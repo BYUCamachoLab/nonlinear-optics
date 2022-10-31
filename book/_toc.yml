@@ -1,0 +1,36 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+- caption: Lectures
+  chapters:
+  - file: atomic_polarizability
+  - file: nonlinear_susceptibility
+  - file: nonlinear_processes
+  - file: coupled_wave_equations
+  - file: three_wave_mixing
+  - file: focused_beams
+  - file: crystal_optics
+  - file: crystal_optics_2
+  - file: third_order_nonlinear_processes
+  - file: raman_scattering
+  - file: optoacoustic_effects
+  - file: brillouin_scattering
+  - file: optical_phase_conjugation
+  - file: phase_and_group_velocity
+  - file: dispersion_optical_pulses
+  - file: nonlinear_optics_with_pulses
+  - file: nonlinear_optics_with_pulses_2
+  - file: schrodinger_equation
+  - file: the_density_matrix
+  - file: first_order_perturbation_theory
+  - file: second_order_perturbation_theory
+  - file: electromagnetically_induced_transparency
+- caption: Projects
+  chapters: 
+  - file: content/midterm
+  - file: content/final_presentation
+- caption: Reference
+  chapters: 
+  - file: content/equations
