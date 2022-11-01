@@ -1,4 +1,4 @@
-# Welcome to your Nonlinear Optics
+# Welcome to Nonlinear Optics
 
 This site contains the course notes, assignments, and selected solutions for
 Nonlinear Optics at Brigham Young University.

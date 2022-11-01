@@ -3,34 +3,39 @@
 
 format: jb-book
 root: intro
+parts:
+- caption: Introduction
+  chapters:
+  - file: overview
+  - file: schedule
 - caption: Lectures
   chapters:
-  - file: atomic_polarizability
-  - file: nonlinear_susceptibility
-  - file: nonlinear_processes
-  - file: coupled_wave_equations
-  - file: three_wave_mixing
-  - file: focused_beams
-  - file: crystal_optics
-  - file: crystal_optics_2
-  - file: third_order_nonlinear_processes
-  - file: raman_scattering
-  - file: optoacoustic_effects
-  - file: brillouin_scattering
-  - file: optical_phase_conjugation
-  - file: phase_and_group_velocity
-  - file: dispersion_optical_pulses
-  - file: nonlinear_optics_with_pulses
-  - file: nonlinear_optics_with_pulses_2
-  - file: schrodinger_equation
-  - file: the_density_matrix
-  - file: first_order_perturbation_theory
-  - file: second_order_perturbation_theory
-  - file: electromagnetically_induced_transparency
-- caption: Projects
-  chapters: 
-  - file: content/midterm
-  - file: content/final_presentation
-- caption: Reference
-  chapters: 
-  - file: content/equations
+  - file: pages/Atomic Polarizability
+  - file: pages/The Nonlinear Susceptibility
+  - file: pages/Overview of Nonlinear Processes
+  - file: pages/Coupled Wave Equations
+  - file: pages/3 Wave Mixing
+  - file: pages/Nonlinear Optics With Focused Beams
+  - file: pages/Crystal Optics
+  - file: pages/Crystal Optics 2
+  - file: pages/Third Order Nonlinear Processes
+  - file: pages/Raman Scattering
+  - file: pages/Optoacoustic Effects
+  - file: pages/Stimulated Brillouin Scattering
+  - file: pages/Optical Phase Conjugation
+  - file: pages/Phase and Group Velocity
+  - file: pages/Dispersion Optical Pulses
+  - file: pages/Nonlinear Optics With Pulses 1
+  - file: pages/Nonlinear Optics With Pulses 2
+  - file: pages/Schrodinger Equation
+  - file: pages/The Density Matrix
+  - file: pages/First Order Perturbation Theory
+  - file: pages/2nd Order Perturbation Theory
+  - file: pages/Electromagnetically Induced Transparency
+# - caption: Projects
+#   chapters: 
+#   - file: content/midterm
+#   - file: content/final_presentation
+# - caption: Reference
+#   chapters: 
+#   - file: content/equations
