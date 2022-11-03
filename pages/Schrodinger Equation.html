@@ -517,16 +517,16 @@ title="Print to PDF"
                 
   <section id="the-quantum-mechanical-wave-function">
 <h1>The Quantum Mechanical Wave Function<a class="headerlink" href="#the-quantum-mechanical-wave-function" title="Permalink to this headline">#</a></h1>
-<p>In this notebook, we want to introduce the Schrodinger equation, the quanum mechanical equivalent of newton’s law of motion $F = ma$.  Why would we want to do this?</p>
+<p>In this notebook, we want to introduce the Schrodinger equation, the quanum mechanical equivalent of newton’s law of motion <span class="math notranslate nohighlight">\(F = ma\)</span>.  Why would we want to do this?</p>
 <p>In the first notebook, we used the Hydrogen wavefunction to calculate the potential energy that an electron would feel when it was displaced from it’s equilibrium position.  What we did not do was calculate the dynamics of the wavefunction itself.  Instead, througout the course we simply assumed there is some atomic polarization resulting from the displacing the charge distribution with an electric field.  We never actually <em>calculated</em> it though.   We just assumed we could expand it using a Taylor series and used measured values of the expansion from a table.</p>
 <p>But what if we wanted to calculate the polarization from first principles?  We would need some equation that tells us how the wavefunction changes when it’s perturbed by an electric field.  Schrodinger provided the equation, which we’ll get to in a bit.</p>
 <p>To understand the Schrodinger equation, we first need to get comfortable with the concept of a wave function. Let’s return to the concrete example of a wavefunction in the first notebook, when we looked at the charge distribution of the electron in a Hydrogen atom.   Here’s the Hydrogen 1s state again:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80a1ae0b-f77f-4893-a5c6-78fbfd0777ed">
-<span class="eqno">(164)<a class="headerlink" href="#equation-80a1ae0b-f77f-4893-a5c6-78fbfd0777ed" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \psi(r)=\frac{1}{\sqrt{\pi}a_0^{3/2}}e^{-r/a_0}
-\end{align}\]</div>
-<p>This simply tells us the electron cloud’s density as a function of $r$.  Actually, it’s <em>square</em> that does this, since the the radial charge distribution is $\rho(r)$ is proportional to the square of the wavefunction:</p>
-<p>$$\rho(r) = e|\psi(r)|^2=\frac{e}{\pi a_0^3}e^{-2r/a_0} $$</p>
+\end{align}</p>
+<p>This simply tells us the electron cloud’s density as a function of <span class="math notranslate nohighlight">\(r\)</span>.  Actually, it’s <em>square</em> that does this, since the the radial charge distribution is <span class="math notranslate nohighlight">\(\rho(r)\)</span> is proportional to the square of the wavefunction:</p>
+<div class="math notranslate nohighlight">
+\[\rho(r) = e|\psi(r)|^2=\frac{e}{\pi a_0^3}e^{-2r/a_0} \]</div>
 <p>Let’s plot this wavefunction again to remind ourselves what it looks like:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1527,29 +1527,26 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='ab439841-f441-430a-b8c5-735dc9096cb7'></div></div></div>
+</script><div class="output text_html"><div id='9705e2b9-6664-4c36-8637-6add9564088f'></div></div></div>
 </div>
 </section>
 <section id="time-dependence-of-the-wave-function">
 <h1>Time Dependence of the Wave Function<a class="headerlink" href="#time-dependence-of-the-wave-function" title="Permalink to this headline">#</a></h1>
 <p>But why is it called a <em>wave</em> function–after all it appears to just be describing a stationary charge distribution.  Well, we’ve actually left out the time dependence, but we’ll put it it back in now.  Every quantum state that has a single definite energy, like single-electron atomic orbitals, evolves in time like this:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70263e43-6043-437e-b7cd-06ee5ffbe83a">
-<span class="eqno">(165)<a class="headerlink" href="#equation-70263e43-6043-437e-b7cd-06ee5ffbe83a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \Psi(r,t) = \psi(r)e^{\frac{-j}{\hbar}E_n t}
-\end{align}\]</div>
-<p>where $E_n$ is the energy of the state.  In the first notebook, we used the wave function to calculate the total potential energy of the 1s electron to be -13.6 V.</p>
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(E_n\)</span> is the energy of the state.  In the first notebook, we used the wave function to calculate the total potential energy of the 1s electron to be -13.6 V.</p>
 <p>Interestingly, the time dependence of a wavefunction with definite energy does <em>not</em> affect the observed charge density distribution, since</p>
-<div class="amsmath math notranslate nohighlight" id="equation-12274800-701b-4ce2-922e-dea40305ee8c">
-<span class="eqno">(166)<a class="headerlink" href="#equation-12274800-701b-4ce2-922e-dea40305ee8c" title="Permalink to this equation">#</a></span>\[\begin{align}
-|\Psi(r,t)|^2 = |\psi(r)e^{\frac{-j}{\hbar}E_n t}|^2 = |\psi(r)|^2 
-\end{align}\]</div>
+<p>\begin{align}
+|\Psi(r,t)|^2 = |\psi(r)e^{\frac{-j}{\hbar}E_n t}|^2 = |\psi(r)|^2
+\end{align}</p>
 <p>For this reason, wavefunctions with definite energy are called stationary states.  They are stationary in the observables (e.g. charge distribution), even though the wave function itself is not stationary in time.  The stationary states of a system are extremely useful, since any other state can be expressed as a superposition of these state.  It is analogous to building up an optical pulse using sinusoids with definite frequencies.</p>
 <p>Let’s see this in action for atomic state, consider an electron in the superposition of being in the 1s state and the 2s state:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-383ed5db-df1a-406d-abc3-2eae0cb8408f">
-<span class="eqno">(167)<a class="headerlink" href="#equation-383ed5db-df1a-406d-abc3-2eae0cb8408f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \Psi(r,t) = \frac{\psi_{100}e^{\frac{-j}{\hbar}E_1 t} + \psi_{200}e^{\frac{-j}{\hbar}E_2 t}}{\sqrt{2}}
-\end{align}\]</div>
-<p>Both the 1s state and 2s states will have their own time dependence, but the superpostion will take into account both.  Here’s a plot of the charge distributions of both states and their superpostion at $t=0$:</p>
+\end{align}</p>
+<p>Both the 1s state and 2s states will have their own time dependence, but the superpostion will take into account both.  Here’s a plot of the charge distributions of both states and their superpostion at <span class="math notranslate nohighlight">\(t=0\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_200</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">a0</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="n">a0</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Z</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a0</span><span class="p">))</span> <span class="c1">#electron density wavefunction</span>
@@ -2544,7 +2541,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='57e3b041-b46f-4235-be25-323486013c45'></div></div></div>
+</script><div class="output text_html"><div id='1a0f11e5-0857-47e6-b14c-90b2811909db'></div></div></div>
 </div>
 <p>Now let’s watch what happens to the charge distribution as we let the state evolve in time:</p>
 <div class="cell docutils container">
@@ -3531,8 +3528,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='bf42209f-10bb-45d7-aa66-b8c4372bc868'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7abf66a4138c4c52b5bee181b0e44a0c"}
+</script><div class="output text_html"><div id='6cbc7019-d15a-44c7-8ef7-6912d20a0290'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "eaacea4f10494ae3b5accd31faea98a3"}
 </script></div>
 </div>
 <p>It’s alive!  Even though the charge distribution of each of the individual wavefunctions is stationary, the charge distribution of their superposition is <em>not</em> stationary.  In general, we can write down any state as the superposition of stationary states and track the time evolution of the state in this way.</p>
@@ -3540,56 +3537,49 @@ if (IPython.notebook.kernel !== null) {
 <section id="schrodinger-s-equation">
 <h1>Schrodinger’s Equation<a class="headerlink" href="#schrodinger-s-equation" title="Permalink to this headline">#</a></h1>
 <p>In 1925, Erwin Schrodinger wrote down an equation that captured this concept.  Here it is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c376c59-b085-4362-8461-fb06b67f838b">
-<span class="eqno">(168)<a class="headerlink" href="#equation-1c376c59-b085-4362-8461-fb06b67f838b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \frac{\partial |\psi \rangle}{\partial t} = \frac{-j}{\hbar}\hat{H} | \psi \rangle
-\end{align}\]</div>
-<p>This equation says that you can obtain the time rate of change of the wavefunction simply by applying the $H$ operater on the wavefunction and then multiplying by $-j/ \hbar$.  But what is $\hat{H}$?  It’s called the Hamiltonian, and when applied to stationary states it simply multiplies it by the standing wave energy.  For example, the ground state energy of the 1s state of the electron in Hydrogen is a standing wave with an energy of -13.6 eV.  So</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f77903a7-f4a1-4edb-85b8-39f60929c0ed">
-<span class="eqno">(169)<a class="headerlink" href="#equation-f77903a7-f4a1-4edb-85b8-39f60929c0ed" title="Permalink to this equation">#</a></span>\[\begin{align}
+\end{align}</p>
+<p>This equation says that you can obtain the time rate of change of the wavefunction simply by applying the <span class="math notranslate nohighlight">\(H\)</span> operater on the wavefunction and then multiplying by <span class="math notranslate nohighlight">\(-j/ \hbar\)</span>.  But what is <span class="math notranslate nohighlight">\(\hat{H}\)</span>?  It’s called the Hamiltonian, and when applied to stationary states it simply multiplies it by the standing wave energy.  For example, the ground state energy of the 1s state of the electron in Hydrogen is a standing wave with an energy of -13.6 eV.  So</p>
+<p>\begin{align}
 \hat{H}\Psi_{100}(r,t) = -13.6 \times \Psi_{100}(r,t)
-\end{align}\]</div>
+\end{align}</p>
 <p>But it turns out that Schrodinger’s equation works on <em>any state</em>, so long as we can find a Hamiltonian that operates properly on all the stationary states that make up that state.  So in quantum mechanics, a lot of the work often comes down to finding the right Hamiltonian.</p>
 <p>As we have seen, nonlinear optical phenomena arise when an electron charge distribution is perturbed by a small amount from it’s equilibrium position around the nucleus.  In that case, a dipole moment is created, resulting in the polarization of the atom.  The Hamiltonian that keeps track of the energy of the system may be written</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a850d86e-f51e-47f5-b1b2-2f50c83b7f2d">
-<span class="eqno">(170)<a class="headerlink" href="#equation-a850d86e-f51e-47f5-b1b2-2f50c83b7f2d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \hat{H} = \hat{H_0} + \hat{V}
-\end{align}\]</div>
-<p>where $\hat{H_0}$ is the unperturbed hamiltonian and $\hat{V}$ is the extra part resulting from the perturbation.  Assuming the dipole approximation (e.g. the perturbing force is spatially uniform across the atom), we can write down the perturbation Hamiltonian as the extra energy arising from the dipole moment produced:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41d207f3-c85a-4bf3-bb7a-6fdbd9c76739">
-<span class="eqno">(171)<a class="headerlink" href="#equation-41d207f3-c85a-4bf3-bb7a-6fdbd9c76739" title="Permalink to this equation">#</a></span>\[\begin{align}
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(\hat{H_0}\)</span> is the unperturbed hamiltonian and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is the extra part resulting from the perturbation.  Assuming the dipole approximation (e.g. the perturbing force is spatially uniform across the atom), we can write down the perturbation Hamiltonian as the extra energy arising from the dipole moment produced:</p>
+<p>\begin{align}
 \hat{V} = e\hat{\mathbf{r}}\cdot{\mathbf{E}} = -\hat{\mathbf{\mu}}\cdot\mathbf{E}
-\end{align}\]</div>
-<p>where $\hat{\mathbf{\mu}} = -e\hat{\mathbf{r}}$ is called the dipole operator.</p>
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(\hat{\mathbf{\mu}} = -e\hat{\mathbf{r}}\)</span> is called the dipole operator.</p>
 <p>We can now substitute this Hamiltonian into the Schrodinger equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a17eb4e-e6a1-42af-b184-b3285a8415f8">
-<span class="eqno">(172)<a class="headerlink" href="#equation-9a17eb4e-e6a1-42af-b184-b3285a8415f8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \frac{\partial |\psi \rangle}{\partial t} = \frac{-j}{\hbar}\left(\hat{H_0} -\hat{\mathbf{\mu}}\cdot\mathbf{E} \right) | \psi \rangle
-\end{align}\]</div>
+\end{align}</p>
 <p>but we have a two problems.  First, the wavefunction is perturbed, and so it’s stationary states are not the same as the ones we used above.  Another problem is figuring out how to operate with the perturbation part H.</p>
 <p>Let’s tackle these one at a time.  First, let’s write the perturbed wavefunction as a superpostion of the stationary states (energy eigenstates) of the system.  We don’t know what they are yet, but we assume that we <em>could</em> find them.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef079c17-505f-41fe-990f-003656dce53e">
-<span class="eqno">(173)<a class="headerlink" href="#equation-ef079c17-505f-41fe-990f-003656dce53e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \psi = \sum_nb_n|n\rangle
-\end{align}\]</div>
-<p>where each stationary state $|n\rangle$ with energy $E_n$ is labeled by the number $n$.  The amplitudes $b_n$ are just the relative weight of each stationary state.  Knowing that each stationary state will evolve in time according to $\Psi_n(r,t) = \psi_n(r) e^{\frac{-j}{\hbar}E_n t} $, we can plug this in and obtain</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8939212e-ca01-4057-aa46-83d6c3a2a43e">
-<span class="eqno">(174)<a class="headerlink" href="#equation-8939212e-ca01-4057-aa46-83d6c3a2a43e" title="Permalink to this equation">#</a></span>\[\begin{align}
-\dot{b}_n = -\frac{j}{\hbar}\sum_l V_{nl}e^{j\omega_{nl}t} b_l
-\end{align}\]</div>
-<p>Where $V_{ln} = \langle n|\hat{V}|l \rangle$ is the perturbation matrix element.  This is the equation of motion that will be the starting point for calculating the nonlinear polarization.</p>
+\end{align}</p>
+<p>where each stationary state <span class="math notranslate nohighlight">\(|n\rangle\)</span> with energy <span class="math notranslate nohighlight">\(E_n\)</span> is labeled by the number <span class="math notranslate nohighlight">\(n\)</span>.  The amplitudes <span class="math notranslate nohighlight">\(b_n\)</span> are just the relative weight of each stationary state.  Knowing that each stationary state will evolve in time according to $\Psi_n(r,t) = \psi_n(r) e^{\frac{-j}{\hbar}E_n t} $, we can plug this in and obtain</p>
+<p>\begin{align}
+\dot{b}<em>n = -\frac{j}{\hbar}\sum_l V</em>{nl}e^{j\omega_{nl}t} b_l
+\end{align}</p>
+<p>Where <span class="math notranslate nohighlight">\(V_{ln} = \langle n|\hat{V}|l \rangle\)</span> is the perturbation matrix element.  This is the equation of motion that will be the starting point for calculating the nonlinear polarization.</p>
 </section>
 <section id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
-<li><p>Make a superposition wavefunction of your choice using the stationary states of the Hydrogen atom.  Use at least one p-orbital.  Animate the resulting charge distribution.  Bonus points if you produce a 2d animation so that the effect of the p-orbital oscillation in $\theta$ can be seen.</p></li>
+<li><p>Make a superposition wavefunction of your choice using the stationary states of the Hydrogen atom.  Use at least one p-orbital.  Animate the resulting charge distribution.  Bonus points if you produce a 2d animation so that the effect of the p-orbital oscillation in <span class="math notranslate nohighlight">\(\theta\)</span> can be seen.</p></li>
 <li><p>Fill in the details for the derivation of the last equation (Eq. 11) above.  Reference Eq. 8.7 in New.  Give an explanation for the perturbation matrix element.  What is it physically?</p></li>
 </ol>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"ce53fca8a3d24e1b978d292fef6996db": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7abf66a4138c4c52b5bee181b0e44a0c": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_4e2c859fc26b470183235e2bc56b9849", "IPY_MODEL_ec6ee55b43cd433a9c164ed25f91b83b"], "layout": "IPY_MODEL_ce53fca8a3d24e1b978d292fef6996db"}}, "e811f0ecf5db41c0baa9bbc4e50a5e11": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b67a15d294fc4f648a830554626194c7": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "4e2c859fc26b470183235e2bc56b9849": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "t", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_e811f0ecf5db41c0baa9bbc4e50a5e11", "max": 1.8479956785822313, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.018479956785822312, "style": "IPY_MODEL_b67a15d294fc4f648a830554626194c7", "value": 0.0}}, "0f14505690f3429994d6cfa1014bddd9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ec6ee55b43cd433a9c164ed25f91b83b": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_0f14505690f3429994d6cfa1014bddd9", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"5be9d1d4f61947a68233953365a6cb43": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "eaacea4f10494ae3b5accd31faea98a3": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_b03a537563384e1ea0e6a803cf88f9c8", "IPY_MODEL_52cd30003f1141888fa23c135fbbbf38"], "layout": "IPY_MODEL_5be9d1d4f61947a68233953365a6cb43"}}, "fa102ab205c74853bae6294673a57514": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a779761ace7144fa8a9ba1021e9ad808": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "b03a537563384e1ea0e6a803cf88f9c8": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "t", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_fa102ab205c74853bae6294673a57514", "max": 1.8479956785822313, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.018479956785822312, "style": "IPY_MODEL_a779761ace7144fa8a9ba1021e9ad808", "value": 0.0}}, "c6649d01a83442d29c3683b622956509": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "52cd30003f1141888fa23c135fbbbf38": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c6649d01a83442d29c3683b622956509", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

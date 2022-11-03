@@ -528,249 +528,226 @@ title="Print to PDF"
   <section id="review">
 <h1>Review<a class="headerlink" href="#review" title="Permalink to this headline">#</a></h1>
 <p>In the last notebook, we arrived at the equation of motion for the stationary states that make up a wavefunction.  To summarize,  if  the wavefunction is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d246ded-5317-45a0-96bd-d96e1f3abfe8">
-<span class="eqno">(175)<a class="headerlink" href="#equation-9d246ded-5317-45a0-96bd-d96e1f3abfe8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \Psi(r,t) = \sum_nb_n|n\rangle e^{-j\omega_n t}
-\end{align}\]</div>
+\end{align}</p>
 <p>and the Hamiltonian is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95e84720-5d6a-4bdd-b652-ccbe410c199a">
-<span class="eqno">(176)<a class="headerlink" href="#equation-95e84720-5d6a-4bdd-b652-ccbe410c199a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \hat{H} = \hat{H_0} + V
-\end{align}\]</div>
-<p>then the equation of motion for the $b$ coefficients is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8fbf0e18-951a-41a3-9927-4e85be264f90">
-<span class="eqno">(177)<a class="headerlink" href="#equation-8fbf0e18-951a-41a3-9927-4e85be264f90" title="Permalink to this equation">#</a></span>\[\begin{align}
-\dot{b}_n = -\frac{j}{\hbar}\sum_l V_{nl}e^{j\omega_{nl}t} b_l
-\end{align}\]</div>
-<p>where $V_{ln} = \langle n|\hat{V}|l \rangle$ is the perturbation matrix element.</p>
-<p>We noted that for nonlinear optics, we ar most interested in wavefunctions of electron clouds around atoms.  In this case the perturbing Hamiltonian $V$ accounts for the slight polarization of the atom when an external field is applied:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e08ed54-8067-466c-99d3-eb761723f9f0">
-<span class="eqno">(178)<a class="headerlink" href="#equation-5e08ed54-8067-466c-99d3-eb761723f9f0" title="Permalink to this equation">#</a></span>\[\begin{align}
+\end{align}</p>
+<p>then the equation of motion for the <span class="math notranslate nohighlight">\(b\)</span> coefficients is</p>
+<p>\begin{align}
+\dot{b}<em>n = -\frac{j}{\hbar}\sum_l V</em>{nl}e^{j\omega_{nl}t} b_l
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(V_{ln} = \langle n|\hat{V}|l \rangle\)</span> is the perturbation matrix element.</p>
+<p>We noted that for nonlinear optics, we ar most interested in wavefunctions of electron clouds around atoms.  In this case the perturbing Hamiltonian <span class="math notranslate nohighlight">\(V\)</span> accounts for the slight polarization of the atom when an external field is applied:</p>
+<p>\begin{align}
 \hat{V} = e\hat{\mathbf{r}}\cdot{\mathbf{E}} &amp;= -\hat{\mathbf{\mu}}\cdot\mathbf{E}
-\end{align}\]</div>
+\end{align}</p>
 <p>Here’s the explicit deriviation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-513b5a38-b6bc-4df4-8ca3-993de80c438d">
-<span class="eqno">(179)<a class="headerlink" href="#equation-513b5a38-b6bc-4df4-8ca3-993de80c438d" title="Permalink to this equation">#</a></span>\[\begin{align}
-\frac{\partial |\Psi \rangle}{\partial t} &amp;= \frac{-j}{\hbar}\hat{H} | \Psi \rangle \nonumber \\
-\frac{\partial}{\partial t}\sum_nb_n|n\rangle e^{-j\omega_n t}&amp;= \frac{-j}{\hbar} \left(\hat{H_0} + V \right ) \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \\
-\sum_n \left ( \dot{b}_n -j\omega_n b_n \right)|n\rangle e^{-j\omega_n t}&amp;=  \sum_n -j\omega_n b_n |n\rangle e^{-j\omega_n t} - \frac{j}{\hbar} V \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \\
-\sum_n  \dot{b}_n|n\rangle e^{-j\omega_n t}&amp;=  - \frac{j}{\hbar} V\ \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \\
-\end{align}\]</div>
-<p>Projecting both sides onto a state $\langle l |e^{j\omega_l t}$ we obtain</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4a21b32f-3594-4f63-a60a-b73a6ca2c81f">
-<span class="eqno">(180)<a class="headerlink" href="#equation-4a21b32f-3594-4f63-a60a-b73a6ca2c81f" title="Permalink to this equation">#</a></span>\[\begin{align}
-\langle l |e^{-j\omega_l t} \sum_n  \dot{b}_n|n\rangle e^{-j\omega_n t}&amp;=  - \frac{j}{\hbar} \langle l |e^{j\omega_l t} V \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \\
- \sum_n  \dot{b}_n \langle l |n\rangle e^{-j(\omega_n-\omega_l) t}&amp;=  - \frac{j}{\hbar} \sum_nb_n \langle l|V|n\rangle e^{-j(\omega_n-\omega_l) t} \nonumber \\
- \dot{b}_n &amp;= -\frac{j}{\hbar}\sum_l V_{nl}e^{j\omega_{nl}t} b_l \nonumber
-\end{align}\]</div>
+<p>\begin{align}
+\frac{\partial |\Psi \rangle}{\partial t} &amp;= \frac{-j}{\hbar}\hat{H} | \Psi \rangle \nonumber \
+\frac{\partial}{\partial t}\sum_nb_n|n\rangle e^{-j\omega_n t}&amp;= \frac{-j}{\hbar} \left(\hat{H_0} + V \right ) \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \
+\sum_n \left ( \dot{b}_n -j\omega_n b_n \right)|n\rangle e^{-j\omega_n t}&amp;=  \sum_n -j\omega_n b_n |n\rangle e^{-j\omega_n t} - \frac{j}{\hbar} V \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \
+\sum_n  \dot{b}_n|n\rangle e^{-j\omega_n t}&amp;=  - \frac{j}{\hbar} V\ \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \
+\end{align}</p>
+<p>Projecting both sides onto a state <span class="math notranslate nohighlight">\(\langle l |e^{j\omega_l t}\)</span> we obtain</p>
+<p>\begin{align}
+\langle l |e^{-j\omega_l t} \sum_n  \dot{b}_n|n\rangle e^{-j\omega_n t}&amp;=  - \frac{j}{\hbar} \langle l |e^{j\omega_l t} V \sum_nb_n|n\rangle e^{-j\omega_n t} \nonumber \
+\sum_n  \dot{b}<em>n \langle l |n\rangle e^{-j(\omega_n-\omega_l) t}&amp;=  - \frac{j}{\hbar} \sum_nb_n \langle l|V|n\rangle e^{-j(\omega_n-\omega_l) t} \nonumber \
+\dot{b}<em>n &amp;= -\frac{j}{\hbar}\sum_l V</em>{nl}e^{j\omega</em>{nl}t} b_l \nonumber
+\end{align}</p>
 <p>where in the last step we have used the fact that the stationary states are orthogonal:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8ab9e25d-aad2-4e1a-85bf-b305ccf2f634">
-<span class="eqno">(181)<a class="headerlink" href="#equation-8ab9e25d-aad2-4e1a-85bf-b305ccf2f634" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \langle l | n \rangle = \int_\mathbf{r} \psi_l^*(r) \psi_n(r)d\mathbf{r} = \delta_{nl}
-\end{align}\]</div>
-<p>Let’s explore what this rate equation is telling us. We can think of it this way:  When the perturbation part of the Hamiltonion $V$ operates on the wavefunction $\psi$, it modifies each of the stationary states that make up the “bare” wavefunctions.  Each of the bare states are now in a superposition of the other bare states, with $V_{nl}$ telling us how much of the state $|n\rangle$ is mapped onto the state $|l \rangle$ by the perturbation $V$. But the new state $|l\rangle$ has a <em>different</em> time evolution $e^{-j\omega_l t}$, so as the state evolves, the result of a small perturbation can actually result in a large re-mapping in the original state into the other stationary states over time.  Does this sound like what we’ve been studying in nonlinear optics?  I hope so!</p>
+\end{align}</p>
+<p>Let’s explore what this rate equation is telling us. We can think of it this way:  When the perturbation part of the Hamiltonion <span class="math notranslate nohighlight">\(V\)</span> operates on the wavefunction <span class="math notranslate nohighlight">\(\psi\)</span>, it modifies each of the stationary states that make up the “bare” wavefunctions.  Each of the bare states are now in a superposition of the other bare states, with <span class="math notranslate nohighlight">\(V_{nl}\)</span> telling us how much of the state <span class="math notranslate nohighlight">\(|n\rangle\)</span> is mapped onto the state <span class="math notranslate nohighlight">\(|l \rangle\)</span> by the perturbation <span class="math notranslate nohighlight">\(V\)</span>. But the new state <span class="math notranslate nohighlight">\(|l\rangle\)</span> has a <em>different</em> time evolution <span class="math notranslate nohighlight">\(e^{-j\omega_l t}\)</span>, so as the state evolves, the result of a small perturbation can actually result in a large re-mapping in the original state into the other stationary states over time.  Does this sound like what we’ve been studying in nonlinear optics?  I hope so!</p>
 </section>
 <section id="the-density-matrix">
 <h1>The Density Matrix<a class="headerlink" href="#the-density-matrix" title="Permalink to this headline">#</a></h1>
-<p>When treating nonlinear optics phenomena with the machinery of quantum mechanics, there are significant advantages to employing what is called the “density operator”.  We already know that state vector $|\psi \rangle$ can be written as a superpostion of the stationary states:  $| \psi \rangle = \sum_n b_n |n \rangle$.  Consider now an operator $\hat{\rho}$, which we’ll call the density matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-15835898-f7f5-4c7b-a850-ba3435a3c2a7">
-<span class="eqno">(182)<a class="headerlink" href="#equation-15835898-f7f5-4c7b-a850-ba3435a3c2a7" title="Permalink to this equation">#</a></span>\[\begin{align}
-\hat{\rho} &amp;= |\psi \rangle \langle \psi | \nonumber \\
-     &amp; = \left(\sum_m b_m |m\rangle \right) \left( \sum_n b_n^*\langle n | \right )
-\end{align}\]</div>
+<p>When treating nonlinear optics phenomena with the machinery of quantum mechanics, there are significant advantages to employing what is called the “density operator”.  We already know that state vector <span class="math notranslate nohighlight">\(|\psi \rangle\)</span> can be written as a superpostion of the stationary states:  <span class="math notranslate nohighlight">\(| \psi \rangle = \sum_n b_n |n \rangle\)</span>.  Consider now an operator <span class="math notranslate nohighlight">\(\hat{\rho}\)</span>, which we’ll call the density matrix:</p>
+<p>\begin{align}
+\hat{\rho} &amp;= |\psi \rangle \langle \psi | \nonumber \
+&amp; = \left(\sum_m b_m |m\rangle \right) \left( \sum_n b_n^*\langle n | \right )
+\end{align}</p>
 <p>To get a better feeling for this, let’s write it our in matrix form.  Our state vectors can be written:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-99897a9b-3885-41cd-9539-57567876591e">
-<span class="eqno">(183)<a class="headerlink" href="#equation-99897a9b-3885-41cd-9539-57567876591e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 |\psi\rangle =
 \begin{bmatrix}
-b_0 \\
-b_1 \\
-b_2 \\
-\vdots\\
-b_N \\
-\end{bmatrix} \nonumber \\
-\end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6b698306-774e-481b-9b49-42c195aa9d52">
-<span class="eqno">(184)<a class="headerlink" href="#equation-6b698306-774e-481b-9b49-42c195aa9d52" title="Permalink to this equation">#</a></span>\[\begin{align}
+b_0 \
+b_1 \
+b_2 \
+\vdots\
+b_N \
+\end{bmatrix} \nonumber \
+\end{align}</p>
+<p>\begin{align}
 \langle \psi | =
 \begin{bmatrix}
 b_0^* &amp; b_1^* &amp; b_2^* &amp; \cdots &amp; b_N^*
 \end{bmatrix}
-\end{align}\]</div>
-<p>Which makes our density matrix</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbc90f90-9b69-47cb-aeeb-e18f6325b47d">
-<span class="eqno">(185)<a class="headerlink" href="#equation-cbc90f90-9b69-47cb-aeeb-e18f6325b47d" title="Permalink to this equation">#</a></span>\[\begin{align}
-\hat{\rho} = |\psi \rangle \langle \psi | &amp;= 
+\end{align}</p>
+<p>Which makes our density matrix
+\begin{align}
+\hat{\rho} = |\psi \rangle \langle \psi | &amp;=
 \begin{bmatrix}
 b_0^* &amp; b_1^* &amp; b_2^* &amp; \cdots &amp; b_N^*
 \end{bmatrix}
 \begin{bmatrix}
-b_0 \\
-b_1 \\
-b_2 \\
-\vdots\\
-b_N \\
-\end{bmatrix} \nonumber \\ &amp;= 
+b_0 \
+b_1 \
+b_2 \
+\vdots\
+b_N \
+\end{bmatrix} \nonumber \ &amp;=
 \begin{bmatrix}
-b_0b_0^* &amp; b_0b_1^* &amp; b_0b_2^* &amp; \cdots &amp; b_0b_N^* \\
-b_1b_0^* &amp; b_1b_1^* &amp; b_1b_2^* &amp; \cdots &amp; b_1b_N^* \\
-b_2b_0^* &amp; b_2b_1^* &amp; b_2b_2^* &amp; \cdots &amp; b_2b_N^* \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-b_Nb_0^* &amp; b_Nb_1^* &amp; b_Nb_2^* &amp; \cdots &amp; b_Nb_N^* \\
+b_0b_0^* &amp; b_0b_1^* &amp; b_0b_2^* &amp; \cdots &amp; b_0b_N^* \
+b_1b_0^* &amp; b_1b_1^* &amp; b_1b_2^* &amp; \cdots &amp; b_1b_N^* \
+b_2b_0^* &amp; b_2b_1^* &amp; b_2b_2^* &amp; \cdots &amp; b_2b_N^* \
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \
+b_Nb_0^* &amp; b_Nb_1^* &amp; b_Nb_2^* &amp; \cdots &amp; b_Nb_N^* \
 \end{bmatrix}
-\end{align}\]</div>
+\end{align}</p>
 <p>The density matrix contains the same exact information as the state vector itself–no more and no less.  In fact, starting with the Schrodinger equation, we can write down the time evolution of the density matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ce68abd-c783-410f-94f3-5c70a3a6664a">
-<span class="eqno">(186)<a class="headerlink" href="#equation-9ce68abd-c783-410f-94f3-5c70a3a6664a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>\begin{align}
 \frac{\partial \hat{\rho}}{\partial t} = \frac{-j}{\hbar}[\hat{H}, \hat{\rho}]
-\end{align}\]</div>
-<p>where $[\hat{H}, \hat{\rho}] = \hat{H} \hat{\rho} - \hat{\rho} \hat{H} $ is the commutator of $\hat{H}$ and $\hat{\rho}$.  This equation contains the identical information as the Schrodinger equation.</p>
-<p>Each element $\rho_{mn}$ of the density matrix may be written</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9fae34a1-c9e2-4f53-b14f-9f34835b80aa">
-<span class="eqno">(187)<a class="headerlink" href="#equation-9fae34a1-c9e2-4f53-b14f-9f34835b80aa" title="Permalink to this equation">#</a></span>\[\begin{align}
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\([\hat{H}, \hat{\rho}] = \hat{H} \hat{\rho} - \hat{\rho} \hat{H} \)</span> is the commutator of <span class="math notranslate nohighlight">\(\hat{H}\)</span> and <span class="math notranslate nohighlight">\(\hat{\rho}\)</span>.  This equation contains the identical information as the Schrodinger equation.</p>
+<p>Each element <span class="math notranslate nohighlight">\(\rho_{mn}\)</span> of the density matrix may be written</p>
+<p>\begin{align}
 \rho_{nm} = \langle n |\hat{\rho} | m \rangle = b_n b_m^*
-\end{align}\]</div>
-<p>Take a look at the diagonal elements of $\hat{\rho}$. They are of the form $b_nb_n^* = |b_n|^2$.  This is just the probability of finding the wavevector in state $|n\rangle$. Since all the probabilities must add up to 1, the sum of the diagonal elements of $\hat{\rho}$, also called the trace of $\hat{\rho}$ must be 1.</p>
+\end{align}</p>
+<p>Take a look at the diagonal elements of <span class="math notranslate nohighlight">\(\hat{\rho}\)</span>. They are of the form <span class="math notranslate nohighlight">\(b_nb_n^* = |b_n|^2\)</span>.  This is just the probability of finding the wavevector in state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. Since all the probabilities must add up to 1, the sum of the diagonal elements of <span class="math notranslate nohighlight">\(\hat{\rho}\)</span>, also called the trace of <span class="math notranslate nohighlight">\(\hat{\rho}\)</span> must be 1.</p>
 </section>
 <section id="two-level-atom">
 <h1>Two Level Atom<a class="headerlink" href="#two-level-atom" title="Permalink to this headline">#</a></h1>
 <p>To explore how to use the density matrix, let’s consider the simplest possible system:  an atom with just two states. In thi case we have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-307e1940-bd7b-408f-bc66-c58f7e463ab3">
-<span class="eqno">(188)<a class="headerlink" href="#equation-307e1940-bd7b-408f-bc66-c58f7e463ab3" title="Permalink to this equation">#</a></span>\[\begin{align}
-\hat{\rho} = 
+<p>\begin{align}
+\hat{\rho} =
 \begin{bmatrix}
-|b_0|^2 &amp; b_0b_1^* \\
-b_1b_0^* &amp; |b_1|^2 \\
+|b_0|^2 &amp; b_0b_1^* \
+b_1b_0^* &amp; |b_1|^2 \
 \end{bmatrix}
-\end{align}\]</div>
-<p>Again, the diagonal elements represent the probability of find the atom in that state.  It turns out the off-diagonal elements represent the polarization of the atom, but we’ll save that for a minute.  First, let’s practice putting the atom in the ground state but setting $b_0 = 1$ and $b_1 = 0$.  Our density matrix becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a1e9780-dace-40b1-9ac6-c86e1a532599">
-<span class="eqno">(189)<a class="headerlink" href="#equation-0a1e9780-dace-40b1-9ac6-c86e1a532599" title="Permalink to this equation">#</a></span>\[\begin{align}
-\hat{\rho}_{ground} = 
+\end{align}</p>
+<p>Again, the diagonal elements represent the probability of find the atom in that state.  It turns out the off-diagonal elements represent the polarization of the atom, but we’ll save that for a minute.  First, let’s practice putting the atom in the ground state but setting <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and <span class="math notranslate nohighlight">\(b_1 = 0\)</span>.  Our density matrix becomes:</p>
+<p>\begin{align}
+\hat{\rho}_{ground} =
 \begin{bmatrix}
-1 &amp; 0 \\
-0 &amp; 0 \\
+1 &amp; 0 \
+0 &amp; 0 \
 \end{bmatrix}
-\end{align}\]</div>
-<p>Ok, in order find the time evolution of the state vector probabilities we need to find the commutator $[\hat{H}, \hat{\rho}]$:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1136e5c1-dc7f-417b-8183-73223f823254">
-<span class="eqno">(190)<a class="headerlink" href="#equation-1136e5c1-dc7f-417b-8183-73223f823254" title="Permalink to this equation">#</a></span>\[\begin{align}
-[\hat{H}_0 + V, \hat{\rho}] &amp;= \hat{H}_0\hat{\rho} -  \hat{\rho}\hat{H}_0 + V\hat{\rho} -  \hat{\rho}V \\
-                            &amp;= \hat{H}_0|\psi \rangle \langle \psi | - |\psi \rangle \langle \psi |\hat{H}_0
-                            + V|\psi \rangle \langle \psi -  |\psi \rangle \langle \psi| V \\
-\end{align}\]</div>
+\end{align}</p>
+<p>Ok, in order find the time evolution of the state vector probabilities we need to find the commutator <span class="math notranslate nohighlight">\([\hat{H}, \hat{\rho}]\)</span>:</p>
+<p>\begin{align}
+[\hat{H}_0 + V, \hat{\rho}] &amp;= \hat{H}_0\hat{\rho} -  \hat{\rho}\hat{H}_0 + V\hat{\rho} -  \hat{\rho}V \
+&amp;= \hat{H}_0|\psi \rangle \langle \psi | - |\psi \rangle \langle \psi |\hat{H}_0
++ V|\psi \rangle \langle \psi -  |\psi \rangle \langle \psi| V \
+\end{align}</p>
 <p>We can write this in matrix form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-13d4ccb8-1b4c-4f47-8d83-444d7365df14">
-<span class="eqno">(191)<a class="headerlink" href="#equation-13d4ccb8-1b4c-4f47-8d83-444d7365df14" title="Permalink to this equation">#</a></span>\[\begin{align}
-[\hat{H}, \hat{\rho}] &amp;= 
+<p>\begin{align}
+[\hat{H}, \hat{\rho}] &amp;=
 \begin{bmatrix}
-E_0|b_0|^2 &amp; E_0b_0b_1^* \\
-E_1b_1b_0^* &amp; E_1|b_1|^2 \\ 
-\end{bmatrix} - 
+E_0|b_0|^2 &amp; E_0b_0b_1^* \
+E_1b_1b_0^* &amp; E_1|b_1|^2 \
+\end{bmatrix} -
 \begin{bmatrix}
-E_0|b_0|^2 &amp; E_1b_0b_1^* \\
-E_0b_1b_0^* &amp; E_1|b_1|^2 \\ 
-\end{bmatrix} + 
+E_0|b_0|^2 &amp; E_1b_0b_1^* \
+E_0b_1b_0^* &amp; E_1|b_1|^2 \
+\end{bmatrix} +
 \begin{bmatrix}
-V_{11} &amp; V_{12} \\
-V_{21} &amp; V_{22} \\ 
+V_{11} &amp; V_{12} \
+V_{21} &amp; V_{22} \
 \end{bmatrix}
 \begin{bmatrix}
-|b_0|^2 &amp; b_0b_1^* \\
-b_1b_0^* &amp; |b_1|^2 \\ 
-\end{bmatrix} - 
+|b_0|^2 &amp; b_0b_1^* \
+b_1b_0^* &amp; |b_1|^2 \
+\end{bmatrix} -
 \begin{bmatrix}
-|b_0|^2 &amp; b_0b_1^* \\
-b_1b_0^* &amp; |b_1|^2 \\ 
+|b_0|^2 &amp; b_0b_1^* \
+b_1b_0^* &amp; |b_1|^2 \
 \end{bmatrix}
 \begin{bmatrix}
-V_{11} &amp; V_{12} \\
-V_{21} &amp; V_{22} \\ 
-\end{bmatrix}\\ &amp;= 
+V_{11} &amp; V_{12} \
+V_{21} &amp; V_{22} \
+\end{bmatrix}\ &amp;=
 \begin{bmatrix}
-0 &amp; (E_0 - E_1)b_0b_1^* \\
-(E_1-E_0)b_1b_0^* &amp; 0 \\ 
-\end{bmatrix} + 
+0 &amp; (E_0 - E_1)b_0b_1^* \
+(E_1-E_0)b_1b_0^* &amp; 0 \
+\end{bmatrix} +
 \begin{bmatrix}
-V_{11} &amp; V_{12} \\
-V_{21} &amp; V_{22} \\ 
+V_{11} &amp; V_{12} \
+V_{21} &amp; V_{22} \
 \end{bmatrix}
 \begin{bmatrix}
-|b_0|^2 &amp; b_0b_1^* \\
-b_1b_0^* &amp; |b_1|^2 \\ 
-\end{bmatrix} - 
+|b_0|^2 &amp; b_0b_1^* \
+b_1b_0^* &amp; |b_1|^2 \
+\end{bmatrix} -
 \begin{bmatrix}
-|b_0|^2 &amp; b_0b_1^* \\
-b_1b_0^* &amp; |b_1|^2 \\ 
+|b_0|^2 &amp; b_0b_1^* \
+b_1b_0^* &amp; |b_1|^2 \
 \end{bmatrix}
 \begin{bmatrix}
-V_{11} &amp; V_{12} \\
-V_{21} &amp; V_{22} \\ 
+V_{11} &amp; V_{12} \
+V_{21} &amp; V_{22} \
 \end{bmatrix}
-\end{align}\]</div>
+\end{align}</p>
 <p>Using the definition of matrix multiplication, we can find the time derivative of any element of the density matrix to be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f483e0ab-aa10-4747-b52e-e985c994e4e4">
-<span class="eqno">(192)<a class="headerlink" href="#equation-f483e0ab-aa10-4747-b52e-e985c994e4e4" title="Permalink to this equation">#</a></span>\[\begin{align}
-\dot{\rho}_{mn} = -j\omega_{mn}\rho_{mn} - \frac{j}{\hbar}\sum_q\left(V_{mq}\rho_{qn} - \rho_{mq}V_{qn} \right)
-\end{align}\]</div>
+<p>\begin{align}
+\dot{\rho}<em>{mn} = -j\omega</em>{mn}\rho_{mn} - \frac{j}{\hbar}\sum_q\left(V_{mq}\rho_{qn} - \rho_{mq}V_{qn} \right)
+\end{align}</p>
 <p>Since the rule for matrix multiplication doesn’t depend on the size the of the matrices, this is actually a general result.</p>
 </section>
 <section id="example">
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h1>
-<p>Let’s consider again the Hydrogen atom, but let’s assume for a moment that it only has two levels $\psi_{100}$ and $\psi_{200}$ and that there is no perturbation to these levels ($V=0$).  Now let’s put it in the superposition state</p>
-<div class="amsmath math notranslate nohighlight" id="equation-da79e86d-d672-4d87-a84f-d68539c7c05a">
-<span class="eqno">(193)<a class="headerlink" href="#equation-da79e86d-d672-4d87-a84f-d68539c7c05a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<p>Let’s consider again the Hydrogen atom, but let’s assume for a moment that it only has two levels <span class="math notranslate nohighlight">\(\psi_{100}\)</span> and <span class="math notranslate nohighlight">\(\psi_{200}\)</span> and that there is no perturbation to these levels (<span class="math notranslate nohighlight">\(V=0\)</span>).  Now let’s put it in the superposition state</p>
+<p>\begin{align}
 \Psi(r,t) &amp;= \frac{\psi_{100}e^{\frac{-j}{\hbar}E_1 t} + \psi_{200}e^{\frac{-j}{\hbar}E_2 t}}{\sqrt{2}} =
-\frac{1}{\sqrt{2}}\begin{bmatrix} 
-e^{-j\omega_1 t} \\
-e^{-j\omega_2 t} \\
+\frac{1}{\sqrt{2}}\begin{bmatrix}
+e^{-j\omega_1 t} \
+e^{-j\omega_2 t} \
 \end{bmatrix}
-\end{align}\]</div>
+\end{align}</p>
 <p>and write down the density matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c212a772-dd90-49e0-af3e-592f6decd924">
-<span class="eqno">(194)<a class="headerlink" href="#equation-c212a772-dd90-49e0-af3e-592f6decd924" title="Permalink to this equation">#</a></span>\[\begin{align}
-\hat{\rho} &amp;= |\Psi \rangle \langle \Psi | \nonumber \\
-     &amp;  = 
+<p>\begin{align}
+\hat{\rho} &amp;= |\Psi \rangle \langle \Psi | \nonumber \
+&amp;  =
 \begin{bmatrix}
-\frac{1}{2}e^{-j\omega_1 t} &amp; \frac{1}{2}e^{-j\omega_{12} t} \\
-\frac{1}{2}e^{j\omega_{12} t} &amp; \frac{1}{2}e^{-j\omega_{2} t} \\
+\frac{1}{2}e^{-j\omega_1 t} &amp; \frac{1}{2}e^{-j\omega_{12} t} \
+\frac{1}{2}e^{j\omega_{12} t} &amp; \frac{1}{2}e^{-j\omega_{2} t} \
 \end{bmatrix}
-\end{align}\]</div>
-<p>We take the time derivative to find</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0386cfa7-ff8d-4dd2-a211-e61c0d48e70d">
-<span class="eqno">(195)<a class="headerlink" href="#equation-0386cfa7-ff8d-4dd2-a211-e61c0d48e70d" title="Permalink to this equation">#</a></span>\[\begin{align}
-\frac{\partial \hat{\rho}}{\partial t} = 
+\end{align}</p>
+<p>We take the time derivative to find
+\begin{align}
+\frac{\partial \hat{\rho}}{\partial t} =
 \begin{bmatrix}
-\frac{-j\omega_1}{2}e^{-j\omega_1 t} &amp; \frac{-j\omega_{12}}{2}e^{-j\omega_{12} t} \\
-\frac{j\omega_{12}}{2}e^{j\omega_{12} t} &amp; \frac{-j\omega_2}{2}e^{-j\omega_{2} t} \\
+\frac{-j\omega_1}{2}e^{-j\omega_1 t} &amp; \frac{-j\omega_{12}}{2}e^{-j\omega_{12} t} \
+\frac{j\omega_{12}}{2}e^{j\omega_{12} t} &amp; \frac{-j\omega_2}{2}e^{-j\omega_{2} t} \
 \end{bmatrix}
-\end{align}\]</div>
+\end{align}</p>
 <p>and we can verify that it follows the time evolution equation we derived.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
-<li><p>For the superposition state considered in this example, plot the time evolution of the probability of finding the atom in the ground state and the excited state.  Use $\omega_1 = 13.6$ and $\omega_2 = 13.6/4$.</p></li>
-<li><p>Now treat all four elements of the density matrix as complex numbers $x(t) + jp(t)$ and plot them in the complex plane with $x$ and $p$ as the coordinate axes.</p></li>
-<li><p>Check that $r^2 = x^2 + y^2$ corresponds to the probabilities you found in part (1).</p></li>
+<li><p>For the superposition state considered in this example, plot the time evolution of the probability of finding the atom in the ground state and the excited state.  Use <span class="math notranslate nohighlight">\(\omega_1 = 13.6\)</span> and <span class="math notranslate nohighlight">\(\omega_2 = 13.6/4\)</span>.</p></li>
+<li><p>Now treat all four elements of the density matrix as complex numbers <span class="math notranslate nohighlight">\(x(t) + jp(t)\)</span> and plot them in the complex plane with <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as the coordinate axes.</p></li>
+<li><p>Check that <span class="math notranslate nohighlight">\(r^2 = x^2 + y^2\)</span> corresponds to the probabilities you found in part (1).</p></li>
 <li><p>Some people call the off diagonal elements the “coherence” between two states.  Does your plot in the complex plane give any insight into what the off-diagonal elements may be describing?</p></li>
-<li><p>Add a very small perturbation</p></li>
-</ol>
-<div class="amsmath math notranslate nohighlight" id="equation-30070839-6836-411e-9e33-4ad7666263a2">
-<span class="eqno">(196)<a class="headerlink" href="#equation-30070839-6836-411e-9e33-4ad7666263a2" title="Permalink to this equation">#</a></span>\[\begin{align}
-V = 
+<li><p>Add a very small perturbation
+\begin{align}
+V =
 \begin{bmatrix}
-0 &amp; V_{12} \\
+0 &amp; V_{12} \
 V_{21} &amp; 0
 \end{bmatrix}
-\end{align}\]</div>
-<p>where $V_{12} = V_{21}$ is a variable that you can adjust.  Since $E_n = \hbar\omega_n$, try making $V_{12}$ a fraction of this number, and setting $\hbar = 1$.  Plot the new time evolution of the density matrix elements and the state populations.</p>
-<p>It is often much more convenient to define a new density matrix $\sigma$ such that every element is modified according to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e09cd58-bce1-4088-82ca-b64078f5dea7">
-<span class="eqno">(197)<a class="headerlink" href="#equation-5e09cd58-bce1-4088-82ca-b64078f5dea7" title="Permalink to this equation">#</a></span>\[\begin{align}
+\end{align}</p></li>
+</ol>
+<p>where <span class="math notranslate nohighlight">\(V_{12} = V_{21}\)</span> is a variable that you can adjust.  Since <span class="math notranslate nohighlight">\(E_n = \hbar\omega_n\)</span>, try making <span class="math notranslate nohighlight">\(V_{12}\)</span> a fraction of this number, and setting <span class="math notranslate nohighlight">\(\hbar = 1\)</span>.  Plot the new time evolution of the density matrix elements and the state populations.</p>
+<p>It is often much more convenient to define a new density matrix <span class="math notranslate nohighlight">\(\sigma\)</span> such that every element is modified according to</p>
+<p>\begin{align}
 \sigma_{mn} = \rho_{mn}e^{j\omega_{mn}t}
-\end{align}\]</div>
-<p>This takes away the natural time dependence of the bare states and justs looks at the effect of the oscillations induced by the perturbations.  Plot the elements of $\sigma$ and the state populations.  Animate your plot so that you can adjust $V_{12}$.</p>
+\end{align}</p>
+<p>This takes away the natural time dependence of the bare states and justs looks at the effect of the oscillations induced by the perturbations.  Plot the elements of <span class="math notranslate nohighlight">\(\sigma\)</span> and the state populations.  Animate your plot so that you can adjust <span class="math notranslate nohighlight">\(V_{12}\)</span>.</p>
 </section>
 
     <script type="text/x-thebe-config">
