@@ -22,6 +22,23 @@ We recommend installing Python by installing
 [miniconda](https://docs.conda.io/en/latest/miniconda.html) (which is
 lightweight Anaconda, basically without all the preinstalled packages).
 
+You'll need to set up your Python environment, too. If you're an development 
+expert, you may consider using a virtual environment. If you're a novice, we
+recommend ignoring this and just installing the required packages into your
+base environment.
+
+You can {download}`download the requirements file <./requirements.txt>`
+and then run:
+
+```
+python -m pip install --upgrade -r requirements.txt
+```
+
+Alternatively, you can use a cloud service such as 
+[Google Colab](https://colab.research.google.com) 
+(basically Google Drive for executable notebooks). Notebooks can be launched
+from the website directly into Google Colab.
+
 ## VSCode
 
 Visual Studio Code (vscode) is a powerful, open-source text editor that allows 

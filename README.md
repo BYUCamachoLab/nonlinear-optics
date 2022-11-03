@@ -26,6 +26,14 @@ Then, install the required packages:
 pip install --upgrade -r requirements.txt
 ```
 
+Note that there are two ``requirements.txt`` files in this repository.
+
+1. ``/requirements.txt``: Development and book-compiling requirements.
+2. ``/book/requirements.txt``: A downloadable file from the website that gives
+    students the necessary requirements (since they don't need to be able to
+    build the book). If packages are added to the notes, be sure to update
+    these requirements files!
+
 ## Building the book
 
 You can simply run from the toplevel directory
