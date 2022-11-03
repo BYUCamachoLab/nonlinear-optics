@@ -51,7 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -309,7 +309,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/master?urlpath=tree/book/pages/Atomic Polarizability.ipynb"
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/main?urlpath=tree/book/pages/Atomic Polarizability.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -322,6 +322,24 @@ title="Launch on Binder"
     <img src="../_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/BYUCamachoLab/nonlinear-optics/blob/main/book/pages/Atomic Polarizability.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -816,9 +834,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -865,7 +881,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -876,8 +891,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -900,13 +914,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -926,12 +934,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -981,10 +984,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -1000,53 +1003,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -1074,7 +1058,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -1229,7 +1213,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -1341,11 +1340,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -1357,15 +1380,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -1375,6 +1398,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -1429,9 +1457,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -1663,6 +1691,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -1708,7 +1741,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='7c2cd1d4-5005-4fba-8c3e-dca98b761639'></div></div></div>
+</script><div class="output text_html"><div id='30c45182-6ade-436e-8f70-afe6764294d4'></div></div></div>
 </div>
 <p>Notice that the most <em>likely</em> place to find the electron is the Bohr radius <span class="math notranslate nohighlight">\(a_0\)</span> at about 53 pm from the nucleus.  If we like, we can visualize the charge and probability distribution in 2D as an electron cloud:</p>
 <div class="cell docutils container">
@@ -1822,9 +1855,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -1871,7 +1902,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -1882,8 +1912,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -1906,13 +1935,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -1932,12 +1955,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -1987,10 +2005,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -2006,53 +2024,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -2080,7 +2079,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -2235,7 +2234,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -2347,11 +2361,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -2363,15 +2401,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -2381,6 +2419,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -2435,9 +2478,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -2669,6 +2712,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -2714,7 +2762,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='d8d34cb6-9757-4804-bd16-42dcd63094fc'></div></div></div>
+</script><div class="output text_html"><div id='ceea81ea-a3a2-4dd0-9e9c-a3468ec6b1e3'></div></div></div>
 </div>
 </section>
 <section id="id1">
@@ -2851,9 +2899,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -2900,7 +2946,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -2911,8 +2956,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -2935,13 +2979,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -2961,12 +2999,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -3016,10 +3049,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -3035,53 +3068,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -3109,7 +3123,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -3264,7 +3278,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -3376,11 +3405,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -3392,15 +3445,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -3410,6 +3463,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -3464,9 +3522,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -3698,6 +3756,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -3743,7 +3806,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='a669798d-f91d-411b-8d48-6205e72f1b89'></div></div></div>
+</script><div class="output text_html"><div id='8087ce95-25e7-4571-b499-e8e05c630bcb'></div></div></div>
 </div>
 <p>The numeric and analytic expressions match very well, except perhaps right near the origin.  Let’s do some slightly fancier integration using built-in Python integration tools from SciPy to see if we can do better.  While we’re at it, let’s also do some fancy interactive plotting.  This will be a useful Python skill for visualizing things later in the course.  For this example we’ll vary the atomic number Z in the interactive plot to see how things change.</p>
 <div class="cell docutils container">
@@ -3850,9 +3913,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -3899,7 +3960,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -3910,8 +3970,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -3934,13 +3993,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -3960,12 +4013,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -4015,10 +4063,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -4034,53 +4082,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -4108,7 +4137,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -4263,7 +4292,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -4375,11 +4419,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -4391,15 +4459,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -4409,6 +4477,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -4463,9 +4536,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -4697,6 +4770,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -4742,8 +4820,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='af2b0396-a6b4-4bce-b7da-9b7b9495168a'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "83cb7d34177846119093a80f889d4217"}
+</script><div class="output text_html"><div id='3d599411-35d0-48ff-83ee-92da745af586'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "4d79eb8c025d4ffca49cbef7359adf2e"}
 </script></div>
 </div>
 </section>
@@ -4851,9 +4929,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -4900,7 +4976,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -4911,8 +4986,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -4935,13 +5009,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -4961,12 +5029,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -5016,10 +5079,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -5035,53 +5098,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -5109,7 +5153,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -5264,7 +5308,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -5376,11 +5435,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -5392,15 +5475,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -5410,6 +5493,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -5464,9 +5552,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -5698,6 +5786,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -5743,7 +5836,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='2211ebe0-17e2-4f0e-8a57-7fbc04c7182f'></div></div></div>
+</script><div class="output text_html"><div id='cc2fd140-0df7-4159-a19d-a88909535c30'></div></div></div>
 </div>
 <p>That’s <em>close</em> but not perfect.  If we do a power series expansion of the equation for the analytic field, we obtain</p>
 <div class="math notranslate nohighlight">
@@ -5850,9 +5943,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -5899,7 +5990,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -5910,8 +6000,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -5934,13 +6023,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -5960,12 +6043,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -6015,10 +6093,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -6034,53 +6112,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -6108,7 +6167,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -6263,7 +6322,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -6375,11 +6449,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -6391,15 +6489,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -6409,6 +6507,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -6463,9 +6566,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -6697,6 +6800,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -6742,7 +6850,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='dadd36de-2ace-4ee4-b356-bd4a28bf4b4b'></div></div></div>
+</script><div class="output text_html"><div id='056a0f00-743d-489f-b0d8-e538123b8bb3'></div></div></div>
 </div>
 <p>Ahh…that’s better.  Note that the linear approximate devatiates significantly after about 10 pm from the orgin, where the electric field is approximately <span class="math notranslate nohighlight">\(10^{11}\)</span> V/m.  This means we need a non-resonant external field of around <span class="math notranslate nohighlight">\(10^{11}\)</span> V/m to observe nonlinear effects! Fortunately, the oscillating electric fields in lasers can be tuned to be resonant with the oscillating motion of the proton-electron oscillating dipole moment, and hence not require such ridiculously large fields.</p>
 <p>To further cement the analogy to mass-spring systems, let’s also plot the potential energy <span class="math notranslate nohighlight">\(eV(r)\)</span>, just like it’s done in mass-spring systems.  Recall that the potential <span class="math notranslate nohighlight">\(V(r)\)</span> is simply the line integral of the electric field from some point with zero potential energy (infinity) to the point in question.</p>
@@ -6853,9 +6961,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -6902,7 +7008,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -6913,8 +7018,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -6937,13 +7041,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -6963,12 +7061,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -7018,10 +7111,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -7037,53 +7130,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -7111,7 +7185,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -7266,7 +7340,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -7378,11 +7467,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -7394,15 +7507,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -7412,6 +7525,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -7466,9 +7584,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -7700,6 +7818,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -7745,7 +7868,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='fe28df52-bfcf-444f-9725-6e26f2542181'></div></div></div>
+</script><div class="output text_html"><div id='9dc786fd-c69c-4010-9d72-b3f8f259fa4c'></div></div></div>
 </div>
 <p>The the potential energy for the linear approximation is a perfect parabola, just like in a mass-spring system.  The potential energy for the actual system is approximately the same for small displacements, but much lower for larger displacements. Notice also that we recover the ground state energy of a Hydrogen atom of -13.6 eV.</p>
 </section>
@@ -7866,9 +7989,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -7915,7 +8036,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -7926,8 +8046,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -7950,13 +8069,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -7976,12 +8089,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -8031,10 +8139,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -8050,53 +8158,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -8124,7 +8213,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -8279,7 +8368,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -8391,11 +8495,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -8407,15 +8535,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -8425,6 +8553,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -8479,9 +8612,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -8713,6 +8846,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -8758,7 +8896,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='a659b595-a14b-48fb-861b-2406062a5d0a'></div></div></div>
+</script><div class="output text_html"><div id='2c28994f-7af8-471a-bb4f-1ba9549ace0d'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -8856,9 +8994,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -8905,7 +9041,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -8916,8 +9051,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -8940,13 +9074,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -8966,12 +9094,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -9021,10 +9144,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -9040,53 +9163,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -9114,7 +9218,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -9269,7 +9373,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -9381,11 +9500,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -9397,15 +9540,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -9415,6 +9558,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -9469,9 +9617,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -9703,6 +9851,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -9748,7 +9901,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='d63a1980-8119-4bea-9042-a78c4f7eb950'></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
+</script><div class="output text_html"><div id='9b47f7a5-076b-4462-b978-e5d23ad8920b'></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
 0.1022 x - 3.908e-06
           3             2
 -0.03175 x + 8.684e-07 x + 0.3879 x - 3.908e-06
@@ -9790,7 +9943,7 @@ if (IPython.notebook.kernel !== null) {
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"1fe3a86a866a454e9d5358356cc097cd": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "83cb7d34177846119093a80f889d4217": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_1fe71e7b18b449ffa8ae4ba1ae5abba5", "IPY_MODEL_c4c203cfa5d243ed88174219eb95ff46"], "layout": "IPY_MODEL_1fe3a86a866a454e9d5358356cc097cd"}}, "75ec5035962e4bd79bebf85da2bf5be9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2b9819022af84a9ca50b7c9a237a7612": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "1fe71e7b18b449ffa8ae4ba1ae5abba5": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "Z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_75ec5035962e4bd79bebf85da2bf5be9", "max": 10, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_2b9819022af84a9ca50b7c9a237a7612", "value": 1}}, "12862e63698f464a8dbade27206059d7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c4c203cfa5d243ed88174219eb95ff46": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_12862e63698f464a8dbade27206059d7", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"cb579c779eaf4a068c584ecc2c194b7d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4d79eb8c025d4ffca49cbef7359adf2e": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_8b0bf3f177c34c91b35a484341e1cb6c", "IPY_MODEL_d5fa1fe0351d4dfba06259996a4bda19"], "layout": "IPY_MODEL_cb579c779eaf4a068c584ecc2c194b7d"}}, "bd4772a63df3415a8ce4d2e435aa09e1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e4b5f2c854934e4f913b2939a1cc1a39": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "8b0bf3f177c34c91b35a484341e1cb6c": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "Z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_bd4772a63df3415a8ce4d2e435aa09e1", "max": 10, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_e4b5f2c854934e4f913b2939a1cc1a39", "value": 1}}, "24a52b905c5b42bd8f1cb3c75638a5f3": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5fa1fe0351d4dfba06259996a4bda19": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_24a52b905c5b42bd8f1cb3c75638a5f3", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

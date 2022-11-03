@@ -51,7 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -309,7 +309,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/master?urlpath=tree/book/pages/The Nonlinear Susceptibility.ipynb"
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/main?urlpath=tree/book/pages/The Nonlinear Susceptibility.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -322,6 +322,24 @@ title="Launch on Binder"
     <img src="../_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/BYUCamachoLab/nonlinear-optics/blob/main/book/pages/The Nonlinear Susceptibility.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -711,9 +729,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -760,7 +776,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -771,8 +786,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -795,13 +809,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -821,12 +829,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -876,10 +879,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -895,53 +898,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -969,7 +953,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -1124,7 +1108,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -1236,11 +1235,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -1252,15 +1275,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -1270,6 +1293,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -1324,9 +1352,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -1558,6 +1586,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -1603,12 +1636,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='1ed05c23-c2e8-4e69-8987-ea25c104aa4f'></div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1997/2875703024.py:35: UserWarning: Data has no positive values, and therefore cannot be log-scaled.
-  ax2.set_xlim(-5, 5)
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "afbe6f043ad24b2891bb6c797bbd2900"}
+</script><div class="output text_html"><div id='6988e5d8-fb1c-413b-b9d4-11433d029a42'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "e1d8ae48541547cfba96894ba998c712"}
 </script></div>
 </div>
 </section>
@@ -1737,9 +1766,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -1786,7 +1813,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -1797,8 +1823,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -1821,13 +1846,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -1847,12 +1866,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -1902,10 +1916,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -1921,53 +1935,34 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -1995,7 +1990,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -2150,7 +2145,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -2262,11 +2272,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -2278,15 +2312,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -2296,6 +2330,11 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -2350,9 +2389,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -2584,6 +2623,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -2629,12 +2673,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='513245ea-7a1b-4bb7-b55a-c1155496792c'></div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1997/655621652.py:40: UserWarning: Data has no positive values, and therefore cannot be log-scaled.
-  ax2.set_xlim(-5, 5)
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8692f7911b654100bc8352bff6fb3313"}
+</script><div class="output text_html"><div id='fdd46724-3398-4b76-9b52-ed8dbc79e729'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "b23d9e9adf9a4cafbd367696b4fe53dd"}
 </script></div>
 </div>
 <p>It turns out that the 2nd order nonlinear restoring force not only adds a frequency response at twice the natural frequency, but it also adds a response at twice the driving frequency!  We know that oscillating electrons produce their own radiation (hence the damping), so if we can make this nonlinearity large enough,  we should be able to detect a doubled frequency component coming from atoms with a second order nonlinear susceptibility.  Note also that the amount of frequency conversion depends on the value of <span class="math notranslate nohighlight">\(k_2\)</span>, and not very much on <span class="math notranslate nohighlight">\(k_1\)</span>.</p>
@@ -2696,7 +2736,7 @@ P(t) &amp;= \epsilon_0 \left( (1.37)(1000)\cos\omega t + 0.46\times10^{-12}(1000
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"9a5339990dfc421ea12c59086b89468d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "afbe6f043ad24b2891bb6c797bbd2900": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_7c8eb50d2d9c435395bb5ead40f7de48", "IPY_MODEL_ca61a2b76e6c496eb072aed3e0bf7a59", "IPY_MODEL_b634bcbf9a574f1990551eae0bec8b01"], "layout": "IPY_MODEL_9a5339990dfc421ea12c59086b89468d"}}, "2f29c0cc83584e5b9a89419ed71f0b36": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "40410b9008a24fd992621955d53794dc": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "7c8eb50d2d9c435395bb5ead40f7de48": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k1", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_2f29c0cc83584e5b9a89419ed71f0b36", "max": 100.0, "min": 10.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_40410b9008a24fd992621955d53794dc", "value": 40.0}}, "9f72a94387214f5aa30ba34197d5f588": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9e250f364c9044938b34d74147427ff5": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "ca61a2b76e6c496eb072aed3e0bf7a59": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k2", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_9f72a94387214f5aa30ba34197d5f588", "max": 10.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.01, "style": "IPY_MODEL_9e250f364c9044938b34d74147427ff5", "value": 0.0}}, "52b11aaf9f8e4930af65ae3c1541b2b8": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b634bcbf9a574f1990551eae0bec8b01": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_52b11aaf9f8e4930af65ae3c1541b2b8", "msg_id": "", "outputs": []}}, "ac679896d4f84529a79d78a79d588fdb": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8692f7911b654100bc8352bff6fb3313": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_3da9d866047f4067a5755f4f616a2c91", "IPY_MODEL_08a9c354379341a8939350256d999736", "IPY_MODEL_bc8ae3f665a54f7388ff9978c8ccd8ed"], "layout": "IPY_MODEL_ac679896d4f84529a79d78a79d588fdb"}}, "af398461ed604c468cd18d280a5957b8": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7f27b5c93a8b45c892f5813326dda875": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "3da9d866047f4067a5755f4f616a2c91": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k1", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_af398461ed604c468cd18d280a5957b8", "max": 986.9604401089358, "min": 39.47841760435743, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_7f27b5c93a8b45c892f5813326dda875", "value": 631.6546816697189}}, "a69f46c696ba470d8bdabb6b77707ebe": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4cac9383b3d644ddb379b5996ca446c4": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "08a9c354379341a8939350256d999736": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k2", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_a69f46c696ba470d8bdabb6b77707ebe", "max": 10.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.01, "style": "IPY_MODEL_4cac9383b3d644ddb379b5996ca446c4", "value": 0.0}}, "65a3b808a20741a0a9fc6cadd9f5eb7f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bc8ae3f665a54f7388ff9978c8ccd8ed": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_65a3b808a20741a0a9fc6cadd9f5eb7f", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"a102258b19ae4ed5a9be0074f55a80cd": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e1d8ae48541547cfba96894ba998c712": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_2c94eaa2d0b34cf9926d95f7ea5fbec1", "IPY_MODEL_04d5f012f6414c699d00ca72b528c874", "IPY_MODEL_fa784eec89f64743ba46bff1a100b1e3"], "layout": "IPY_MODEL_a102258b19ae4ed5a9be0074f55a80cd"}}, "1ab1b6a42551461ab7fe5f4c44fb8e3a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7981579c04ee466e884b0c6c7b1201be": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "2c94eaa2d0b34cf9926d95f7ea5fbec1": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k1", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_1ab1b6a42551461ab7fe5f4c44fb8e3a", "max": 100.0, "min": 10.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_7981579c04ee466e884b0c6c7b1201be", "value": 40.0}}, "76e56d01979148458dd053b82535fe90": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "85d694f37c924b34a456ceaa43ed68d9": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "04d5f012f6414c699d00ca72b528c874": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k2", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_76e56d01979148458dd053b82535fe90", "max": 10.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.01, "style": "IPY_MODEL_85d694f37c924b34a456ceaa43ed68d9", "value": 0.0}}, "c9bd05b436ab440b85e907a6720e7d2f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "fa784eec89f64743ba46bff1a100b1e3": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c9bd05b436ab440b85e907a6720e7d2f", "msg_id": "", "outputs": []}}, "4626ed873ea44cea8ff263c88f570c55": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b23d9e9adf9a4cafbd367696b4fe53dd": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_7b42cd67159342d5ae1ef928d6c5ede5", "IPY_MODEL_6bff57f0277f4a8aa9a3fd4d84fa9ae7", "IPY_MODEL_5f0db50dadc24917b473f77dae8a1c80"], "layout": "IPY_MODEL_4626ed873ea44cea8ff263c88f570c55"}}, "0f14ed9d3e5d4d97859b1c0da6bb02d0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1062b81f30b54fb88d9088d638c2358a": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "7b42cd67159342d5ae1ef928d6c5ede5": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k1", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_0f14ed9d3e5d4d97859b1c0da6bb02d0", "max": 986.9604401089358, "min": 39.47841760435743, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.1, "style": "IPY_MODEL_1062b81f30b54fb88d9088d638c2358a", "value": 631.6546816697189}}, "76957095262f4377bb8421c8f5e1b768": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ab9931a124834145bf8f53b78df6992d": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "6bff57f0277f4a8aa9a3fd4d84fa9ae7": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "k2", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_76957095262f4377bb8421c8f5e1b768", "max": 10.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.01, "style": "IPY_MODEL_ab9931a124834145bf8f53b78df6992d", "value": 0.0}}, "bfbb886d99f04c6b99b8432ada572e64": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5f0db50dadc24917b473f77dae8a1c80": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bfbb886d99f04c6b99b8432ada572e64", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

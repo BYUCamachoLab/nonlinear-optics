@@ -51,7 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Atoms in external electric fields" href="pages/Atomic%20Polarizability.html" />
@@ -504,6 +504,19 @@ install some software. All recommended software is detailed below.</p>
 <a class="reference external" href="https://www.anaconda.com/products/distribution">Anaconda</a> or
 <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> (which is
 lightweight Anaconda, basically without all the preinstalled packages).</p>
+<p>You’ll need to set up your Python environment, too. If you’re an development
+expert, you may consider using a virtual environment. If you’re a novice, we
+recommend ignoring this and just installing the required packages into your
+base environment.</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/b4ef698db8ca845e5845c4618278f29a/requirements.txt"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">the</span> <span class="pre">requirements</span> <span class="pre">file</span></code></a>
+and then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use a cloud service such as
+<a class="reference external" href="https://colab.research.google.com">Google Colab</a>
+(basically Google Drive for executable notebooks). Notebooks can be launched
+from the website directly into Google Colab.</p>
 </section>
 <section id="vscode">
 <h2>VSCode<a class="headerlink" href="#vscode" title="Permalink to this headline">#</a></h2>
