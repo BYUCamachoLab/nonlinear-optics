@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction to EIT &#8212; Nonlinear Optics</title>
+    <title>Electromagnetically Induced Transparency &#8212; Nonlinear Optics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="2nd%20Order%20Perturbation%20Theory.html" />
+    <link rel="prev" title="Second Order Perturbation Theory" href="2nd%20Order%20Perturbation%20Theory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -196,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -226,17 +226,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -445,22 +450,22 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-eit">
    Introduction to EIT
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calculation-of-eit-polarization">
    Calculation of EIT Polarization
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#quantum-picture">
    Quantum Picture
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#slow-light">
    Slow Light
   </a>
@@ -474,7 +479,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction to EIT</h1>
+                <h1>Electromagnetically Induced Transparency</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -484,22 +489,22 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-eit">
    Introduction to EIT
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calculation-of-eit-polarization">
    Calculation of EIT Polarization
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#quantum-picture">
    Quantum Picture
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#slow-light">
    Slow Light
   </a>
@@ -514,8 +519,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="introduction-to-eit">
-<h1>Introduction to EIT<a class="headerlink" href="#introduction-to-eit" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="electromagnetically-induced-transparency">
+<span id="lectures-eit"></span><h1>Electromagnetically Induced Transparency<a class="headerlink" href="#electromagnetically-induced-transparency" title="Permalink to this headline">#</a></h1>
+<section id="introduction-to-eit">
+<h2>Introduction to EIT<a class="headerlink" href="#introduction-to-eit" title="Permalink to this headline">#</a></h2>
 <p>Electromagnetically induced transparency (EIT) is one of the more recently discovered a nonlinear optical phenomena. It is a nonlinear process that allows an otherwise opaque medium to become transparent.  Here is an energy level diagram:</p>
 <div>
 <img src="attachment:EIT.png" width="600px"/>
@@ -523,17 +530,20 @@ title="Print to PDF"
 <p>To understand what’s going on, we need to calculate the polarization of the medium oscillating at <span class="math notranslate nohighlight">\(\omega_s\)</span>.  The key insight is to realize that all odd orders of the susceptibility contribute, and each term can be represented as an energy level diagram in which an electron starts in state <span class="math notranslate nohighlight">\(|1\rangle\)</span> and ends up in state <span class="math notranslate nohighlight">\(|2\rangle\)</span>.  The linear susceptibility <span class="math notranslate nohighlight">\(\chi^{(1)}(\omega_s)\)</span> corresponds to a single-photon transition from. <span class="math notranslate nohighlight">\(|1\rangle\)</span> to <span class="math notranslate nohighlight">\(|2\rangle\)</span>. The third order susceptibility corresponds to the electron being promoted from <span class="math notranslate nohighlight">\(|1\rangle\)</span> to <span class="math notranslate nohighlight">\(|2\rangle\)</span>, transitioning from <span class="math notranslate nohighlight">\(|2\rangle\)</span> to state <span class="math notranslate nohighlight">\(|3\rangle\)</span> via stimulated emission, and then being promoted again up to state <span class="math notranslate nohighlight">\(|3\rangle\)</span>.  This same process repeats and is responsible for all odd orders participating.  This extra coupling to state <span class="math notranslate nohighlight">\(|3\rangle\)</span> is what provides the transparency.</p>
 </section>
 <section id="calculation-of-eit-polarization">
-<h1>Calculation of EIT Polarization<a class="headerlink" href="#calculation-of-eit-polarization" title="Permalink to this headline">#</a></h1>
+<h2>Calculation of EIT Polarization<a class="headerlink" href="#calculation-of-eit-polarization" title="Permalink to this headline">#</a></h2>
 <p>The steady state polarization at the
 signal frequency may be found by summing the polarizations induced by all possible excitation pathways from state <span class="math notranslate nohighlight">\(|1\rangle\)</span> to state
 <span class="math notranslate nohighlight">\(|3\rangle\)</span>, which can also be represented using double-sided Feynman
 diagrams as shown in the figure.</p>
-<p>\begin{align}
-P_{s} &amp;=  N \mu_{12}\Omega_s\frac{1}{\tilde{\Delta}<em>s}
-\sum</em>{n=0}^\infty \left(\frac{\Omega_c^2}{4\tilde{\Delta}_s\tilde{\Delta}<em>R} \right)^n \nonumber \
-&amp;= N \mu</em>{12}\Omega_s \frac{1}{\tilde{\Delta}_s -
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P_{s} &amp;=  N \mu_{12}\Omega_s\frac{1}{\tilde{\Delta}_s}
+\sum_{n=0}^\infty \left(\frac{\Omega_c^2}{4\tilde{\Delta}_s\tilde{\Delta}_R} \right)^n \nonumber \\
+&amp;= N \mu_{12}\Omega_s \frac{1}{\tilde{\Delta}_s -
 \frac{\Omega_c^2}{\tilde{4\Delta}_R}}
-\end{align}</p>
+\end{align}
+\end{split}\]</div>
 <p>The quantities <span class="math notranslate nohighlight">\(\tilde{\Delta}_s = \Delta_s -i\Gamma/2\)</span> and
 <span class="math notranslate nohighlight">\(\tilde{\Delta}_R = \Delta_s- \Delta_c - i\gamma\)</span> are the complex
 single photon and two-photon (Raman) detunings where <span class="math notranslate nohighlight">\(\Gamma\)</span> and
@@ -1566,36 +1576,48 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='14a88b61-82bd-4e1c-9e54-501d6eba6b13'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6f8147d3e2624668b461f9cfbf3b5276"}
+</script><div class="output text_html"><div id='f681893c-3a4b-45df-a0e2-0907bbb060ca'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "9d293d43ace34fffacdc1229be89068c"}
 </script></div>
 </div>
 </section>
 <section id="quantum-picture">
-<h1>Quantum Picture<a class="headerlink" href="#quantum-picture" title="Permalink to this headline">#</a></h1>
-<p>The Hamiltonian describing the atom-field interaction in the absence of damping may be written in the rotating frame as
+<h2>Quantum Picture<a class="headerlink" href="#quantum-picture" title="Permalink to this headline">#</a></h2>
+<p>The Hamiltonian describing the atom-field interaction in the absence of damping may be written in the rotating frame as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{equation}
 -\frac{\hbar}{2}\left[ \begin{array}{ccc}
-0 &amp; \Omega_s &amp;  0 \
-\Omega_s &amp; -2\Delta_1 &amp; \Omega_c \
+0 &amp; \Omega_s &amp;  0 \\
+\Omega_s &amp; -2\Delta_1 &amp; \Omega_c \\
 0 &amp; \Omega_c &amp; -2(\Delta_1 - \Delta_3) \end{array} \right],
 \end{equation}
-where <span class="math notranslate nohighlight">\(\Omega_s\)</span> and <span class="math notranslate nohighlight">\(\Omega_c\)</span> are the Rabi frequencies induced by the signal and coupling fields respectively, and <span class="math notranslate nohighlight">\(\Delta_1\)</span> and <span class="math notranslate nohighlight">\(\Delta_3\)</span> represent the signal and coupling field detunings from optical resonance.  When the two photon detuning is zero (<span class="math notranslate nohighlight">\(\Delta_1=\Delta_3\)</span>), we obtain eigenvalues of <span class="math notranslate nohighlight">\(\{0, \hbar/2(\Delta_1 \pm \Omega_N)\}\)</span>, where we have defined a normalizing Rabi frequency <span class="math notranslate nohighlight">\(\Omega_N \equiv \sqrt{\Omega_c^2+\Omega_s^2}\)</span>. The vanishing energy eigenvalue corresponds to the case in which no atom field coupling exists and has an eigenvector of
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega_s\)</span> and <span class="math notranslate nohighlight">\(\Omega_c\)</span> are the Rabi frequencies induced by the signal and coupling fields respectively, and <span class="math notranslate nohighlight">\(\Delta_1\)</span> and <span class="math notranslate nohighlight">\(\Delta_3\)</span> represent the signal and coupling field detunings from optical resonance.  When the two photon detuning is zero (<span class="math notranslate nohighlight">\(\Delta_1=\Delta_3\)</span>), we obtain eigenvalues of <span class="math notranslate nohighlight">\(\{0, \hbar/2(\Delta_1 \pm \Omega_N)\}\)</span>, where we have defined a normalizing Rabi frequency <span class="math notranslate nohighlight">\(\Omega_N \equiv \sqrt{\Omega_c^2+\Omega_s^2}\)</span>. The vanishing energy eigenvalue corresponds to the case in which no atom field coupling exists and has an eigenvector of</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 |-\rangle =  \frac{\Omega_c}{\Omega_N}|1\rangle - \frac{\Omega_s}{\Omega_N}|3\rangle.
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>When the system is in this eigenstate, no absorption takes place and hence no spontaenous emission occurs.  For this reason, atoms prepared in this eigenstate are said to be in a dark state, invisible to radiation at the signal frequency.</p>
 </section>
 <section id="slow-light">
-<h1>Slow Light<a class="headerlink" href="#slow-light" title="Permalink to this headline">#</a></h1>
+<h2>Slow Light<a class="headerlink" href="#slow-light" title="Permalink to this headline">#</a></h2>
 <p>Recall that the group velocity of light is defined as</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 v_g &amp;= \frac{d\omega}{dk}
-\end{align}</p>
-<p>Since <span class="math notranslate nohighlight">\(k = n(\omega)\omega/c\)</span>, we can define a group index of
+\end{align}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(k = n(\omega)\omega/c\)</span>, we can define a group index of</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 n_g = n(\omega) + \omega\frac{dn(\omega)}{d\omega}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>That measures how slow a pulse of light will propagate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2582,17 +2604,18 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='33b98195-08c4-47b7-b650-ee833cc3de9c'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "16bb5bb0eab740fe90daa08d360d571a"}
+</script><div class="output text_html"><div id='240f813c-ea26-4fa5-a0a7-04f318f089fc'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "13ee2149d4ae4831b2592eeddac43784"}
 </script></div>
 </div>
 <p>One of my first papers used this effect to slow down images encoded in single photons:
 <a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.98.043902">All-Optical Delay of Images using Slow Light</a></p>
 </section>
+</section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"c81186d0027c44f7ad217bb89a1e1c10": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6f8147d3e2624668b461f9cfbf3b5276": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_a828802e76914a0fb8bb16dcfe0a6159", "IPY_MODEL_585a36d285f5435aaa46b5f9f2c2f3a0"], "layout": "IPY_MODEL_c81186d0027c44f7ad217bb89a1e1c10"}}, "cadbd47e6d8d441eaf72058d7867862c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4b9ff4776d8b40d6889d8254b3eddb90": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "a828802e76914a0fb8bb16dcfe0a6159": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Omegac", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_cadbd47e6d8d441eaf72058d7867862c", "max": 190694674.07290044, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 381389.3481458009, "style": "IPY_MODEL_4b9ff4776d8b40d6889d8254b3eddb90", "value": 7627786.962916018}}, "958dbdb55ce5448a8ec8a01d56aedae9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "585a36d285f5435aaa46b5f9f2c2f3a0": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_958dbdb55ce5448a8ec8a01d56aedae9", "msg_id": "", "outputs": []}}, "78f5d31942b34f29b6c5bcba68621933": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "16bb5bb0eab740fe90daa08d360d571a": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_139b1e16377b43f293b9d66151020cf5", "IPY_MODEL_2c99e14935dc40b891b567ea13fe9843"], "layout": "IPY_MODEL_78f5d31942b34f29b6c5bcba68621933"}}, "74e24d6e61b94f20bc5e3b916695f58d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b689335401dd45269fff3446cb18e23b": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "139b1e16377b43f293b9d66151020cf5": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Omegac", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_74e24d6e61b94f20bc5e3b916695f58d", "max": 38138934.81458009, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 381389.3481458009, "style": "IPY_MODEL_b689335401dd45269fff3446cb18e23b", "value": 7627786.962916018}}, "b6d48ae78cda4470a33cf9d03d0a2f8d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2c99e14935dc40b891b567ea13fe9843": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b6d48ae78cda4470a33cf9d03d0a2f8d", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"d1c8f0c12b1349a28880ca96b40716ce": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9d293d43ace34fffacdc1229be89068c": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_73c747cdda4c4a8abf2f72822d828f05", "IPY_MODEL_50e8c36603ac499daa249b5beed3fa0f"], "layout": "IPY_MODEL_d1c8f0c12b1349a28880ca96b40716ce"}}, "c9430eb700074d33802d8a8e5fef4b81": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "15de42f8cc154c5ab7c21e5435f144a1": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "73c747cdda4c4a8abf2f72822d828f05": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Omegac", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_c9430eb700074d33802d8a8e5fef4b81", "max": 190694674.07290044, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 381389.3481458009, "style": "IPY_MODEL_15de42f8cc154c5ab7c21e5435f144a1", "value": 7627786.962916018}}, "afb5680a7d884ca0a65627258b726829": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "50e8c36603ac499daa249b5beed3fa0f": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_afb5680a7d884ca0a65627258b726829", "msg_id": "", "outputs": []}}, "cacb0aa67cfc4e23b92a3a39b8b0c675": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "13ee2149d4ae4831b2592eeddac43784": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_44b6b9e1bc6f4bdfb9db8fadc3e4beb9", "IPY_MODEL_030f19c99ab54f8691cda2f4e690d0aa"], "layout": "IPY_MODEL_cacb0aa67cfc4e23b92a3a39b8b0c675"}}, "42274d02a63f4479aecd8fac6321446d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8924252e9e954dc6a6467d1bef72aea3": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "44b6b9e1bc6f4bdfb9db8fadc3e4beb9": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Omegac", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_42274d02a63f4479aecd8fac6321446d", "max": 38138934.81458009, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 381389.3481458009, "style": "IPY_MODEL_8924252e9e954dc6a6467d1bef72aea3", "value": 7627786.962916018}}, "9a51cd845eb64c3ea62758b46c4206a2": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "030f19c99ab54f8691cda2f4e690d0aa": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9a51cd845eb64c3ea62758b46c4206a2", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -2627,7 +2650,7 @@ if (IPython.notebook.kernel !== null) {
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">&lt;no title&gt;</p>
+            <p class="prev-next-title">Second Order Perturbation Theory</p>
         </div>
     </a>
 </div>

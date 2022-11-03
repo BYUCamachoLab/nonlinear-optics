@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Finding the elastic wave equation" href="Stimulated%20Brillouin%20Scattering.html" />
+    <link rel="next" title="Stimulated Brillouin Scattering" href="Stimulated%20Brillouin%20Scattering.html" />
     <link rel="prev" title="Introduction to Raman Scattering" href="Raman%20Scattering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -447,16 +452,6 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#name">
-   Name: –
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#total-points-100-pts">
-   Total Points: –/100 pts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interaction-of-acoustic-waves-and-optical-waves">
    Interaction of Acoustic Waves and Optical Waves
   </a>
@@ -467,8 +462,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -491,16 +486,6 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#name">
-   Name: –
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#total-points-100-pts">
-   Total Points: –/100 pts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interaction-of-acoustic-waves-and-optical-waves">
    Interaction of Acoustic Waves and Optical Waves
   </a>
@@ -511,8 +496,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -526,13 +511,9 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="optoacoustic-effects">
-<h1>Optoacoustic Effects<a class="headerlink" href="#optoacoustic-effects" title="Permalink to this headline">#</a></h1>
-<section id="name">
-<h2>Name: –<a class="headerlink" href="#name" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="total-points-100-pts">
-<h2>Total Points: –/100 pts<a class="headerlink" href="#total-points-100-pts" title="Permalink to this headline">#</a></h2>
-</section>
+<span id="lectures-optoacoustic-effects"></span><h1>Optoacoustic Effects<a class="headerlink" href="#optoacoustic-effects" title="Permalink to this headline">#</a></h1>
+<p>Name: –</p>
+<p>Total Points: –/100 pts</p>
 <section id="interaction-of-acoustic-waves-and-optical-waves">
 <h2>Interaction of Acoustic Waves and Optical Waves<a class="headerlink" href="#interaction-of-acoustic-waves-and-optical-waves" title="Permalink to this headline">#</a></h2>
 <p>How can light interact with acoustic waves?  Well, acoustic waves are just density variations within a material.   Since the material polarization (and hence refractive index) is proportional to the number of dipoles per unit volume, a density wave can also lead to a polarization wave.</p>
@@ -550,40 +531,64 @@ title="Print to PDF"
 <h2>Frequecy Shifting of Light by Acoustic Waves<a class="headerlink" href="#frequecy-shifting-of-light-by-acoustic-waves" title="Permalink to this headline">#</a></h2>
 <p>Let’s work out how an ultrasonic wave can induce a nonlinear polarization through electrostriction.  We’ll then use that nonlinear polarization in the electric field wave equations to see some nonlinear optical effects.</p>
 <p>We start by writing the acoustic wave in the same form as the electric field waves.  We’ll let <span class="math notranslate nohighlight">\(Q\)</span> signify the mechanical displacement, <span class="math notranslate nohighlight">\(\Omega_A\)</span> the acoustic angular frequency, and <span class="math notranslate nohighlight">\(K_A\)</span> the acoustic wavenumber:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 Q = \tilde{Q}e^{j\left(K_Ay - j\Omega_A t\right)} + c.c.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>We have chosen this wave to travel in the <span class="math notranslate nohighlight">\(y\)</span> direction.  It is somewhat difficult to measure the amplitude of internal displacements within a material, but often much easier to apply and measure a strain <span class="math notranslate nohighlight">\(S = \partial Q/\partial y\)</span>.  For this reason, the electrostrictive constant <span class="math notranslate nohighlight">\(\gamma_e\)</span> is given as a measure of the change in the dielectric constant as a function of strain:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \delta\epsilon = -\gamma_e S
-\end{align}</p>
+\end{align}
+\]</div>
 <p>The upshot is that we need to write our acoustic wave interms of the strain:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 S = \frac{\partial Q}{\partial y} = j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>So we conclude that the acoustic wave sets up dielectric constant wave:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \delta \epsilon = -\gamma_e j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>If a laser field is incident on this material, it will set up a polarization equal to <span class="math notranslate nohighlight">\(P = \epsilon_0\chi E = \epsilon_0(\delta \epsilon - 1)E\)</span>.  The nonlinear polarization will therefore be</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 P^{(NL)} = \epsilon_0\delta\epsilon E
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Writing the electric field of the laser as</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 E= \tilde{E}_Le^{j\left(k_Ly - \omega_L t\right)} + c.c.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>we obtain</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 P^{(NL)} &amp;= \epsilon_0\left(-\gamma_e j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.\right)\left( \tilde{E}_Le^{j\left(k_Ly - \omega_L t\right)} + c.c.
-\right) \nonumber \
-&amp;= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((k_l +K_A)y - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((k_l -K_A)y - (\omega_L - \Omega_A) t\right)} + c.c. \right)
-\end{align}</p>
+ \right) \nonumber \\
+ &amp;= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((k_l +K_A)y - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((k_l -K_A)y - (\omega_L - \Omega_A) t\right)} + c.c. \right)
+ \end{align}
+\end{split}\]</div>
 <p>We can thus see that the effect of the mechanical wave is to produce a polarization wave oscillating at frequencies <span class="math notranslate nohighlight">\(\omega_L \pm \Omega_A\)</span>.  This is the same process used in acousto-optic modulators and deflectors.</p>
 <p>We actually need to generalize our nonliear polarization a bit to account for the fact that the direction of propagation of the light wave does not need to be in the same direction as the acoustic wave.  In fact, for most acousto-optic modulators the two direction are perpindicular!  We do this by writing the wavenumbers <span class="math notranslate nohighlight">\(k_L\)</span> and <span class="math notranslate nohighlight">\(K_A\)</span> as wave vectors <span class="math notranslate nohighlight">\(\mathbf{k}_L\)</span> and <span class="math notranslate nohighlight">\(\mathbf{K}_A\)</span> and the spatial coordinate <span class="math notranslate nohighlight">\(y\)</span> as a spatial vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>.  Our nonlinear polarization becomes:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 P^{(NL)}= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((\mathbf{k}_l + \mathbf{K}_A)\cdot \mathbf{r} - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((\mathbf{k}_l -\mathbf{K}_A)\cdot \mathbf{r} - (\omega_L - \Omega_A) t\right)} + c.c. \right)
-\end{align}</p>
+ \end{align}
+\]</div>
 <p>Here’s a diagram showing the addition of wave-vectors for a typical acousto-optic modulator:</p>
 <p><img alt="acousto_optic_modulator.png" src="pages/attachment:acousto_optic_modulator.png" /></p>
 <p>How large of a deflection might we expect to acheive?  Let’s calculate:</p>
@@ -614,14 +619,17 @@ P^{(NL)}= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((\mathbf{k
 </div>
 <p>So it looks like to get a deflection of more than a few degrees, we need to have an acoustic frequency of &gt; 1 GHz.  But what about phase matching?</p>
 <p>The wavevector of the generated optical wave along the propogation direction of the laser is <span class="math notranslate nohighlight">\(k_L\cos \theta\)</span>, so the wavevector mismatch is</p>
-<p>\begin{align}
-\Delta k &amp;= k_L - k_L \cos \theta \nonumber \
-&amp;\approx k_L\frac{\theta^2}{2}
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\Delta k &amp;= k_L - k_L \cos \theta \nonumber \\
+ &amp;\approx k_L\frac{\theta^2}{2} 
+\end{align}
+\end{split}\]</div>
 <p>This is typically a very short coherence length (microns), and acousto-optic modulators in which the crystal width is much smaller than the coherence length regime are said to operate in the Raman-Nath regime.</p>
 </section>
-<section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>(50 pts) For a normal incident laser with parameter identical to the calculation above, plot the coherence length as a function of acoustic frequency.</p></li>
 <li><p>(50 pts) Phase matching can be acheived by angling the acoustic wave so that it is it is not quite perpedincular to the optical wave (see Fig. 5.9 in New).  Plot the rotation angle needed for perfect phase matching as a function of acoustic frequency.</p></li>
@@ -666,7 +674,7 @@ P^{(NL)}= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((\mathbf{k
     <a class='right-next' id="next-link" href="Stimulated%20Brillouin%20Scattering.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Finding the elastic wave equation</p>
+        <p class="prev-next-title">Stimulated Brillouin Scattering</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

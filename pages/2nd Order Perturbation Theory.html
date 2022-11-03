@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Nonlinear Optics</title>
+    <title>Second Order Perturbation Theory &#8212; Nonlinear Optics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to EIT" href="Electromagnetically%20Induced%20Transparency.html" />
-    <link rel="prev" title="Two level atom" href="First%20Order%20Perturbation%20Theory.html" />
+    <link rel="next" title="Electromagnetically Induced Transparency" href="Electromagnetically%20Induced%20Transparency.html" />
+    <link rel="prev" title="First Order Perturbation Theory" href="First%20Order%20Perturbation%20Theory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -139,7 +139,7 @@ const thebe_selector_output = ".output, .cell_output"
   Lectures
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Atomic%20Polarizability.html">
    Atoms in external electric fields
@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -424,50 +429,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>Second Order Perturbation Theory</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -475,48 +453,75 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>In the last notebook we derived the transition amplitude for a two level atom, obtaining <span class="math notranslate nohighlight">\(a_1^{(1)}\)</span> for the excited state of:</p>
-<p>\begin{align}
-a_1^{(1)} = \frac{1}{\hbar}\sum_j \mu_{10}^j \left(\frac{\hat{E}<em>j e^{-j\omega t}}{\omega</em>{10} + \omega} + \frac{\hat{E}^*<em>j e^{j\omega t}}{\omega</em>{10} - \omega} \right)
-\end{align}</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="second-order-perturbation-theory">
+<span id="lectures-perturbation-theory-2"></span><h1>Second Order Perturbation Theory<a class="headerlink" href="#second-order-perturbation-theory" title="Permalink to this headline">#</a></h1>
+<p>In the last notebook we derived the transition amplitude for a two level atom, obtaining <span class="math notranslate nohighlight">\(a_1^{(1)}\)</span> for the excited state of:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+a_1^{(1)} = \frac{1}{\hbar}\sum_j \mu_{10}^j \left(\frac{\hat{E}_j e^{-j\omega t}}{\omega_{10} + \omega} + \frac{\hat{E}^*_j e^{j\omega t}}{\omega_{10} - \omega} \right)
+\end{align}
+\]</div>
 <p>In this notebook, we extend the analysis by including an additional energy level <span class="math notranslate nohighlight">\(a_3\)</span>.  Since levels 1 and 2 both function as an excited state in first order, we can write down the first order population in level 2 in the same way:</p>
-<p>\begin{align}
-a_2^{(1)} = \frac{1}{\hbar}\sum_j \mu_{20}^j \left(\frac{\hat{E}<em>j e^{-j\omega t}}{\omega</em>{20} + \omega} + \frac{\hat{E}^*<em>j e^{j\omega t}}{\omega</em>{20} - \omega} \right)
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+a_2^{(1)} = \frac{1}{\hbar}\sum_j \mu_{20}^j \left(\frac{\hat{E}_j e^{-j\omega t}}{\omega_{20} + \omega} + \frac{\hat{E}^*_j e^{j\omega t}}{\omega_{20} - \omega} \right)
+\end{align}
+\]</div>
 <p>We can now plug these amplitudes in to find the second order corrections according to</p>
-<p>\begin{align}
-\dot{a_2}^{(1)} &amp;= -j\omega_{20}  + a_1^{(2)} -\frac{j}{\hbar}V_{12}a_2^{(1)} \nonumber \
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\dot{a_2}^{(1)} &amp;= -j\omega_{20}  + a_1^{(2)} -\frac{j}{\hbar}V_{12}a_2^{(1)} \nonumber \\
 &amp;= -\frac{j} {\hbar} \sum_k \mu_{12}^k\left( \hat{E}_ke^{-j\omega t }+ c.c. \right)a_2^{(1)}
-\end{align}</p>
+\end{align}
+\end{split}\]</div>
 <p>which gives us</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 a_1^{(2)} = \frac{1}{\hbar^2} \sum_{j,k} \mu_{12}^k\mu_{20}^j
-\left(\frac{\hat{E}<em>j\hat{E}<em>k e^{j2\omega t}}{\left(\omega</em>{10} + 2\omega\right)\left(\omega</em>{20} + \omega\right)} +<br />
-\frac{\hat{E}^<em>_j\hat{E}^</em><em>k e^{-j2\omega t}}{\left(\omega</em>{10} + 2\omega\right)\left(\omega_{20} + \omega\right)}\right)
-\end{align}</p>
+\left(\frac{\hat{E}_j\hat{E}_k e^{j2\omega t}}{\left(\omega_{10} + 2\omega\right)\left(\omega_{20} + \omega\right)} +  
+\frac{\hat{E}^*_j\hat{E}^*_k e^{-j2\omega t}}{\left(\omega_{10} + 2\omega\right)\left(\omega_{20} + \omega\right)}\right)
+\end{align}
+\]</div>
 <p>and we can find <span class="math notranslate nohighlight">\(a_2^{(2)}\)</span> by exchanging indices 1 and 2.</p>
 <p>To make the connection to second harmonic generation and other 2nd order nonlinear processes, we need to find the resulting polarization.  This is</p>
-<p>\begin{align}
-\mathbf{P} = N\langle \mathbf{\mu} \rangle = N\sum_{nl} \mu_{nl}a_la_n^*
-\end{align}</p>
-<p>The resultig polarization for second harmonic generation along direction <span class="math notranslate nohighlight">\(i\)</span> is
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
-P_i^{SHG} &amp;= \hat{P}<em>i e^{j2\omega t} + c.c. \nonumber \
-&amp;= N\left(a_2^{(2)}a_0^{(0)*}\mu</em>{02}^i  +
-a_1^{(2)}a_0^{(0)<em>}\mu_{01}^i +
-a_1^{(1)}a_2^{(1)</em>}\mu_{21}^i + c.c. \right)
-\end{align}</p>
+\mathbf{P} = N\langle \mathbf{\mu} \rangle = N\sum_{nl} \mu_{nl}a_la_n^*
+\end{align}
+\]</div>
+<p>The resultig polarization for second harmonic generation along direction <span class="math notranslate nohighlight">\(i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P_i^{SHG} &amp;= \hat{P}_i e^{j2\omega t} + c.c. \nonumber \\
+          &amp;= N\left(a_2^{(2)}a_0^{(0)*}\mu_{02}^i  +
+          a_1^{(2)}a_0^{(0)*}\mu_{01}^i + 
+          a_1^{(1)}a_2^{(1)*}\mu_{21}^i + c.c. \right)
+\end{align}
+\end{split}\]</div>
 <p>The main takeaway here is that the polarization is the sum of products of the population levels multiplied by the correspodning dipole matrix element.</p>
 <p>How do we interpret this result?  Let’s take a look again at the first-order result for some help:</p>
-<p>\begin{align}
-P_i = \frac{N}{\hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}<em>{10}-\omega} + \frac{\mu</em>{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)\hat{E}_je^{j\omega t} + c.c.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P_i = \frac{N}{\hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}_{10}-\omega} + \frac{\mu_{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)\hat{E}_je^{j\omega t} + c.c.
+\end{align}
+\]</div>
 <p>meaning that the linear susceptibility is</p>
-<p>\begin{align}
-\chi_{ij}^{(1)} = \frac{N}{\epsilon_0 \hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}<em>{10}-\omega} + \frac{\mu</em>{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\chi_{ij}^{(1)} = \frac{N}{\epsilon_0 \hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}_{10}-\omega} + \frac{\mu_{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)
+\end{align}
+\]</div>
 <p><img alt="linear_susceptibility_quantum.png" src="pages/attachment:linear_susceptibility_quantum.png" /></p>
 <p>We can see from the figure that only the first term contributes substantially, since it represents photon transitions that are much closer to resonances.  We can similarly represent nonlinear processes as sums of dominant processes which are close to resonance.  We will take this up in the next notebook.</p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -549,13 +554,13 @@ P_i = \frac{N}{\hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}<em>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Two level atom</p>
+            <p class="prev-next-title">First Order Perturbation Theory</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Electromagnetically%20Induced%20Transparency.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to EIT</p>
+        <p class="prev-next-title">Electromagnetically Induced Transparency</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

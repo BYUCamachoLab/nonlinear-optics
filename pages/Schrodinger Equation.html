@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Review" href="The%20Density%20Matrix.html" />
+    <link rel="next" title="The Density Matrix" href="The%20Density%20Matrix.html" />
     <link rel="prev" title="Nonlinear Differential Equations For Pulsed Light" href="Nonlinear%20Optics%20With%20Pulses%201.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -446,22 +451,17 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   The Quantum Mechanical Wave Function
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#time-dependence-of-the-wave-function">
    Time Dependence of the Wave Function
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#schrodinger-s-equation">
    Schrodinger’s Equation
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -485,22 +485,17 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   The Quantum Mechanical Wave Function
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#time-dependence-of-the-wave-function">
    Time Dependence of the Wave Function
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#schrodinger-s-equation">
    Schrodinger’s Equation
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -515,18 +510,23 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="the-quantum-mechanical-wave-function">
-<h1>The Quantum Mechanical Wave Function<a class="headerlink" href="#the-quantum-mechanical-wave-function" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-quantum-mechanical-wave-function">
+<span id="lectures-schrodinger-equation"></span><h1>The Quantum Mechanical Wave Function<a class="headerlink" href="#the-quantum-mechanical-wave-function" title="Permalink to this headline">#</a></h1>
 <p>In this notebook, we want to introduce the Schrodinger equation, the quanum mechanical equivalent of newton’s law of motion <span class="math notranslate nohighlight">\(F = ma\)</span>.  Why would we want to do this?</p>
 <p>In the first notebook, we used the Hydrogen wavefunction to calculate the potential energy that an electron would feel when it was displaced from it’s equilibrium position.  What we did not do was calculate the dynamics of the wavefunction itself.  Instead, througout the course we simply assumed there is some atomic polarization resulting from the displacing the charge distribution with an electric field.  We never actually <em>calculated</em> it though.   We just assumed we could expand it using a Taylor series and used measured values of the expansion from a table.</p>
 <p>But what if we wanted to calculate the polarization from first principles?  We would need some equation that tells us how the wavefunction changes when it’s perturbed by an electric field.  Schrodinger provided the equation, which we’ll get to in a bit.</p>
 <p>To understand the Schrodinger equation, we first need to get comfortable with the concept of a wave function. Let’s return to the concrete example of a wavefunction in the first notebook, when we looked at the charge distribution of the electron in a Hydrogen atom.   Here’s the Hydrogen 1s state again:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \psi(r)=\frac{1}{\sqrt{\pi}a_0^{3/2}}e^{-r/a_0}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>This simply tells us the electron cloud’s density as a function of <span class="math notranslate nohighlight">\(r\)</span>.  Actually, it’s <em>square</em> that does this, since the the radial charge distribution is <span class="math notranslate nohighlight">\(\rho(r)\)</span> is proportional to the square of the wavefunction:</p>
 <div class="math notranslate nohighlight">
-\[\rho(r) = e|\psi(r)|^2=\frac{e}{\pi a_0^3}e^{-2r/a_0} \]</div>
+\[
+\rho(r) = e|\psi(r)|^2=\frac{e}{\pi a_0^3}e^{-2r/a_0}
+\]</div>
 <p>Let’s plot this wavefunction again to remind ourselves what it looks like:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1527,25 +1527,33 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='9705e2b9-6664-4c36-8637-6add9564088f'></div></div></div>
+</script><div class="output text_html"><div id='6075b1c6-c257-4ca6-bb0a-df471b79a237'></div></div></div>
 </div>
-</section>
 <section id="time-dependence-of-the-wave-function">
-<h1>Time Dependence of the Wave Function<a class="headerlink" href="#time-dependence-of-the-wave-function" title="Permalink to this headline">#</a></h1>
+<h2>Time Dependence of the Wave Function<a class="headerlink" href="#time-dependence-of-the-wave-function" title="Permalink to this headline">#</a></h2>
 <p>But why is it called a <em>wave</em> function–after all it appears to just be describing a stationary charge distribution.  Well, we’ve actually left out the time dependence, but we’ll put it it back in now.  Every quantum state that has a single definite energy, like single-electron atomic orbitals, evolves in time like this:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \Psi(r,t) = \psi(r)e^{\frac{-j}{\hbar}E_n t}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(E_n\)</span> is the energy of the state.  In the first notebook, we used the wave function to calculate the total potential energy of the 1s electron to be -13.6 V.</p>
 <p>Interestingly, the time dependence of a wavefunction with definite energy does <em>not</em> affect the observed charge density distribution, since</p>
-<p>\begin{align}
-|\Psi(r,t)|^2 = |\psi(r)e^{\frac{-j}{\hbar}E_n t}|^2 = |\psi(r)|^2
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+|\Psi(r,t)|^2 = |\psi(r)e^{\frac{-j}{\hbar}E_n t}|^2 = |\psi(r)|^2 
+\end{align}
+\]</div>
 <p>For this reason, wavefunctions with definite energy are called stationary states.  They are stationary in the observables (e.g. charge distribution), even though the wave function itself is not stationary in time.  The stationary states of a system are extremely useful, since any other state can be expressed as a superposition of these state.  It is analogous to building up an optical pulse using sinusoids with definite frequencies.</p>
 <p>Let’s see this in action for atomic state, consider an electron in the superposition of being in the 1s state and the 2s state:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \Psi(r,t) = \frac{\psi_{100}e^{\frac{-j}{\hbar}E_1 t} + \psi_{200}e^{\frac{-j}{\hbar}E_2 t}}{\sqrt{2}}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Both the 1s state and 2s states will have their own time dependence, but the superpostion will take into account both.  Here’s a plot of the charge distributions of both states and their superpostion at <span class="math notranslate nohighlight">\(t=0\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2541,7 +2549,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='1a0f11e5-0857-47e6-b14c-90b2811909db'></div></div></div>
+</script><div class="output text_html"><div id='c283dab6-cbba-446d-b8aa-328df24b8fed'></div></div></div>
 </div>
 <p>Now let’s watch what happens to the charge distribution as we let the state evolve in time:</p>
 <div class="cell docutils container">
@@ -3528,58 +3536,80 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='6cbc7019-d15a-44c7-8ef7-6912d20a0290'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "eaacea4f10494ae3b5accd31faea98a3"}
+</script><div class="output text_html"><div id='35992141-9fd4-4b18-a8db-e4515e58b6c1'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "6cd65df9c37e4027b5808143b01ac968"}
 </script></div>
 </div>
 <p>It’s alive!  Even though the charge distribution of each of the individual wavefunctions is stationary, the charge distribution of their superposition is <em>not</em> stationary.  In general, we can write down any state as the superposition of stationary states and track the time evolution of the state in this way.</p>
 </section>
 <section id="schrodinger-s-equation">
-<h1>Schrodinger’s Equation<a class="headerlink" href="#schrodinger-s-equation" title="Permalink to this headline">#</a></h1>
+<h2>Schrodinger’s Equation<a class="headerlink" href="#schrodinger-s-equation" title="Permalink to this headline">#</a></h2>
 <p>In 1925, Erwin Schrodinger wrote down an equation that captured this concept.  Here it is:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial |\psi \rangle}{\partial t} = \frac{-j}{\hbar}\hat{H} | \psi \rangle
-\end{align}</p>
+\end{align}
+\]</div>
 <p>This equation says that you can obtain the time rate of change of the wavefunction simply by applying the <span class="math notranslate nohighlight">\(H\)</span> operater on the wavefunction and then multiplying by <span class="math notranslate nohighlight">\(-j/ \hbar\)</span>.  But what is <span class="math notranslate nohighlight">\(\hat{H}\)</span>?  It’s called the Hamiltonian, and when applied to stationary states it simply multiplies it by the standing wave energy.  For example, the ground state energy of the 1s state of the electron in Hydrogen is a standing wave with an energy of -13.6 eV.  So</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \hat{H}\Psi_{100}(r,t) = -13.6 \times \Psi_{100}(r,t)
-\end{align}</p>
+\end{align}
+\]</div>
 <p>But it turns out that Schrodinger’s equation works on <em>any state</em>, so long as we can find a Hamiltonian that operates properly on all the stationary states that make up that state.  So in quantum mechanics, a lot of the work often comes down to finding the right Hamiltonian.</p>
 <p>As we have seen, nonlinear optical phenomena arise when an electron charge distribution is perturbed by a small amount from it’s equilibrium position around the nucleus.  In that case, a dipole moment is created, resulting in the polarization of the atom.  The Hamiltonian that keeps track of the energy of the system may be written</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \hat{H} = \hat{H_0} + \hat{V}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{H_0}\)</span> is the unperturbed hamiltonian and <span class="math notranslate nohighlight">\(\hat{V}\)</span> is the extra part resulting from the perturbation.  Assuming the dipole approximation (e.g. the perturbing force is spatially uniform across the atom), we can write down the perturbation Hamiltonian as the extra energy arising from the dipole moment produced:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \hat{V} = e\hat{\mathbf{r}}\cdot{\mathbf{E}} = -\hat{\mathbf{\mu}}\cdot\mathbf{E}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\mathbf{\mu}} = -e\hat{\mathbf{r}}\)</span> is called the dipole operator.</p>
 <p>We can now substitute this Hamiltonian into the Schrodinger equation:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial |\psi \rangle}{\partial t} = \frac{-j}{\hbar}\left(\hat{H_0} -\hat{\mathbf{\mu}}\cdot\mathbf{E} \right) | \psi \rangle
-\end{align}</p>
+\end{align}
+\]</div>
 <p>but we have a two problems.  First, the wavefunction is perturbed, and so it’s stationary states are not the same as the ones we used above.  Another problem is figuring out how to operate with the perturbation part H.</p>
 <p>Let’s tackle these one at a time.  First, let’s write the perturbed wavefunction as a superpostion of the stationary states (energy eigenstates) of the system.  We don’t know what they are yet, but we assume that we <em>could</em> find them.</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \psi = \sum_nb_n|n\rangle
-\end{align}</p>
+\end{align}
+\]</div>
 <p>where each stationary state <span class="math notranslate nohighlight">\(|n\rangle\)</span> with energy <span class="math notranslate nohighlight">\(E_n\)</span> is labeled by the number <span class="math notranslate nohighlight">\(n\)</span>.  The amplitudes <span class="math notranslate nohighlight">\(b_n\)</span> are just the relative weight of each stationary state.  Knowing that each stationary state will evolve in time according to $\Psi_n(r,t) = \psi_n(r) e^{\frac{-j}{\hbar}E_n t} $, we can plug this in and obtain</p>
-<p>\begin{align}
-\dot{b}<em>n = -\frac{j}{\hbar}\sum_l V</em>{nl}e^{j\omega_{nl}t} b_l
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\dot{b}_n = -\frac{j}{\hbar}\sum_l V_{nl}e^{j\omega_{nl}t} b_l
+\end{align}
+\]</div>
 <p>Where <span class="math notranslate nohighlight">\(V_{ln} = \langle n|\hat{V}|l \rangle\)</span> is the perturbation matrix element.  This is the equation of motion that will be the starting point for calculating the nonlinear polarization.</p>
 </section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Make a superposition wavefunction of your choice using the stationary states of the Hydrogen atom.  Use at least one p-orbital.  Animate the resulting charge distribution.  Bonus points if you produce a 2d animation so that the effect of the p-orbital oscillation in <span class="math notranslate nohighlight">\(\theta\)</span> can be seen.</p></li>
 <li><p>Fill in the details for the derivation of the last equation (Eq. 11) above.  Reference Eq. 8.7 in New.  Give an explanation for the perturbation matrix element.  What is it physically?</p></li>
 </ol>
 </section>
+</section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"5be9d1d4f61947a68233953365a6cb43": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "eaacea4f10494ae3b5accd31faea98a3": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_b03a537563384e1ea0e6a803cf88f9c8", "IPY_MODEL_52cd30003f1141888fa23c135fbbbf38"], "layout": "IPY_MODEL_5be9d1d4f61947a68233953365a6cb43"}}, "fa102ab205c74853bae6294673a57514": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a779761ace7144fa8a9ba1021e9ad808": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "b03a537563384e1ea0e6a803cf88f9c8": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "t", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_fa102ab205c74853bae6294673a57514", "max": 1.8479956785822313, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.018479956785822312, "style": "IPY_MODEL_a779761ace7144fa8a9ba1021e9ad808", "value": 0.0}}, "c6649d01a83442d29c3683b622956509": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "52cd30003f1141888fa23c135fbbbf38": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c6649d01a83442d29c3683b622956509", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"85f3b1a1dbf84e4a9998007f98416681": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6cd65df9c37e4027b5808143b01ac968": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_c1e929a8f3bb4f3c93036209a359d508", "IPY_MODEL_b654d3176df149b8a7b1a9a81e3e63d8"], "layout": "IPY_MODEL_85f3b1a1dbf84e4a9998007f98416681"}}, "4a1e14071cec401095d89871bf51b71f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6742f3119fd74e278e4c696933b2ff37": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "c1e929a8f3bb4f3c93036209a359d508": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "t", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_4a1e14071cec401095d89871bf51b71f", "max": 1.8479956785822313, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.018479956785822312, "style": "IPY_MODEL_6742f3119fd74e278e4c696933b2ff37", "value": 0.0}}, "74dff592f1b04fad84452f36ee81be38": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b654d3176df149b8a7b1a9a81e3e63d8": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_74dff592f1b04fad84452f36ee81be38", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -3620,7 +3650,7 @@ if (IPython.notebook.kernel !== null) {
     <a class='right-next' id="next-link" href="The%20Density%20Matrix.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Review</p>
+        <p class="prev-next-title">The Density Matrix</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

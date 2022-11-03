@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -446,12 +451,7 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Introduction to Raman Scattering
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -475,12 +475,7 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Introduction to Raman Scattering
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -495,8 +490,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="introduction-to-raman-scattering">
-<h1>Introduction to Raman Scattering<a class="headerlink" href="#introduction-to-raman-scattering" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-raman-scattering">
+<span id="lectures-raman-scattering"></span><h1>Introduction to Raman Scattering<a class="headerlink" href="#introduction-to-raman-scattering" title="Permalink to this headline">#</a></h1>
 <p>Raman scattering was first observed by C.V Raman in 1928.  Raman noticed that when he illuminated certain materials with light, he observed new frequency components in the scattered light.  Some of the light was shifted to lower frequencies, called Stokes waves.  Some of the light (much less!) was shifted to higher frequencies, called anti-Stokes waves.  Raman correctly hypothesized that molecular vibrations were responsible for the frequency shift.  In modern nonlinear optics terms, the input light at <span class="math notranslate nohighlight">\(\omega\)</span> was creating a linear polarization oscillating at <span class="math notranslate nohighlight">\(\omega\)</span>.  However, molecules vibrating at <span class="math notranslate nohighlight">\(\Omega\)</span> were also creating a nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(\Omega\)</span>, which were acting as a source for new electric fields at <span class="math notranslate nohighlight">\(\omega \pm \Omega\)</span>.</p>
 <p>We can visualize Raman scattering using an energy level diagram:</p>
 <p><img alt="raman.png" src="pages/attachment:raman.png" /></p>
@@ -523,40 +518,55 @@ title="Print to PDF"
 </div>
 </div>
 <p>The process we are looking for is <span class="math notranslate nohighlight">\(E_L E_L^* E_S\)</span>, which has a degeneracy of 6.  We can therefore write the nonlinear polarization as</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \tilde{P}(\omega_S) = 6\epsilon_0 \chi^{(3)}(\omega_S; \omega_L, -\omega_L, \omega_S )|\tilde{E}_L|^2 \tilde{E}_S
-\end{align}</p>
+\end{align}
+\]</div>
 <p>As written, this is a parametric process that looks identical to the optical Kerr effect studied in the last notebook.  As such, it will only modify the refractive index a the stokes frequency, but nothing more.  However, often the process occurs near a material resonance (hence the solid horizontal lines in the energy level diagram).   In such cases, the susceptibility has a real and imaginary part to account for material absorption.   Inserting the polarization into the coupled wave equation, we get</p>
-<p>\begin{align}
-\frac{\partial \tilde{E}_S}{\partial z}  &amp;= j\frac{\omega_S}{ 2 \epsilon_0 c n_S} P_S^{(NL)}(z) \nonumber \
-&amp;= \frac{3\omega_S}{ c n_S}  (\chi’’ - j\chi’)|\tilde{E}_L|^2 \tilde{E}_S
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{\partial \tilde{E}_S}{\partial z}  &amp;= j\frac{\omega_S}{ 2 \epsilon_0 c n_S} P_S^{(NL)}(z) \nonumber \\
+&amp;= \frac{3\omega_S}{ c n_S}  (\chi'' - j\chi')|\tilde{E}_L|^2 \tilde{E}_S 
+\end{align}
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\chi'\)</span> is the real part of the susceptibility and <span class="math notranslate nohighlight">\(\chi''\)</span> is the imaginary part.</p>
 <p>What is the effect of the imaginary part?  Well, consider how the polarization affects the derivative of the stokes wave <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z}\)</span>.  If the polarization has no imaginary part, then we have something like <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z} = jA\tilde{E}_S\)</span>.  The solutions to this is just sinuoidal waves that neither grow or decay.  If, however, the polarization has an imaginary part, then we have something like <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z} = A\tilde{E}_S\)</span>, with a solution of exponential decay or growth.</p>
 <p>So material absorption can change a nonlinear affect from an intensity dependent refractive index to dramatic frequency conversion!</p>
 <p>The corresponding ode for the laser field is</p>
-<p>\begin{align}
-\frac{\partial \tilde{E}_L}{\partial z}  &amp;= j\frac{\omega_L}{ 2 \epsilon_0 c n_L} P_L^{(NL)}(z) \nonumber \
-&amp;= \frac{3\omega_L}{ c n_L}  (-\chi’’ - j\chi’)|\tilde{E}_S|^2 \tilde{E}_L
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{\partial \tilde{E}_L}{\partial z}  &amp;= j\frac{\omega_L}{ 2 \epsilon_0 c n_L} P_L^{(NL)}(z) \nonumber \\
+&amp;= \frac{3\omega_L}{ c n_L}  (-\chi'' - j\chi')|\tilde{E}_S|^2 \tilde{E}_L 
+\end{align}
+\end{split}\]</div>
 <p>Both of these differential equations can be re-written in terms of the optical intensities instead of the fields:</p>
-<p>\begin{align}
-\frac{\partial I_S}{\partial z} &amp;= \frac{3\omega_S \chi’’ I_L}{c^2\epsilon_0 n_L n_S}I_S = g_S I_S \
-\frac{\partial I_L}{\partial z} &amp;= -\frac{3\omega_L \chi’’I_S}{c^2\epsilon_0 n_L n_S}I_L<br />
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{\partial I_S}{\partial z} &amp;= \frac{3\omega_S \chi'' I_L}{c^2\epsilon_0 n_L n_S}I_S = g_S I_S \\
+\frac{\partial I_L}{\partial z} &amp;= -\frac{3\omega_L \chi''I_S}{c^2\epsilon_0 n_L n_S}I_L  
+\end{align}
+\end{split}\]</div>
 <p>Notice that we have not worried about phase matching at all in this notebook.  Why?  Well, it turns out that stimulated Raman scattering is <em>automatically</em> phase-matched!  If we were to write down the phase mismatch term explicitly, we subtract the wavenumber of the resulting stokes wave from the sum of the wavenumbers in the polarization that generated that wave:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \Delta k = k_S - (k_L - k_L + k_S) = 0
-\end{align}</p>
+\end{align}
+\]</div>
 <p>So owing to the double-degeneracy of the two waves, the wavenumbers perfectly cancel.  This makes it possible to have the direction of the laser beam and the stokes beam be opposite one another, a process called backward stimulated Raman scattering.</p>
 <p>Another interesting feature of stimulated Raman scattering is that the residual energy lost because of material absorption goes into acoustic waves generated insided the crystal.  Interestingly, these waves can be <em>coherent</em> and have been proposed to do coherent imaging at small scales, similar to ultrasound but with much smaller wavelengths.  A more complete description of SRS includes the acoustic waves in addition to the electromagnetic waves.</p>
-</section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Find 2 applications of stimulated Raman scattering.  Include links to a journal article for each describing the application.</p></li>
 <li><p>In silica optical fibers, the Raman gain coefficient is about <span class="math notranslate nohighlight">\(10^{-13}\)</span> m/W.  Starting with 8 kW of power at 1064 nm and a stokes frequency at 1116 nm,  at what distance is 90% transfered to the stokes frequency?</p></li>
 </ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

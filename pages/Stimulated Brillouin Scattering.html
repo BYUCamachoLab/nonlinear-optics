@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Finding the elastic wave equation &#8212; Nonlinear Optics</title>
+    <title>Stimulated Brillouin Scattering &#8212; Nonlinear Optics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -446,24 +451,24 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-elastic-wave-equation">
    Finding the elastic wave equation
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-the-stokes-wave-is-counterpropagating">
    Why the Stokes wave is counterpropagating
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#coupled-wave-equations-for-sbs">
    Coupled Wave Equations for SBS
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -475,7 +480,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Finding the elastic wave equation</h1>
+                <h1>Stimulated Brillouin Scattering</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -485,24 +490,24 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-elastic-wave-equation">
    Finding the elastic wave equation
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-the-stokes-wave-is-counterpropagating">
    Why the Stokes wave is counterpropagating
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#coupled-wave-equations-for-sbs">
    Coupled Wave Equations for SBS
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -515,84 +520,122 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>In the last two notebooks, we have studied the scattering of light by elastic waves.  In this section we continue that study by considering another acousto-optic process, Stimulated Brillouin Scattering (SBS).  SBS is very similar to Stimulated Raman Scattering in that the optical wave itself drives an elastic vibration.  Historically, however, SBS has two distinct features that make it different from SRS:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="stimulated-brillouin-scattering">
+<span id="lectures-raman-scattering"></span><h1>Stimulated Brillouin Scattering<a class="headerlink" href="#stimulated-brillouin-scattering" title="Permalink to this headline">#</a></h1>
+<p>In the last two notebooks, we have studied the scattering of light by elastic waves.  In this section we continue that study by considering another acousto-optic process, Stimulated Brillouin Scattering (SBS).  SBS is very similar to Stimulated Raman Scattering in that the optical wave itself drives an elastic vibration.  Historically, however, SBS has two distinct features that make it different from SRS:</p>
 <ol class="simple">
 <li><p>SBS involves low-frequency acoustic waves</p></li>
 <li><p>The stokes optical wave in SBS is normally observed in the backward direction</p></li>
 </ol>
 <p>Similar to acousto-optic modulation, the SBS interaction is usually mediated by the electrostrictive effect.  In this notebook, we will write down a wave equation for the acoustic waves produced by SBS via electrostriction, and then use that coupled wave equation in addition to the familiear nonlinear ode’s we have been studying to model SBS.</p>
 <section id="finding-the-elastic-wave-equation">
-<h1>Finding the elastic wave equation<a class="headerlink" href="#finding-the-elastic-wave-equation" title="Permalink to this headline">#</a></h1>
+<h2>Finding the elastic wave equation<a class="headerlink" href="#finding-the-elastic-wave-equation" title="Permalink to this headline">#</a></h2>
 <p>Recall that for electrostrictive interactions, a material strain induces a change in the dielectric constant:</p>
-<p>\begin{align}
-\delta\epsilon = -\gamma_e S
-\end{align}</p>
-<p>Recall that the energy density (energy per unit volume) in an electrostatic field in a material depends on the dielectric constant:
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
-u &amp;= \frac{1}{2} \epsilon_0 \epsilon E^2 \
-\end{align}</p>
+\delta\epsilon = -\gamma_e S
+\end{align}
+\]</div>
+<p>Recall that the energy density (energy per unit volume) in an electrostatic field in a material depends on the dielectric constant:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+u &amp;= \frac{1}{2} \epsilon_0 \epsilon E^2 \\
+\end{align}
+\end{split}\]</div>
 <p>Implying that a material strain can induce a change in the electromagnetic energy density:</p>
-<p>\begin{align}
-\delta u &amp;= -\frac{1}{2} \epsilon_0 \gamma_e S E^2 \
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\delta u &amp;= -\frac{1}{2} \epsilon_0 \gamma_e S E^2 \\
+\end{align}
+\end{split}\]</div>
 <p>Noting the pressure exerted by the field is just <span class="math notranslate nohighlight">\(p = \delta u / S\)</span>, we can write the driving force per unit volume along the <span class="math notranslate nohighlight">\(z\)</span> direction as</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 F_v = -\frac{\partial p}{\partial z} = \frac{1}{2}\epsilon_0\gamma_e \frac{\partial (E)^2}{\partial z}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>We can now write down the wave equation for the displacement <span class="math notranslate nohighlight">\(Q\)</span> in response to the force <span class="math notranslate nohighlight">\(F_v\)</span>:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{1}{2}\epsilon_0\gamma_e \frac{\partial (E)^2}{\partial z} + \frac{1}{C}\frac{\partial^2 Q}{\partial z ^2} - \Gamma \frac{\partial Q}{\partial t} = \rho \frac{\partial^2 Q}{\partial t^2}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>We haven’t derived the equation, rather just quoted it.  All the terms on the left hand side are forces, representing electrostriction, elasticity, and loss.  The term on the right is the mass times accerlation term. In this equation, <span class="math notranslate nohighlight">\(C\)</span> is the compressibility, <span class="math notranslate nohighlight">\(\rho\)</span> is the mass density, and <span class="math notranslate nohighlight">\(\Gamma\)</span> is the acoustic damping coefficient.</p>
 </section>
 <section id="why-the-stokes-wave-is-counterpropagating">
-<h1>Why the Stokes wave is counterpropagating<a class="headerlink" href="#why-the-stokes-wave-is-counterpropagating" title="Permalink to this headline">#</a></h1>
+<h2>Why the Stokes wave is counterpropagating<a class="headerlink" href="#why-the-stokes-wave-is-counterpropagating" title="Permalink to this headline">#</a></h2>
 <p>Recall from our study of stimulated Raman scattering and acousto-optic interactions that the interaction of light waves that the phase matching condition requires that the wavevector of the Stokes wave and acoustic wave must sum to the wavevector of the incident laser wave:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \mathbf{k}_L = \mathbf{k}_S + \mathbf{K}_A
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Consider for a moment what would happen if all three waves were co-propagating.  Since the frequency of the stokes wave is very close to the frequency of the laser, their wavevectors are nearly the same.  This means that the acoustic wavevector <span class="math notranslate nohighlight">\(\mathbf{K}_A\)</span> is very small.  A very small wavevector means a very small acoustic frequency since <span class="math notranslate nohighlight">\(\Omega_A = K_A V\)</span>.  In order to maximize the gain, we would like to maximize the acoustic wave-vector (see below), but co-propogation minimizes <span class="math notranslate nohighlight">\(K_A\)</span>.</p>
 <p>In contrast, counter-propogating laser and stokes wave maximizes the <span class="math notranslate nohighlight">\(K_A\)</span></p>
 </section>
 <section id="coupled-wave-equations-for-sbs">
-<h1>Coupled Wave Equations for SBS<a class="headerlink" href="#coupled-wave-equations-for-sbs" title="Permalink to this headline">#</a></h1>
+<h2>Coupled Wave Equations for SBS<a class="headerlink" href="#coupled-wave-equations-for-sbs" title="Permalink to this headline">#</a></h2>
 <p>We are now ready to write down the coupled wave equations for SBS.  We start by assuming both the electromagnetic wave and the elastic wave are harmonic waves of the form</p>
-<p>\begin{align}
-E= \tilde{E}_Le^{j\left(k_Lz - \omega_L t\right)} + \tilde{E}_Se^{j\left(-k_Lz - \omega_L t\right)} c.c.\
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+E= \tilde{E}_Le^{j\left(k_Lz - \omega_L t\right)} + \tilde{E}_Se^{j\left(-k_Lz - \omega_L t\right)} c.c.\\
 Q = \tilde{Q}e^{j\left(K_Az - j\Omega_A t\right)} + \tilde{Q}^*e^{j\left(K_Az + j\Omega_A t\right)} + c.c.
-\end{align}</p>
+\end{align}
+\end{split}\]</div>
 <p>We then plug these quantities into the elastic wave equation.  We make two assumptions in order to drop some derivatives:</p>
 <ol class="simple">
 <li><p>Slowly varying amplitude (similar to previous notebooks)</p></li>
 <li><p>Fast decay of acoustic waves.  This allows us to drop first order spatial derivatives.</p></li>
 </ol>
 <p>After some algebra, we obtain</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \tilde{Q}}{\partial z} + \frac{\Gamma  \tilde{Q}}{2\rho V} = -\frac{\epsilon_0\gamma_e}{2\rho V^2}\tilde{E}_L\tilde{E}_S^*
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Here the velocity of the elastic waves is <span class="math notranslate nohighlight">\(V = (C\rho)^{1/2}\)</span>.</p>
 <p>Now we have an equations that tells us how the elastic wave grows or shrinks as a result of the electromagnetic waves.  We can obtain the equations for the growth and decay of the laser and the Stokes field by using the same nonlinear polarization derived for acousto-optic interactions:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 P^{(NL)} = -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((k_l +K_A)z - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((k_l -K_A)z - (\omega_L - \Omega_A) t\right)} + c.c. \right)
-\end{align}</p>
+ \end{align}
+\]</div>
 <p>In this case, however, we only need to use the second term since the stokes acoustic and laser waves will be counterpropogating:</p>
-<p>\begin{align}
-P_S^{(NL)} &amp;= -\epsilon_0\gamma_e j K_A \tilde{E_L}\tilde{Q}^*e^{j\left(k_Sz + \omega_S t\right)} + c.c. \nonumber \ &amp;= \tilde{P}_S e^{j\left(k_Sz + \omega_S t\right)} + c.c.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+ \begin{align}
+P_S^{(NL)} &amp;= -\epsilon_0\gamma_e j K_A \tilde{E_L}\tilde{Q}^*e^{j\left(k_Sz + \omega_S t\right)} + c.c. \nonumber \\ &amp;= \tilde{P}_S e^{j\left(k_Sz + \omega_S t\right)} + c.c. 
+ \end{align}
+\end{split}\]</div>
 <p>The analogous nonlinear polarization oscillating at the laser frequency is</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+ \begin{align}
 P_L^{(NL)} = \epsilon_0\gamma_e j K_A \tilde{E_S}\tilde{Q}e^{j\left(k_Lz + \omega_L t\right)}
-\end{align}</p>
+ \end{align}
+\]</div>
 <p>We can finally write down the three coupled wave equations</p>
-<p>\begin{align}
-\frac{\partial \tilde{Q}}{\partial z} + \frac{\Gamma  \tilde{Q}}{2\rho V} &amp;= -\frac{\epsilon_0\gamma_e}{2\rho V^2}\tilde{E}_L\tilde{E}_S^* \
-\frac{\partial \tilde{E}_S}{\partial z} &amp;= \left( \frac{\omega_S \gamma_e K_A}{2c n_S} \right) \tilde{E}_L \tilde{Q}^* \
-\frac{\partial \tilde{E_L}}{\partial z} &amp;= -\left( \frac{\omega_L \gamma_e K_A}{2c n_L} \right) \tilde{E}_S \tilde{Q}
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{align}
+\frac{\partial \tilde{Q}}{\partial z} + \frac{\Gamma  \tilde{Q}}{2\rho V} &amp;= -\frac{\epsilon_0\gamma_e}{2\rho V^2}\tilde{E}_L\tilde{E}_S^* \\
+\frac{\partial \tilde{E}_S}{\partial z} &amp;= \left( \frac{\omega_S \gamma_e K_A}{2c n_S} \right) \tilde{E}_L \tilde{Q}^* \\
+\frac{\partial \tilde{E_L}}{\partial z} &amp;= -\left( \frac{\omega_L \gamma_e K_A}{2c n_L} \right) \tilde{E}_S \tilde{Q} 
+\end{align}
+\end{split}\]</div>
 <p>Let’s solve these equations.  Below is the start of a script that inputs the three coupled wave equations, modified from the 3-wave mixing coupled differential equations we solved in an earlier notebook.</p>
 </section>
-<section id="exercise">
-<h1>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h1>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>As currently written, the script below does not include damping of the acoustic wave. Include a damping parameter.</p></li>
 <li><p>As currently written, the frequencies and intensities of the three waves are wrong.  Modify the Stokes wave so that it is very close in frequency to the laser field.  Also modify the acoustic wave frequency so that it conserves power.</p></li>
@@ -1631,15 +1674,16 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='5af40ff6-093e-4cdb-b6d0-290e9e3ee1b1'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8d48602d29624785ad91db22934ce32f"}
+</script><div class="output text_html"><div id='49b2928e-3648-4d3b-aca5-f1220bbe42eb'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "5679b3bbb06c4ab9b3c4ae490338186c"}
 </script></div>
 </div>
+</section>
 </section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"fdac8300e4934394a5963399b28d100f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8d48602d29624785ad91db22934ce32f": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_88fda5d5cbad47ee8f85390e3e294e33", "IPY_MODEL_9e62e35607894051b54faa48ecd7b4a8", "IPY_MODEL_684621e403b747139c727cff699c095e", "IPY_MODEL_76d4376824a049c4983f8cbfc0d4630a", "IPY_MODEL_ab79558371ab4a79bf8edc7727003066"], "layout": "IPY_MODEL_fdac8300e4934394a5963399b28d100f"}}, "d0a1c0a0fa3843909173255b968d9a78": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e3bc327689f44575bda0648d0d0c0770": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "88fda5d5cbad47ee8f85390e3e294e33": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Lcoh", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_d0a1c0a0fa3843909173255b968d9a78", "max": 100.0, "min": 0.0001, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1.0, "style": "IPY_MODEL_e3bc327689f44575bda0648d0d0c0770", "value": 0.05}}, "0ebae8109b7a4622a8ab74c94e4c849b": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3e1f24bdbe76413e8d30a09bb9f3a26a": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "9e62e35607894051b54faa48ecd7b4a8": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "ES0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_0ebae8109b7a4622a8ab74c94e4c849b", "max": 50000.0, "min": 1.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_3e1f24bdbe76413e8d30a09bb9f3a26a", "value": 30000.0}}, "ef326161c3c34d5b9cc3cc4898f475d0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "266230e9dff74ddd9a7fa0006978118f": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "684621e403b747139c727cff699c095e": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Q0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_ef326161c3c34d5b9cc3cc4898f475d0", "max": 50000.0, "min": 1.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_266230e9dff74ddd9a7fa0006978118f", "value": 30000.0}}, "68da3f6e0583403fa619d1b07dd45800": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8a1cb9a6f007405cb9d3a6de9672c4f4": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "76d4376824a049c4983f8cbfc0d4630a": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "EL0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_68da3f6e0583403fa619d1b07dd45800", "max": 50000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_8a1cb9a6f007405cb9d3a6de9672c4f4", "value": 0.0}}, "8d11d9d019e84dd48de072df46f7937e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ab79558371ab4a79bf8edc7727003066": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_8d11d9d019e84dd48de072df46f7937e", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"6dabe96601c14444a43e27ed188dac52": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5679b3bbb06c4ab9b3c4ae490338186c": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_164277f39c7f4f9c9fdf01baa63ae42e", "IPY_MODEL_6c17726307764c4daae0474865e75071", "IPY_MODEL_980a3c93b5a849468c09f3ec82a3688d", "IPY_MODEL_1b60def2fc7e43db8387ec4578a80f91", "IPY_MODEL_bb2230187d384dd3953f7d3e2c3d1de1"], "layout": "IPY_MODEL_6dabe96601c14444a43e27ed188dac52"}}, "c54bec3c16774942a699f6ae8d08b7cc": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9a0593651d9d4dff86ca47ce3e8b5561": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "164277f39c7f4f9c9fdf01baa63ae42e": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Lcoh", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_c54bec3c16774942a699f6ae8d08b7cc", "max": 100.0, "min": 0.0001, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1.0, "style": "IPY_MODEL_9a0593651d9d4dff86ca47ce3e8b5561", "value": 0.05}}, "78a09c3f4e1b41be930035b584ccf9e5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b108864130be45febde41a9d52a2de91": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "6c17726307764c4daae0474865e75071": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "ES0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_78a09c3f4e1b41be930035b584ccf9e5", "max": 50000.0, "min": 1.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_b108864130be45febde41a9d52a2de91", "value": 30000.0}}, "aba57ba8a8304a44be7a95092a320937": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "37003db9fcf248c0b67fa02c79d055ca": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "980a3c93b5a849468c09f3ec82a3688d": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "Q0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_aba57ba8a8304a44be7a95092a320937", "max": 50000.0, "min": 1.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_37003db9fcf248c0b67fa02c79d055ca", "value": 30000.0}}, "058b01acc53243f8a7ba186876ff408e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "66ac3adb583d4fee93f155e51dc3b2c3": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "1b60def2fc7e43db8387ec4578a80f91": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "EL0", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_058b01acc53243f8a7ba186876ff408e", "max": 50000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 1000.0, "style": "IPY_MODEL_66ac3adb583d4fee93f155e51dc3b2c3", "value": 0.0}}, "b43a5378030e4929aada6bfb74ffde33": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bb2230187d384dd3953f7d3e2c3d1de1": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_b43a5378030e4929aada6bfb74ffde33", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

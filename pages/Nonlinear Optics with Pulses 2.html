@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -225,17 +225,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -444,12 +449,7 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Combining Dispersion and Nonlinearity in Optical Pulse Propagation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -473,12 +473,7 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Combining Dispersion and Nonlinearity in Optical Pulse Propagation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -493,32 +488,47 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="combining-dispersion-and-nonlinearity-in-optical-pulse-propagation">
-<h1>Combining Dispersion and Nonlinearity in Optical Pulse Propagation<a class="headerlink" href="#combining-dispersion-and-nonlinearity-in-optical-pulse-propagation" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="combining-dispersion-and-nonlinearity-in-optical-pulse-propagation">
+<span id="lectures-nonlinear-pulses-2"></span><h1>Combining Dispersion and Nonlinearity in Optical Pulse Propagation<a class="headerlink" href="#combining-dispersion-and-nonlinearity-in-optical-pulse-propagation" title="Permalink to this headline">#</a></h1>
 <p>In the last two notebooks we have explored how pulses propagate in nonlinear media.  We first examined how dispersion affect pulse propogation, and found that we can model dispersion by transforming to the frequency domain and allowing each frequency component to accummulate a different phase.  We then examined how nonlinearity affects pulse propogation by studying how the intensity-dependent refractive index leads to self-phase modulation.  In this notebook, we will combine these two effects and look at how dipsersion and nonlinearity act simultaneously.</p>
 <p>In the last notebook, we derived the nonlinear wave equation that includes a time-varying amplitude:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \tilde{E}}{\partial z} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2c\epsilon_0n_0}\left(1-\frac{j}{\omega}\frac{\partial}{\partial T} \right)\tilde{P}^{NL}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>It is very often the case that the second term on the right (the time derivative of the polarization) is negligible, so we’ll first consider a scenario in which is the case.  This simplifies the pulse propagation equation to</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \tilde{E}}{\partial z} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2c\epsilon_0n_0}\tilde{P}^{NL}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Let’s start by modelling what happens when the nonlinear polarization results from the intensity-dependent refractive index.  In this case we can write</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \tilde{P}^{NL} = 3\epsilon_0\chi^{(3)}|E|^2 E
-\end{align}</p>
+\end{align}
+\]</div>
 <p>so that we have</p>
-<p>\begin{align}
-\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2cn_0}3\chi^{(3)}|E|^2 E \nonumber \
-\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\gamma |E|^2E \nonumber \
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2cn_0}3\chi^{(3)}|E|^2 E \nonumber \\
+\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\gamma |E|^2E \nonumber \\
+\end{align}
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\gamma =  3 \omega \chi^{(3)}/ 2cn_0 \)</span>.</p>
 <p>This equation is known as the nonlinear Schrodinger equation.  The first term on the right is responsible for dispersion and the second term on the right is responsible for the nonlinearity.  A very common (and simple)technique for solving this equation numerically is the Split-Step Fourier Method.  We will not go through the details of the implementation, but the idea is that we will step forward a distance <span class="math notranslate nohighlight">\(h\)</span> in two steps.  In the first step we’ll take care of dispersion by transforming to the frequency domain and letting each frequency component acquire its own phase shift.  In the second step, will transform back to the time domain and take a nonlinear step.  In practice, the frequency domain step is itself usually divided into two half-steps, one before and one after the time step.  This reduces numerical errors.</p>
 <p>Here is a simple implementation of the Split-Step Fourier method for self-phase modulation in a dispersive fiber.  We’ll start with an initial pulse of the form</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 E_0 = A_0e^{-(1-jC)\frac{t^2}{2\tau^2}}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>This is the same as the pulse we used in the previous two notebooks with two modifications:</p>
 <ol class="simple">
 <li><p>We have included the possibility of a linear chirp in the initial pulse, parameterized by the constant <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
@@ -1550,7 +1560,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='0d3e0519-9a0b-4ecc-98cd-6384a54c82c5'></div></div></div>
+</script><div class="output text_html"><div id='012a2f2b-98b7-4e58-9414-e900fbcac199'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2563,23 +2573,23 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='2c0eb42a-7ec3-4a2c-a547-e68d59f8ed5e'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9974e900b5394097ba048cdc444e8834"}
+</script><div class="output text_html"><div id='5a6c3da3-d3be-4a91-a319-5af45d83a6da'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "5db199b164ba4283b4e4dddc7952a6e5"}
 </script></div>
 </div>
-</section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Track the FWHM of the pulse in the time domain at every h-step.  Hint: I’ve included above some code to calculate the length of the FWHM time array for the initial pulse.</p></li>
 <li><p>Calculate the pulse broadening ratio at every step.  This is the ratio of the FWHM to the original pulse.  Question:  why does the pulse get narrower at first when you start with a negative chirp?</p></li>
 <li><p>Explore what happens when you increase the input pulse power.  How does the pulse broadening and frequency content change?  Why?  At what power does the nonlinearity start to have as much effect as the dispersion?</p></li>
 </ol>
 </section>
+</section>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"37826c5acf1e445aa3126edcc15ae94b": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9974e900b5394097ba048cdc444e8834": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_52ddfa93f279405bbd007a002fd2ca61", "IPY_MODEL_7f8158d520814490a8305f8cf8d42016"], "layout": "IPY_MODEL_37826c5acf1e445aa3126edcc15ae94b"}}, "2e1f1e93b818451b85d1ac4bf604f604": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e5b12c8b310349f69af73ee32174124d": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "52ddfa93f279405bbd007a002fd2ca61": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_2e1f1e93b818451b85d1ac4bf604f604", "max": 1250000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 62500.0, "style": "IPY_MODEL_e5b12c8b310349f69af73ee32174124d", "value": 0.0}}, "18c5f414e488426cab975655333c6c0e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7f8158d520814490a8305f8cf8d42016": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_18c5f414e488426cab975655333c6c0e", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"07c10221775747b39fc9d49611b04737": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5db199b164ba4283b4e4dddc7952a6e5": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_239a8130616c4426a40f30636c70c895", "IPY_MODEL_1633e3e54fa14085a906ce8412f2cc6f"], "layout": "IPY_MODEL_07c10221775747b39fc9d49611b04737"}}, "f64b2edf668b401d9d1c1dbd81533f91": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "78f980ebb6c84f42be5e61c870cc4f40": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "239a8130616c4426a40f30636c70c895": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_f64b2edf668b401d9d1c1dbd81533f91", "max": 1250000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 62500.0, "style": "IPY_MODEL_78f980ebb6c84f42be5e61c870cc4f40", "value": 0.0}}, "1a5829381ae2467fa5d80420d56d2d1e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1633e3e54fa14085a906ce8412f2cc6f": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_1a5829381ae2467fa5d80420d56d2d1e", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

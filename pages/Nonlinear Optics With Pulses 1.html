@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
-   Finding the elastic wave equation
+   Stimulated Brillouin Scattering
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,17 +227,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="The%20Density%20Matrix.html">
-   Review
+   The Density Matrix
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
-   Two level atom
+   First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2nd%20Order%20Perturbation%20Theory.html">
+   Second Order Perturbation Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
-   Introduction to EIT
+   Electromagnetically Induced Transparency
   </a>
  </li>
 </ul>
@@ -457,8 +462,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#excercises">
-   Excercises
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -491,8 +496,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#excercises">
-   Excercises
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -508,69 +513,108 @@ title="Print to PDF"
   <section id="nonlinear-differential-equations-for-pulsed-light">
 <h1>Nonlinear Differential Equations For Pulsed Light<a class="headerlink" href="#nonlinear-differential-equations-for-pulsed-light" title="Permalink to this headline">#</a></h1>
 <p>In assignment 4, we derived the coupled differential equations that govern nonlinear optical processes.  We started with Maxwell’s equations, which required us to take both space and time derivatives of the electric fields.  To do that, we wrote down the electric field and resulting polarization as</p>
-<p>\begin{align}
-\tilde{E}(z,t) = E(z)e^{j(kz - \omega t)} + c.c. \
-\tilde{P}(z,t) = P(z)e^{j(kz - \omega t)} + c.c.
-\end{align}</p>
-<p>where the amplitudes <span class="math notranslate nohighlight">\(E(z)\)</span> and <span class="math notranslate nohighlight">\(P(z)\)</span> varied in space but not time.  In order to treat optical pulses, we must allow these field amplitudes to vary int time, and instead write</p>
-<p>\begin{align}
-\tilde{E}(z,t) = E(z, t)e^{j(kz - \omega t)} + c.c. \
-\tilde{P}(z,t) = P(z, t)e^{j(kz - \omega t)} + c.c.
-\end{align}</p>
-<p>If we take space and time derivatives just like we did before and insert them back into the plane-wave version of Maxwell’s equations, we obtain:</p>
-<p>\begin{align}
-2jk\frac{\partial \tilde{E}}{\partial z} + k^2\tilde{E} + \frac{2j\omega}{c^2}\frac{\partial \tilde{E}}{\partial t} - \frac{\omega^2}{c^2}\tilde{E}=\mu_0\left(\omega^2 (\tilde{P}^L + \tilde{P}^{NL})-2j\omega \frac{\partial (\tilde{P}^L + \tilde{P}^{NL})}{\partial t} \right)
-\end{align}</p>
-<p>This looks just like the differential equation we obtained before, but with extra time derivatives.  How do we deal with these extra time derivatives?</p>
-<p>Well, let’s first make the usual substitutions:
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{align}
-\tilde{P}^L &amp;= \epsilon_0\chi^{(1)}\tilde{E} \nonumber \
-k&amp;=n_0\frac{\omega}{c} \nonumber \
-n_0 &amp;= \sqrt{1+\chi^{(1)}} \nonumber \
-v_{phase} &amp;= \frac{c}{n_0}
-\end{align}</p>
-<p>To obtain
+\tilde{E}(z,t) = E(z)e^{j(kz - \omega t)} + c.c. \\
+\tilde{P}(z,t) = P(z)e^{j(kz - \omega t)} + c.c.
+\end{align}
+\end{split}\]</div>
+<p>where the amplitudes <span class="math notranslate nohighlight">\(E(z)\)</span> and <span class="math notranslate nohighlight">\(P(z)\)</span> varied in space but not time.  In order to treat optical pulses, we must allow these field amplitudes to vary int time, and instead write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\tilde{E}(z,t) = E(z, t)e^{j(kz - \omega t)} + c.c. \\
+\tilde{P}(z,t) = P(z, t)e^{j(kz - \omega t)} + c.c.
+\end{align}
+\end{split}\]</div>
+<p>If we take space and time derivatives just like we did before and insert them back into the plane-wave version of Maxwell’s equations, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+2jk\frac{\partial \tilde{E}}{\partial z} + k^2\tilde{E} + \frac{2j\omega}{c^2}\frac{\partial \tilde{E}}{\partial t} - \frac{\omega^2}{c^2}\tilde{E}=\mu_0\left(\omega^2 (\tilde{P}^L + \tilde{P}^{NL})-2j\omega \frac{\partial (\tilde{P}^L + \tilde{P}^{NL})}{\partial t} \right)
+\end{align}
+\]</div>
+<p>This looks just like the differential equation we obtained before, but with extra time derivatives.  How do we deal with these extra time derivatives?</p>
+<p>Well, let’s first make the usual substitutions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\tilde{P}^L &amp;= \epsilon_0\chi^{(1)}\tilde{E} \nonumber \\
+ k&amp;=n_0\frac{\omega}{c} \nonumber \\
+ n_0 &amp;= \sqrt{1+\chi^{(1)}} \nonumber \\
+ v_{phase} &amp;= \frac{c}{n_0}
+\end{align}
+\end{split}\]</div>
+<p>To obtain</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 \frac{\partial \tilde{E}}{\partial z} +\frac{1}{v_{phase}}\frac{\partial \tilde{E}}{\partial t} =-j\frac{\omega}{2c\epsilon_0n_0}\left(1-\frac{2j}{\omega}\frac{\partial}{\partial t} \right)\tilde{P}^{NL}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>This differential equation has a problem, however.  It was derived just like before assuming a single frequency.  However, the derivatives in time imply that we may have additional spectral components beyond just <span class="math notranslate nohighlight">\(\omega\)</span>.  And these additional frequencies might have different k-vectors associated with them.  In other words, this equation does not yet take into account dispersion.</p>
 <p>To fix that, we can write the k-vector as a Taylor series around a central frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 k(\omega) = k(\omega_0) + \beta_1(\omega-\omega_0) + \frac{1}{2}\beta_2(\omega-\omega_0)^2 + \dots
-\end{align}</p>
+\end{align}
+\]</div>
 <p>After some rather tedious manipulations, we arrive at</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \tilde{E}}{\partial z} +\frac{1}{v_{group}}\frac{\partial \tilde{E}}{\partial t} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial t^2} -j\frac{\omega}{2c\epsilon_0n_0}\left(1-\frac{2j}{\omega}\frac{\partial}{\partial t} \right)\tilde{P}^{NL}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Alternatively we could just use a Sellmeir equation to write down <span class="math notranslate nohighlight">\(k(\omega)\)</span>.  This differential equation is the equivalent to the ones we have been solving throughout the course, but now takes into account a time-dependent field amplitude.  However, many authors make one more simplification by transforming this equation into  a “local time frame”, which removes the motion of the pulse from the equations.  Sometimes this is helpful so that the pulse profile can be visualized.  To transform to a local time frame, we let</p>
-<p>\begin{align}
-Z &amp;= z \
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Z &amp;= z \\
 T &amp;= t-\frac{z}{v_{group}}
-\end{align}</p>
+\end{align}
+\end{split}\]</div>
 <p>and arrive at</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \tilde{E}}{\partial z} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2c\epsilon_0n_0}\left(1-\frac{j}{\omega}\frac{\partial}{\partial T} \right)\tilde{P}^{NL}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Note that that last step is not trivial, and requires some subtlety to reproduce.</p>
 </section>
 <section id="self-phase-modulation">
 <h1>Self Phase Modulation<a class="headerlink" href="#self-phase-modulation" title="Permalink to this headline">#</a></h1>
-<p>Let’s now explore how the nonlinearities change pulse propagation.  We’ll start by taking another look at the intensity-dependent refractive index.  Recall that this is a third-order nonlinear process in which the nonlinear polarization takes the form
+<p>Let’s now explore how the nonlinearities change pulse propagation.  We’ll start by taking another look at the intensity-dependent refractive index.  Recall that this is a third-order nonlinear process in which the nonlinear polarization takes the form</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 P^{(NL)}= 3\epsilon_0\chi^{(3)}(\omega = \omega+\omega-\omega)|E(\omega)|^2E(\omega)
-\end{align}</p>
+\end{align}
+\]</div>
 <p>This implies that we an effective polarization oscillating at frequency <span class="math notranslate nohighlight">\(\omega\)</span> (which normally looks like a linear susceptibility) of the form</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 P^{(TOT)} = \epsilon_0\chi_{eff}E(\omega)
-\end{align}</p>
+\end{align}
+\]</div>
 <p>where</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \chi_{eff} = \chi^{(1)} + 3\chi^{(3)}|E(\omega)|^2
-\end{align}</p>
+\end{align}
+\]</div>
 <p>We can therefore write the refractive index as</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 n = n_0 + \frac{3\chi^{(3)}}{n_0^2c\epsilon_0} I = n_0 + n_2I
-\end{align}</p>
+\end{align}
+\]</div>
 <p>The most significant cosequnce of the frequency-dependent refractive index is that the refractive index is different within different regions of the pulse.  This means that the phase velocity is modulated with pulse intensity, an effect known as self-phase modulation.  To get a feeling for how this affects the pulses, let’s plot some examples.</p>
 <p>We’ll start with the same gaussian pulse we used in the last notebook, but this time we’ll plot the field instead of the intensity so that we can see the phase.</p>
 <div class="cell docutils container">
@@ -2179,13 +2223,19 @@ if (IPython.notebook.kernel != null) {
 </script></div>
 </div>
 <p>Notice that the carrier frequency appears to change within the pulse.  We can calculate that!  Since the intensity-induced phase shift is</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \phi(z,t) = -\frac{\omega n_2I(t)z}{c}
-\end{align}</p>
+\end{align}
+\]</div>
 <p>The intantaneous phase shift is then</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \frac{\partial \phi(z,t)}{\partial t} = -\frac{\omega n_2z}{c}\frac{\partial I(t)}{\partial t}
-\end{align}</p>
+\end{align}
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Self-Phase Modulated Pulse with relative frequency shift</span>
@@ -2989,8 +3039,8 @@ if (IPython.notebook.kernel != null) {
 </div>
 <p>This reproduces Fig 7.1 in New.</p>
 </section>
-<section id="excercises">
-<h1>Excercises<a class="headerlink" href="#excercises" title="Permalink to this headline">#</a></h1>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
 <li><p>Reproduce Fig. 7.2 in New.  What is the physical interpretation of the three lines plotted?</p></li>
 <li><p>Take the fourier transform of the self-phase modulated pulse. Reproduce Fig 7.3 in New.</p></li>
