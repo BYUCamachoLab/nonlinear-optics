@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Optical Phase Conjugation &#8212; Nonlinear Optics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Phase and Group Velocities" href="Phase%20and%20Group%20Velocity.html" />
+    <link rel="prev" title="Finding the elastic wave equation" href="Stimulated%20Brillouin%20Scattering.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Nonlinear Optics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to Nonlinear Optics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Course Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Atomic%20Polarizability.html">
+   Atoms in external electric fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="The%20Nonlinear%20Susceptibility.html">
+   The Nonlinear Susceptibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overview%20of%20Nonlinear%20Processes.html">
+   Overview of Nonlinear Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Coupled%20Wave%20Equations.html">
+   Coupled Wave Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3%20Wave%20Mixing.html">
+   3-Wave Mixing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Nonlinear%20Optics%20With%20Focused%20Beams.html">
+   Focused Beams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Crystal%20Optics.html">
+   Crystal Symmetry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Crystal%20Optics%202.html">
+   Nonlinear Optics in Crystals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Third%20Order%20Nonlinear%20Processes.html">
+   Third-order nonlinear polarization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Raman%20Scattering.html">
+   Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Optoacoustic%20Effects.html">
+   Optoacoustic Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
+   Finding the elastic wave equation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Phase%20and%20Group%20Velocity.html">
+   Phase and Group Velocities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Dispersion%20Optical%20Pulses.html">
+   Exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Nonlinear%20Optics%20With%20Pulses%201.html">
+   Nonlinear Differential Equations For Pulsed Light
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Schrodinger%20Equation.html">
+   The Quantum Mechanical Wave Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="The%20Density%20Matrix.html">
+   Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
+   Two level atom
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
+   Introduction to EIT
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/master?urlpath=tree/book/pages/Optical Phase Conjugation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics/issues/new?title=Issue%20on%20page%20%2Fpages/Optical Phase Conjugation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/pages/Optical Phase Conjugation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#name">
+   Name: –
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-points-100-pts">
+   Total Points: –/100 pts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#description-of-optical-phase-conjugation">
+   Description of Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phase-conjugation-by-4-wave-mixing">
+   Phase Conjugation by 4-wave mixing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-time-holography-phase-conjugation-by-another-name">
+   Real-Time Holography–phase conjugation by another name
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Optical Phase Conjugation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#name">
+   Name: –
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-points-100-pts">
+   Total Points: –/100 pts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#description-of-optical-phase-conjugation">
+   Description of Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phase-conjugation-by-4-wave-mixing">
+   Phase Conjugation by 4-wave mixing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-time-holography-phase-conjugation-by-another-name">
+   Real-Time Holography–phase conjugation by another name
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="optical-phase-conjugation">
+<h1>Optical Phase Conjugation<a class="headerlink" href="#optical-phase-conjugation" title="Permalink to this headline">#</a></h1>
+<section id="name">
+<h2>Name: –<a class="headerlink" href="#name" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="total-points-100-pts">
+<h2>Total Points: –/100 pts<a class="headerlink" href="#total-points-100-pts" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="description-of-optical-phase-conjugation">
+<h2>Description of Optical Phase Conjugation<a class="headerlink" href="#description-of-optical-phase-conjugation" title="Permalink to this headline">#</a></h2>
+<p>We have already seen from our study of stimulated Brillouin scattering that nonlinear processes can produce backwards waves.  Optical phase conjugation refers to cases in which those backwards wave are exact time-reversals of the original forward waves.  This is very different from a regular mirror.  For example, a beam that is focused just before a regular mirror would continue to expand after reflection, just travelling in the reverse direction.  A beam hitting a phase-conjugate mirror would re-focus back through the focal point.  How is this different from a parbolic mirror?  Well, in a parabolic mirror light doesn’t retrace it’s exact path, but instead bounces off the mirror twice in such a way that it’s reflected path goes back through the focus, but through a different path. This is why the image is inverted.  In contrast, light hitting a phase-conjugate mirror does an exact 180<span class="math notranslate nohighlight">\(^\circ\)</span> turn as soon as it hits the mirror.  This way, the light beam’s phase reverses at the reflection point and it traverses the same trajectory backwards.  For this reason, a phase-conjugate mirror is very useful in laser engineering, since any distortions accumulated by a forward propagating beam can be undone by travelling backward through the same abberations.</p>
+<p>Let’s now describe the process mathematically.  Consider a forward propagating beam of the form</p>
+<p>\begin{align}
+E_1(\mathbf{r}, t) = E_1(\mathbf{r})e^{-j\omega t} + E_1^*(\mathbf{r})e^{j\omega t}
+\end{align}</p>
+<p>All the spatial dependence is contained in <span class="math notranslate nohighlight">\(E_1(\mathbf{r}) = \tilde{E_1}(\mathbf{r})\exp(jk_1z)\)</span>.  There are four-wave mixing processes described below that produce a backward propgating beam, the conjugate wave, that are identical to <span class="math notranslate nohighlight">\(E_1(\mathbf{r}, t)\)</span> except that <span class="math notranslate nohighlight">\(E_1(\mathbf{r})\)</span> is replaced by its complex conjugate <span class="math notranslate nohighlight">\(E_1^*(\mathbf{r})\)</span>.  This results in a conjugate wave <span class="math notranslate nohighlight">\(\mathbf{E}_c\)</span> of the form:</p>
+<p>\begin{align}
+E_C(\mathbf{r}, t) &amp;= E_1^<em>(\mathbf{r})e^{-j\omega t} + E_1(\mathbf{r})e^{j\omega t} \nonumber \
+&amp;= \tilde{E_1}^</em>(\mathbf{r})e^{-j(\omega t - k_1z)} + E_1(\mathbf{r})e^{j(\omega t + k_1z)}
+\end{align}</p>
+<p>Mathematically, we could have made the exact same change by replacing <span class="math notranslate nohighlight">\(t\)</span> with <span class="math notranslate nohighlight">\(-t\)</span>.  Hence we can write</p>
+<p>\begin{align}
+E_C(\mathbf{r}, t) = E_1(\mathbf{r}, -t)
+\end{align}</p>
+<p>For this reason some people call phase conjugate waves time-reversed waves.</p>
+</section>
+<section id="phase-conjugation-by-4-wave-mixing">
+<h2>Phase Conjugation by 4-wave mixing<a class="headerlink" href="#phase-conjugation-by-4-wave-mixing" title="Permalink to this headline">#</a></h2>
+<p>Consider the three propagating waves <span class="math notranslate nohighlight">\(E_1, E_2\)</span>, and <span class="math notranslate nohighlight">\(E_3\)</span> with the same frequency <span class="math notranslate nohighlight">\(\omega\)</span> that combine via a third-order nonlinearity to produce a fourth wave.</p>
+<p>We would like to have two conditions fulfilled:</p>
+<ol class="simple">
+<li><p>The fourth wave propagates in the opposite direction of <span class="math notranslate nohighlight">\(E_1\)</span>.  This means that waves <span class="math notranslate nohighlight">\(E_2\)</span> and <span class="math notranslate nohighlight">\(E_3\)</span> will be counterpropagating relative to each other (why? think about phase matching and conservation of momentum).</p></li>
+<li><p>The fourth wave will be the same frequency as the <span class="math notranslate nohighlight">\(E_1\)</span>.  By energy conservation, this means that our energy level diagram will involve absorbing two photons at <span class="math notranslate nohighlight">\(\omega\)</span>, and then emitting two photons at <span class="math notranslate nohighlight">\(\omega\)</span>, one by stimulated emission and one by spontaneous emission.</p></li>
+</ol>
+<p>We could use sympy to search for a combination that makes this work:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">E1</span><span class="p">,</span> <span class="n">E2</span><span class="p">,</span> <span class="n">E3</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;E_1, E_2, E_3&#39;</span><span class="p">)</span>
+<span class="n">E_cubed</span> <span class="o">=</span> <span class="p">(</span><span class="n">E1</span> <span class="o">+</span> <span class="n">E2</span> <span class="o">+</span> <span class="n">E3</span> <span class="o">+</span> <span class="n">conjugate</span><span class="p">(</span><span class="n">E1</span><span class="p">)</span> <span class="o">+</span> <span class="n">conjugate</span><span class="p">(</span><span class="n">E2</span><span class="p">)</span> <span class="o">+</span> <span class="n">conjugate</span><span class="p">(</span><span class="n">E3</span><span class="p">))</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">E_cubed</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle E_{1}^{3} + 3 E_{1}^{2} E_{2} + 3 E_{1}^{2} E_{3} + 3 E_{1}^{2} \overline{E_{1}} + 3 E_{1}^{2} \overline{E_{2}} + 3 E_{1}^{2} \overline{E_{3}} + 3 E_{1} E_{2}^{2} + 6 E_{1} E_{2} E_{3} + 6 E_{1} E_{2} \overline{E_{1}} + 6 E_{1} E_{2} \overline{E_{2}} + 6 E_{1} E_{2} \overline{E_{3}} + 3 E_{1} E_{3}^{2} + 6 E_{1} E_{3} \overline{E_{1}} + 6 E_{1} E_{3} \overline{E_{2}} + 6 E_{1} E_{3} \overline{E_{3}} + 3 E_{1} \overline{E_{1}}^{2} + 6 E_{1} \overline{E_{1}} \overline{E_{2}} + 6 E_{1} \overline{E_{1}} \overline{E_{3}} + 3 E_{1} \overline{E_{2}}^{2} + 6 E_{1} \overline{E_{2}} \overline{E_{3}} + 3 E_{1} \overline{E_{3}}^{2} + E_{2}^{3} + 3 E_{2}^{2} E_{3} + 3 E_{2}^{2} \overline{E_{1}} + 3 E_{2}^{2} \overline{E_{2}} + 3 E_{2}^{2} \overline{E_{3}} + 3 E_{2} E_{3}^{2} + 6 E_{2} E_{3} \overline{E_{1}} + 6 E_{2} E_{3} \overline{E_{2}} + 6 E_{2} E_{3} \overline{E_{3}} + 3 E_{2} \overline{E_{1}}^{2} + 6 E_{2} \overline{E_{1}} \overline{E_{2}} + 6 E_{2} \overline{E_{1}} \overline{E_{3}} + 3 E_{2} \overline{E_{2}}^{2} + 6 E_{2} \overline{E_{2}} \overline{E_{3}} + 3 E_{2} \overline{E_{3}}^{2} + E_{3}^{3} + 3 E_{3}^{2} \overline{E_{1}} + 3 E_{3}^{2} \overline{E_{2}} + 3 E_{3}^{2} \overline{E_{3}} + 3 E_{3} \overline{E_{1}}^{2} + 6 E_{3} \overline{E_{1}} \overline{E_{2}} + 6 E_{3} \overline{E_{1}} \overline{E_{3}} + 3 E_{3} \overline{E_{2}}^{2} + 6 E_{3} \overline{E_{2}} \overline{E_{3}} + 3 E_{3} \overline{E_{3}}^{2} + \overline{E_{1}}^{3} + 3 \overline{E_{1}}^{2} \overline{E_{2}} + 3 \overline{E_{1}}^{2} \overline{E_{3}} + 3 \overline{E_{1}} \overline{E_{2}}^{2} + 6 \overline{E_{1}} \overline{E_{2}} \overline{E_{3}} + 3 \overline{E_{1}} \overline{E_{3}}^{2} + \overline{E_{2}}^{3} + 3 \overline{E_{2}}^{2} \overline{E_{3}} + 3 \overline{E_{2}} \overline{E_{3}}^{2} + \overline{E_{3}}^{3}\]</div>
+</div>
+</div>
+<p>But that’s a lot of terms to search through.  A little intuition tells us that it must be the term  <span class="math notranslate nohighlight">\(6E_2E_3E_1^*\)</span>. This is the only one that fulfulls our requirements.  The k-vectors <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(k_3\)</span> are opposites, so the product <span class="math notranslate nohighlight">\(E_2 E_3\)</span> cancels them out.  This leaves only the k-vector from <span class="math notranslate nohighlight">\(E_1^*\)</span>, which points opposite to the incident wave <span class="math notranslate nohighlight">\(E_1\)</span> just like we wanted.  Also, the product <span class="math notranslate nohighlight">\(E_2E_3E_1^*\)</span> oscillates at frequency <span class="math notranslate nohighlight">\(\omega\)</span>, just like we wanted.</p>
+<p>We can therefore write the nonlinear polarization that will be the antenna for our fourth wave as</p>
+<p>\begin{align}
+P_4^{(NL)} = 6\epsilon_0\chi^{(3)}(\omega; \omega, -\omega, \omega)E_2(\mathbf{r})E_3(\mathbf{r})E_1^*(\mathbf{r})
+\end{align}</p>
+<p>A picture can help us get a better understanding of how optical phase conjugation works.</p>
+<p><img alt="phase_conjugation.png" src="pages/attachment:phase_conjugation.png" /></p>
+<p>On the left is the geometric representation of the three incident waves used to produce a fourth beam that is phase-conjugated from the first.  <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(k_3\)</span> must be equal and opposite to ensure phase matching.  On the right is the energy picture, showing photons from fields 2 and 3 being absorbed, while photons from fields 1 and 4 are emitted.  This also clearly shows that the energy for the conjugate wave is coming from waves 2 and 3, while wave 1 simply stimulates emission of a photon with the correct energy and wavevector.</p>
+</section>
+<section id="real-time-holography-phase-conjugation-by-another-name">
+<h2>Real-Time Holography–phase conjugation by another name<a class="headerlink" href="#real-time-holography-phase-conjugation-by-another-name" title="Permalink to this headline">#</a></h2>
+<p>The process of optical phase conjugation turns out to be identical with holography.  Let’s re-describe the process using hologrophy terms.  Suppose we have an image carred in some field <span class="math notranslate nohighlight">\(E_1\)</span> whose amplitude and phase we would like to store in a material for later retrieval.  To store the image, we shine a reference beam <span class="math notranslate nohighlight">\(E_2\)</span> on a holographic plate at the same time as the image.  The fields <span class="math notranslate nohighlight">\(E_2\)</span> and <span class="math notranslate nohighlight">\(E_3\)</span> interfere to write a grating on the holographic plate, which encodes the amplitude and phase of the interference pattern.  At some later time, we illuminate the grating with <span class="math notranslate nohighlight">\(E_3\)</span>, which is just a copy of the reference beam pointing in the opposite direction.  The field <span class="math notranslate nohighlight">\(E_3\)</span> scatters from the grating to produce the original image, but in the opposite direction.</p>
+<p>The difference with optical phase-conjugation, of course, is that the grating is written in real time, nearly instaneously in fact.  The form of the grating is in fact just a polarization wave (electrons separated from their nuclei) that results from fields <span class="math notranslate nohighlight">\(E_2\)</span> and <span class="math notranslate nohighlight">\(E_3\)</span>.</p>
+<p>It turns out that the same real-time holography process can also be achieved by setting up an acoustic wave grating that the stores the phase and amplitude of two interfering beams.  In fact, this is exactly what happens in stimulated Brillouin Scattering!  The backward propogating wave is a phase conjugate wave.  However, there is a small caveat, since the stokes wave is shifted in frequency relative to the incident beam.  That means that it’s not <em>exactly</em> the same and abberations will only be corrected for a limited path length.  Since the incident frequency and the conjugate wave frequency differ by about 1 part in 20,000, for a laser with a wavelenght of 1 <span class="math notranslate nohighlight">\(\mu\)</span>m, no serious mismatch will occur for approximately 20 mm.</p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>(100 pts) Several applications of optical phase conjugation exist, including image distortion correction, optical lithography, and optical computing using real-time holography.  Write a paragraph about one application and include a link to a paper.  Make a quantitative statment about the limitations of using optical phase conjugation for this application (e.g. is the limitation they mention theoretical, experimental, or introduces additional complexities?  Can you use numbers to explain the limitations?).</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pages"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Stimulated%20Brillouin%20Scattering.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Finding the elastic wave equation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Phase%20and%20Group%20Velocity.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Phase and Group Velocities</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr. Ryan Camacho<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

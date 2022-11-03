@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Raman Scattering &#8212; Nonlinear Optics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optoacoustic Effects" href="Optoacoustic%20Effects.html" />
+    <link rel="prev" title="Third-order nonlinear polarization" href="Third%20Order%20Nonlinear%20Processes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Nonlinear Optics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to Nonlinear Optics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Course Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Atomic%20Polarizability.html">
+   Atoms in external electric fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="The%20Nonlinear%20Susceptibility.html">
+   The Nonlinear Susceptibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overview%20of%20Nonlinear%20Processes.html">
+   Overview of Nonlinear Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Coupled%20Wave%20Equations.html">
+   Coupled Wave Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3%20Wave%20Mixing.html">
+   3-Wave Mixing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Nonlinear%20Optics%20With%20Focused%20Beams.html">
+   Focused Beams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Crystal%20Optics.html">
+   Crystal Symmetry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Crystal%20Optics%202.html">
+   Nonlinear Optics in Crystals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Third%20Order%20Nonlinear%20Processes.html">
+   Third-order nonlinear polarization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Optoacoustic%20Effects.html">
+   Optoacoustic Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Stimulated%20Brillouin%20Scattering.html">
+   Finding the elastic wave equation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Optical%20Phase%20Conjugation.html">
+   Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Phase%20and%20Group%20Velocity.html">
+   Phase and Group Velocities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Dispersion%20Optical%20Pulses.html">
+   Exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Nonlinear%20Optics%20With%20Pulses%201.html">
+   Nonlinear Differential Equations For Pulsed Light
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Schrodinger%20Equation.html">
+   The Quantum Mechanical Wave Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="The%20Density%20Matrix.html">
+   Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="First%20Order%20Perturbation%20Theory.html">
+   Two level atom
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Electromagnetically%20Induced%20Transparency.html">
+   Introduction to EIT
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/master?urlpath=tree/book/pages/Raman Scattering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics/issues/new?title=Issue%20on%20page%20%2Fpages/Raman Scattering.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/pages/Raman Scattering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to Raman Scattering</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="introduction-to-raman-scattering">
+<h1>Introduction to Raman Scattering<a class="headerlink" href="#introduction-to-raman-scattering" title="Permalink to this headline">#</a></h1>
+<p>Raman scattering was first observed by C.V Raman in 1928.  Raman noticed that when he illuminated certain materials with light, he observed new frequency components in the scattered light.  Some of the light was shifted to lower frequencies, called Stokes waves.  Some of the light (much less!) was shifted to higher frequencies, called anti-Stokes waves.  Raman correctly hypothesized that molecular vibrations were responsible for the frequency shift.  In modern nonlinear optics terms, the input light at <span class="math notranslate nohighlight">\(\omega\)</span> was creating a linear polarization oscillating at <span class="math notranslate nohighlight">\(\omega\)</span>.  However, molecules vibrating at <span class="math notranslate nohighlight">\(\Omega\)</span> were also creating a nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(\Omega\)</span>, which were acting as a source for new electric fields at <span class="math notranslate nohighlight">\(\omega \pm \Omega\)</span>.</p>
+<p>We can visualize Raman scattering using an energy level diagram:</p>
+<p><img alt="raman.png" src="pages/attachment:raman.png" /></p>
+<p>Here we have a photon from a laser at frequency <span class="math notranslate nohighlight">\(\omega_L\)</span> being absorbed.  Then a photon at <span class="math notranslate nohighlight">\(\omega_S = \omega_L - \Omega\)</span> is emitted, bringing the energy stored in the atom down to the ground state plus <span class="math notranslate nohighlight">\(\hbar \Omega\)</span>, which is just the energy of a phonon vibrating with frequency <span class="math notranslate nohighlight">\(\Omega\)</span>.  This means that some of the energy was used to create a photon at the stokes frequency <span class="math notranslate nohighlight">\(\omega_S = \omega_L - \Omega\)</span>, and some was used to create at phonon at frequency <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<p>If the incident laser power is weak, this process only happens occasionally, and by the time a new scattering process is initiated, the atom has re-thermalized back to the ground state.  However, some electrons are always in the state with energy <span class="math notranslate nohighlight">\(\hbar \Omega\)</span> above the ground state. How many? a factor of <span class="math notranslate nohighlight">\(\exp(-\hbar \Omega /kT)\)</span> smaller than the ground state.  This is called the Boltzmann factor.</p>
+<p><img alt="raman_AS.png" src="pages/attachment:raman_AS.png" /></p>
+<p>In this case, a photon is generated with frequency <span class="math notranslate nohighlight">\(\omega_{AS} = \omega_L + \Omega\)</span>.</p>
+<p>However, if the incident laser power is high enough, then many stokes photons will be produced, and they can initiate <em>stimulated</em> scattering of additional photons at the stokes frequency.  The energy level diagram looks like this:</p>
+<p><img alt="raman_stimulated.png" src="pages/attachment:raman_stimulated.png" /></p>
+<p>What is the degeneracy factor for this process?  In other words, how many photon pathways are there?  Let’s do a quick check using sympy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1">#import sympy</span>
+<span class="n">EL</span><span class="p">,</span> <span class="n">ES</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;E_L, E_S&#39;</span><span class="p">)</span>
+<span class="n">Esq</span> <span class="o">=</span> <span class="p">(</span><span class="n">EL</span> <span class="o">+</span> <span class="n">functions</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">EL</span><span class="p">)</span> <span class="o">+</span> <span class="n">ES</span> <span class="o">+</span> <span class="n">functions</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">ES</span><span class="p">))</span><span class="o">**</span><span class="mi">3</span>
+    
+<span class="n">simplify</span><span class="p">(</span><span class="n">Esq</span><span class="o">.</span><span class="n">expand</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle E_{L}^{3} + 3 E_{L}^{2} E_{S} + 3 E_{L}^{2} \overline{E_{L}} + 3 E_{L}^{2} \overline{E_{S}} + 3 E_{L} E_{S}^{2} + 6 E_{L} E_{S} \overline{E_{L}} + 6 E_{L} E_{S} \overline{E_{S}} + 3 E_{L} \overline{E_{L}}^{2} + 6 E_{L} \overline{E_{L}} \overline{E_{S}} + 3 E_{L} \overline{E_{S}}^{2} + E_{S}^{3} + 3 E_{S}^{2} \overline{E_{L}} + 3 E_{S}^{2} \overline{E_{S}} + 3 E_{S} \overline{E_{L}}^{2} + 6 E_{S} \overline{E_{L}} \overline{E_{S}} + 3 E_{S} \overline{E_{S}}^{2} + \overline{E_{L}}^{3} + 3 \overline{E_{L}}^{2} \overline{E_{S}} + 3 \overline{E_{L}} \overline{E_{S}}^{2} + \overline{E_{S}}^{3}\]</div>
+</div>
+</div>
+<p>The process we are looking for is <span class="math notranslate nohighlight">\(E_L E_L^* E_S\)</span>, which has a degeneracy of 6.  We can therefore write the nonlinear polarization as</p>
+<p>\begin{align}
+\tilde{P}(\omega_S) = 6\epsilon_0 \chi^{(3)}(\omega_S; \omega_L, -\omega_L, \omega_S )|\tilde{E}_L|^2 \tilde{E}_S
+\end{align}</p>
+<p>As written, this is a parametric process that looks identical to the optical Kerr effect studied in the last notebook.  As such, it will only modify the refractive index a the stokes frequency, but nothing more.  However, often the process occurs near a material resonance (hence the solid horizontal lines in the energy level diagram).   In such cases, the susceptibility has a real and imaginary part to account for material absorption.   Inserting the polarization into the coupled wave equation, we get</p>
+<p>\begin{align}
+\frac{\partial \tilde{E}_S}{\partial z}  &amp;= j\frac{\omega_S}{ 2 \epsilon_0 c n_S} P_S^{(NL)}(z) \nonumber \
+&amp;= \frac{3\omega_S}{ c n_S}  (\chi’’ - j\chi’)|\tilde{E}_L|^2 \tilde{E}_S
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(\chi'\)</span> is the real part of the susceptibility and <span class="math notranslate nohighlight">\(\chi''\)</span> is the imaginary part.</p>
+<p>What is the effect of the imaginary part?  Well, consider how the polarization affects the derivative of the stokes wave <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z}\)</span>.  If the polarization has no imaginary part, then we have something like <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z} = jA\tilde{E}_S\)</span>.  The solutions to this is just sinuoidal waves that neither grow or decay.  If, however, the polarization has an imaginary part, then we have something like <span class="math notranslate nohighlight">\({\partial \tilde{E}_S}/{\partial z} = A\tilde{E}_S\)</span>, with a solution of exponential decay or growth.</p>
+<p>So material absorption can change a nonlinear affect from an intensity dependent refractive index to dramatic frequency conversion!</p>
+<p>The corresponding ode for the laser field is</p>
+<p>\begin{align}
+\frac{\partial \tilde{E}_L}{\partial z}  &amp;= j\frac{\omega_L}{ 2 \epsilon_0 c n_L} P_L^{(NL)}(z) \nonumber \
+&amp;= \frac{3\omega_L}{ c n_L}  (-\chi’’ - j\chi’)|\tilde{E}_S|^2 \tilde{E}_L
+\end{align}</p>
+<p>Both of these differential equations can be re-written in terms of the optical intensities instead of the fields:</p>
+<p>\begin{align}
+\frac{\partial I_S}{\partial z} &amp;= \frac{3\omega_S \chi’’ I_L}{c^2\epsilon_0 n_L n_S}I_S = g_S I_S \
+\frac{\partial I_L}{\partial z} &amp;= -\frac{3\omega_L \chi’’I_S}{c^2\epsilon_0 n_L n_S}I_L<br />
+\end{align}</p>
+<p>Notice that we have not worried about phase matching at all in this notebook.  Why?  Well, it turns out that stimulated Raman scattering is <em>automatically</em> phase-matched!  If we were to write down the phase mismatch term explicitly, we subtract the wavenumber of the resulting stokes wave from the sum of the wavenumbers in the polarization that generated that wave:</p>
+<p>\begin{align}
+\Delta k = k_S - (k_L - k_L + k_S) = 0
+\end{align}</p>
+<p>So owing to the double-degeneracy of the two waves, the wavenumbers perfectly cancel.  This makes it possible to have the direction of the laser beam and the stokes beam be opposite one another, a process called backward stimulated Raman scattering.</p>
+<p>Another interesting feature of stimulated Raman scattering is that the residual energy lost because of material absorption goes into acoustic waves generated insided the crystal.  Interestingly, these waves can be <em>coherent</em> and have been proposed to do coherent imaging at small scales, similar to ultrasound but with much smaller wavelengths.  A more complete description of SRS includes the acoustic waves in addition to the electromagnetic waves.</p>
+</section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<ol class="simple">
+<li><p>Find 2 applications of stimulated Raman scattering.  Include links to a journal article for each describing the application.</p></li>
+<li><p>In silica optical fibers, the Raman gain coefficient is about <span class="math notranslate nohighlight">\(10^{-13}\)</span> m/W.  Starting with 8 kW of power at 1064 nm and a stokes frequency at 1116 nm,  at what distance is 90% transfered to the stokes frequency?</p></li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pages"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Third%20Order%20Nonlinear%20Processes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Third-order nonlinear polarization</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Optoacoustic%20Effects.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Optoacoustic Effects</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr. Ryan Camacho<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
