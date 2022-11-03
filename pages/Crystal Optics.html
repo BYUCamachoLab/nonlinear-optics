@@ -212,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Dispersion%20Optical%20Pulses.html">
-   Exercise
+   Dispersion in Optical Pulses
   </a>
  </li>
  <li class="toctree-l1">
@@ -451,17 +451,12 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Crystal Symmetry
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-monoclinic">
      Example: Monoclinic
     </a>
@@ -487,17 +482,12 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Crystal Symmetry
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-monoclinic">
      Example: Monoclinic
     </a>
@@ -514,8 +504,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="crystal-symmetry">
-<h1>Crystal Symmetry<a class="headerlink" href="#crystal-symmetry" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="crystal-symmetry">
+<span id="lectures-crystal-symmetry"></span><h1>Crystal Symmetry<a class="headerlink" href="#crystal-symmetry" title="Permalink to this headline">#</a></h1>
 <p>In this notebook, we’ll review some of the principles of light propagation in crystals.  In the next notebook, we’ll apply these principles to nonlinear optics.</p>
 <p>We’ve already seen that when a cyrstal possesses inversion symmetry, no second-order nonlinear effects can be observed.</p>
 <p>Another important symmetry property of crystals is whether it is anisotropic.  An optically isotropic material interacts with light in the same way no matter which polarization the light is.  (Note the unfortunate double-meaning of polarization!)  In contrast, an anisotropic material assumes different properties for light with different polarizations.</p>
@@ -1497,14 +1487,13 @@ if (IPython.notebook.kernel != null) {
 \end{split}\]</div>
 <p>These new coordinates define the principal axis of the material.  If all three principal dielectric constants (<span class="math notranslate nohighlight">\(\epsilon_{xx}, \epsilon_{yy}, \epsilon_{zz}\)</span>) are the same, we have an isotropic material.  If two of them are the same but one is different, the material is uniaxial, and if all three are different it is biaxial.</p>
 <p>Most commonly, researchers use uniaxial crystals.  In this case, the material will have two refractive indices and ordinary refractive index <span class="math notranslate nohighlight">\(n_o = n_x = n_y \)</span> and an extraordinatry refractive index <span class="math notranslate nohighlight">\(n_e = n_z\)</span></p>
-</section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Look up the 7 crystal classes (Triclinic, Monoclini, Orthorhombic, Tetragonal, Trigonal, Hexagonal, Cubic, Isotropic) and write their linear susceptibility tensors in matrix form indicating which elements are nonzero.  Indicate whether each class is an isotropic, uniaxial, or biaxial crystal, and why. Give an example of that crystal and an interesting fact about it.</p></li>
 </ol>
 <section id="example-monoclinic">
-<h2>Example: Monoclinic<a class="headerlink" href="#example-monoclinic" title="Permalink to this headline">#</a></h2>
+<h3>Example: Monoclinic<a class="headerlink" href="#example-monoclinic" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{bmatrix}
@@ -1519,6 +1508,7 @@ if (IPython.notebook.kernel != null) {
 <li><p>Choose one each of an isotropic, uniaxial, and biaxial crystal that are optically transparent.  Look up the principal indices of refraction and displace them in matrix form.</p></li>
 <li><p>Suppose you wanted to make a half-waveplate for light at 633 nm out of the uniaxial crystal you chose. What thickness would you choose?  Why?</p></li>
 </ol>
+</section>
 </section>
 </section>
 
