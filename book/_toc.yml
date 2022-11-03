@@ -8,6 +8,7 @@ parts:
   chapters:
   - file: overview
   - file: schedule
+  - file: computer
 - caption: Lectures
   chapters:
   - file: pages/Atomic Polarizability
