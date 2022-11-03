@@ -5,10 +5,12 @@ title: Nonlinear Optics
 author: Dr. Ryan Camacho
 logo: logo.png
 
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", build, extra]
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: auto
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -30,3 +32,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+sphinx:
+  extra_extensions:
+  - "sphinx.ext.mathjax"
