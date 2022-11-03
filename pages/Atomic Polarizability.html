@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Nonlinear Susceptibility" href="The%20Nonlinear%20Susceptibility.html" />
-    <link rel="prev" title="Schedule" href="../schedule.html" />
+    <link rel="prev" title="Computer Configuration" href="../computer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,6 +131,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../schedule.html">
    Schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../computer.html">
+   Computer Configuration
   </a>
  </li>
 </ul>
@@ -1703,7 +1708,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='e8d3fcfe-91e1-45f1-bbfa-15ae635df697'></div></div></div>
+</script><div class="output text_html"><div id='7c2cd1d4-5005-4fba-8c3e-dca98b761639'></div></div></div>
 </div>
 <p>Notice that the most <em>likely</em> place to find the electron is the Bohr radius <span class="math notranslate nohighlight">\(a_0\)</span> at about 53 pm from the nucleus.  If we like, we can visualize the charge and probability distribution in 2D as an electron cloud:</p>
 <div class="cell docutils container">
@@ -2709,7 +2714,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='5aeb8921-5fc7-4e7b-a93b-2dd47ce4b3f7'></div></div></div>
+</script><div class="output text_html"><div id='d8d34cb6-9757-4804-bd16-42dcd63094fc'></div></div></div>
 </div>
 </section>
 <section id="id1">
@@ -3738,7 +3743,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='eeceabb8-bdcd-4618-be90-73e62fba5a57'></div></div></div>
+</script><div class="output text_html"><div id='a669798d-f91d-411b-8d48-6205e72f1b89'></div></div></div>
 </div>
 <p>The numeric and analytic expressions match very well, except perhaps right near the origin.  Let’s do some slightly fancier integration using built-in Python integration tools from SciPy to see if we can do better.  While we’re at it, let’s also do some fancy interactive plotting.  This will be a useful Python skill for visualizing things later in the course.  For this example we’ll vary the atomic number Z in the interactive plot to see how things change.</p>
 <div class="cell docutils container">
@@ -4737,8 +4742,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='c3cc3b02-872a-4eae-9a9d-7ffa73bdbfe1'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d9791c7126b14fcd93d6a88dbdd23000"}
+</script><div class="output text_html"><div id='af2b0396-a6b4-4bce-b7da-9b7b9495168a'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "83cb7d34177846119093a80f889d4217"}
 </script></div>
 </div>
 </section>
@@ -5738,7 +5743,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='5a5ffd54-0ec6-4e93-b65c-f664224d8b3a'></div></div></div>
+</script><div class="output text_html"><div id='2211ebe0-17e2-4f0e-8a57-7fbc04c7182f'></div></div></div>
 </div>
 <p>That’s <em>close</em> but not perfect.  If we do a power series expansion of the equation for the analytic field, we obtain</p>
 <div class="math notranslate nohighlight">
@@ -6737,7 +6742,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='fc4b67a7-5e66-442f-97b8-b04b8a92b083'></div></div></div>
+</script><div class="output text_html"><div id='dadd36de-2ace-4ee4-b356-bd4a28bf4b4b'></div></div></div>
 </div>
 <p>Ahh…that’s better.  Note that the linear approximate devatiates significantly after about 10 pm from the orgin, where the electric field is approximately <span class="math notranslate nohighlight">\(10^{11}\)</span> V/m.  This means we need a non-resonant external field of around <span class="math notranslate nohighlight">\(10^{11}\)</span> V/m to observe nonlinear effects! Fortunately, the oscillating electric fields in lasers can be tuned to be resonant with the oscillating motion of the proton-electron oscillating dipole moment, and hence not require such ridiculously large fields.</p>
 <p>To further cement the analogy to mass-spring systems, let’s also plot the potential energy <span class="math notranslate nohighlight">\(eV(r)\)</span>, just like it’s done in mass-spring systems.  Recall that the potential <span class="math notranslate nohighlight">\(V(r)\)</span> is simply the line integral of the electric field from some point with zero potential energy (infinity) to the point in question.</p>
@@ -7740,7 +7745,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='fb548ef6-0d71-40bf-99a4-026c0a8f094c'></div></div></div>
+</script><div class="output text_html"><div id='fe28df52-bfcf-444f-9725-6e26f2542181'></div></div></div>
 </div>
 <p>The the potential energy for the linear approximation is a perfect parabola, just like in a mass-spring system.  The potential energy for the actual system is approximately the same for small displacements, but much lower for larger displacements. Notice also that we recover the ground state energy of a Hydrogen atom of -13.6 eV.</p>
 </section>
@@ -8753,7 +8758,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='5c5e08a0-5849-4f64-bb60-74ad93be81a7'></div></div></div>
+</script><div class="output text_html"><div id='a659b595-a14b-48fb-861b-2406062a5d0a'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -9743,7 +9748,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='07215d16-a16e-4a4d-9a95-fa19440c7a8e'></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
+</script><div class="output text_html"><div id='d63a1980-8119-4bea-9042-a78c4f7eb950'></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
 0.1022 x - 3.908e-06
           3             2
 -0.03175 x + 8.684e-07 x + 0.3879 x - 3.908e-06
@@ -9785,7 +9790,7 @@ if (IPython.notebook.kernel !== null) {
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"637c814068014a67a9f73f6d822663cd": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d9791c7126b14fcd93d6a88dbdd23000": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_fb2921455e8044e2a75baa36a182d074", "IPY_MODEL_fa7657a0f7db4c74a3da1b03dab25acc"], "layout": "IPY_MODEL_637c814068014a67a9f73f6d822663cd"}}, "8bd9f53eb5674886b9ac1f3fce60fcfe": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "170f240a3f3447b698c36e08da45fe75": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "fb2921455e8044e2a75baa36a182d074": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "Z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_8bd9f53eb5674886b9ac1f3fce60fcfe", "max": 10, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_170f240a3f3447b698c36e08da45fe75", "value": 1}}, "2d4e2849639844448a94e272a8fb1454": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "fa7657a0f7db4c74a3da1b03dab25acc": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_2d4e2849639844448a94e272a8fb1454", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"1fe3a86a866a454e9d5358356cc097cd": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "83cb7d34177846119093a80f889d4217": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_1fe71e7b18b449ffa8ae4ba1ae5abba5", "IPY_MODEL_c4c203cfa5d243ed88174219eb95ff46"], "layout": "IPY_MODEL_1fe3a86a866a454e9d5358356cc097cd"}}, "75ec5035962e4bd79bebf85da2bf5be9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2b9819022af84a9ca50b7c9a237a7612": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "1fe71e7b18b449ffa8ae4ba1ae5abba5": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "Z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_75ec5035962e4bd79bebf85da2bf5be9", "max": 10, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_2b9819022af84a9ca50b7c9a237a7612", "value": 1}}, "12862e63698f464a8dbade27206059d7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c4c203cfa5d243ed88174219eb95ff46": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_12862e63698f464a8dbade27206059d7", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -9816,11 +9821,11 @@ if (IPython.notebook.kernel !== null) {
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../schedule.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../computer.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Schedule</p>
+            <p class="prev-next-title">Computer Configuration</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="The%20Nonlinear%20Susceptibility.html" title="next page">
