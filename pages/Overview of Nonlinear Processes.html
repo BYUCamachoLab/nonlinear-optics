@@ -640,27 +640,30 @@ title="Print to PDF"
 <h2>Total Points: ( –/100 + –/40 pts)<a class="headerlink" href="#total-points-100-40-pts" title="Permalink to this headline">#</a></h2>
 <section id="second-harmonic-generation">
 <h3>Second Harmonic Generation<a class="headerlink" href="#second-harmonic-generation" title="Permalink to this headline">#</a></h3>
-<p>We’ve already seen second harmonic generation in our introductory example to nonlinear suceptibility in the last notebook.  We saw that when a quadratic term is added to the restoring force of a simple harmonic oscillator, oscillations appear at <span class="math notranslate nohighlight">\(2\omega_0\)</span> in addition to the natural oscillation frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>.  Furthermore, if the mass is <em>driven</em> by an external force at frequency <span class="math notranslate nohighlight">\(\omega\)</span>, the mass will oscillate at both <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(2\omega\)</span>.  These oscillations in turn produce electric fields, thus <em>generating</em> light at the doubled frequency.</p>
+<p>We’ve already seen second harmonic generation in our introductory example to nonlinear suceptibility in the last notebook.  We saw that when a quadratic term is added to the restoring force of a simple harmonic oscillator, oscillations appear at $2\omega_0$ in addition to the natural oscillation frequency $\omega_0$.  Furthermore, if the mass is <em>driven</em> by an external force at frequency $\omega$, the mass will oscillate at both $\omega$ and $2\omega$.  These oscillations in turn produce electric fields, thus <em>generating</em> light at the doubled frequency.</p>
 <p>Mathematically, we summarize this process as follows.  The external driving force is usually a laser, whose electric field is represented as</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9bff1d14-9001-47d5-80d4-f50a14637f18">
+<span class="eqno">(21)<a class="headerlink" href="#equation-9bff1d14-9001-47d5-80d4-f50a14637f18" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{E}(t) = Ee^{-j\omega t} + Ee^{j\omega t}
-\end{align}</p>
+\end{align}\]</div>
 <p>Here we’ve followed the convention of Boyd, and indicated all rapidly varying quantitites with a tilde.  We substitute this field into the equation for the nonlinear polarization and obtain:</p>
-<p>\begin{align}
-P(t) &amp; = \epsilon_0 \left[ \chi^{(1)} \tilde{E}(t) + \chi^{(2)} \tilde{E}^2(t) + \dots \right] \nonumber \
-&amp;=  \epsilon_0 \left[ \chi^{(1)} \left( Ee^{-j\omega t} +  E^*e^{j\omega t}\right) + \chi^{(2)} \left(E^2e^{-j2\omega t} + 2|E|^2 + E^{*2}e^{-j2\omega t} \right)  + \dots \right]
-\end{align}</p>
-<p>We may isolate the nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(2\omega\)</span> and write it as</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2055bdc0-2685-4fd1-b5dc-9a08fc6c453c">
+<span class="eqno">(22)<a class="headerlink" href="#equation-2055bdc0-2685-4fd1-b5dc-9a08fc6c453c" title="Permalink to this equation">#</a></span>\[\begin{align}
+P(t) &amp; = \epsilon_0 \left[ \chi^{(1)} \tilde{E}(t) + \chi^{(2)} \tilde{E}^2(t) + \dots \right] \nonumber \\
+     &amp;=  \epsilon_0 \left[ \chi^{(1)} \left( Ee^{-j\omega t} +  E^*e^{j\omega t}\right) + \chi^{(2)} \left(E^2e^{-j2\omega t} + 2|E|^2 + E^{*2}e^{-j2\omega t} \right)  + \dots \right] 
+\end{align}\]</div>
+<p>We may isolate the nonlinear polarization oscillating at $2\omega$ and write it as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-62c37bb1-eeb3-4809-b40f-ef0f695523d5">
+<span class="eqno">(23)<a class="headerlink" href="#equation-62c37bb1-eeb3-4809-b40f-ef0f695523d5" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{P}^{(2)}(t) = \epsilon_0 \chi^{(2)} \left(E^2e^{-j2\omega t} + c.c \right)
-\end{align}</p>
-<p>Notice there is also a non-oscillating polarization created of magnitude <span class="math notranslate nohighlight">\(2 \epsilon_0 \chi^{(2)}|E|^2 \)</span>.  This is known as optical rectification.</p>
-<p>We can start to think of a quantum mechanical description of second harmonic generation by considering the external laser as a flux of photons with frequency <span class="math notranslate nohighlight">\(\omega\)</span> incident on the atoms.  The frequency doubling process produces new photons at frequency <span class="math notranslate nohighlight">\(2\omega\)</span>.  Since the energy of a photon is proportional to its frequency (thank you Max Planck!), each photon generated at <span class="math notranslate nohighlight">\(2\omega\)</span> must result in the destruction of a single photon at <span class="math notranslate nohighlight">\(\omega\)</span>.  This process is often represnted graphically an energy diagram:</p>
+\end{align}\]</div>
+<p>Notice there is also a non-oscillating polarization created of magnitude $2 \epsilon_0 \chi^{(2)}|E|^2 $.  This is known as optical rectification.</p>
+<p>We can start to think of a quantum mechanical description of second harmonic generation by considering the external laser as a flux of photons with frequency $\omega$ incident on the atoms.  The frequency doubling process produces new photons at frequency $2\omega$.  Since the energy of a photon is proportional to its frequency (thank you Max Planck!), each photon generated at $2\omega$ must result in the destruction of a single photon at $\omega$.  This process is often represnted graphically an energy diagram:</p>
 <div>
 <img src="attachment:second_harmonic_generation.png" width="100px"/>
 </div>
 <p>The horizontal lines represent the new potential energy of the electron when it absorbs or emits photons.  Solid horizontal lines represent allowed quantum states, and dashed lines represent “virtual” states that are very short-lived.</p>
-<p>Interesting side note: You can also do the reverse of this process, and send in a single photon at <span class="math notranslate nohighlight">\(2\omega\)</span> and generate two “daughter” photons at <span class="math notranslate nohighlight">\(\omega\)</span>.  This process is called parametric downconversion, and is the most common way to generate entangled photons.  But more on that later…</p>
+<p>Interesting side note: You can also do the reverse of this process, and send in a single photon at $2\omega$ and generate two “daughter” photons at $\omega$.  This process is called parametric downconversion, and is the most common way to generate entangled photons.  But more on that later…</p>
 </section>
 <section id="sum-and-difference-frequency-generation">
 <h3>Sum and Difference Frequency Generation<a class="headerlink" href="#sum-and-difference-frequency-generation" title="Permalink to this headline">#</a></h3>
@@ -668,40 +671,45 @@ P(t) &amp; = \epsilon_0 \left[ \chi^{(1)} \tilde{E}(t) + \chi^{(2)} \tilde{E}^2(
 <div>
 <img src="attachment:sum_frequency_generation.png" width="100px"/>
 </div>
-<p>This is just a slight modification of second harmonic generation.  The external laser now has photons at two frequencies, <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_2\)</span>.  The second order nonlinearity allows them to combine and generate photons at frequency <span class="math notranslate nohighlight">\(\omega_1 + \omega_2\)</span>.  Here’s the math:</p>
-<p>\begin{align}
+<p>This is just a slight modification of second harmonic generation.  The external laser now has photons at two frequencies, $\omega_1$ and $\omega_2$.  The second order nonlinearity allows them to combine and generate photons at frequency $\omega_1 + \omega_2$.  Here’s the math:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2d226d18-d671-4be4-89bc-10fdeea7cbd5">
+<span class="eqno">(24)<a class="headerlink" href="#equation-2d226d18-d671-4be4-89bc-10fdeea7cbd5" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{E}(t) = E_1e^{-j\omega_1 t} + E_2e^{-j\omega_2 t} + c.c
-\end{align}</p>
-<p>\begin{align}
-\tilde{P}^{(2)}(t)  = &amp; \epsilon_0 \chi^{(2)}\left[  E_1^2e^{-j2\omega_1 t} + E_2^2e^{-j2\omega_2 t} + 2E_1E_2e^{-j(\omega_1 + \omega_2) t} + 2E_1E_2^*e^{-j(\omega_1 - \omega_2) t} + c.c. \right]\nonumber\
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-bab6da49-b234-4e16-b52e-8b6dba113859">
+<span class="eqno">(25)<a class="headerlink" href="#equation-bab6da49-b234-4e16-b52e-8b6dba113859" title="Permalink to this equation">#</a></span>\[\begin{align}
+\tilde{P}^{(2)}(t)  = &amp; \epsilon_0 \chi^{(2)}\left[  E_1^2e^{-j2\omega_1 t} + E_2^2e^{-j2\omega_2 t} + 2E_1E_2e^{-j(\omega_1 + \omega_2) t} + 2E_1E_2^*e^{-j(\omega_1 - \omega_2) t} + c.c. \right]\nonumber\\
 &amp; + 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right]
-\end{align}</p>
+\end{align}\]</div>
 <p>There are several terms here.  Let’s break it down by the frequency of the resulting polarization.  In other words, we can write</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3f87c427-ed0f-4be9-aaad-220135af3589">
+<span class="eqno">(26)<a class="headerlink" href="#equation-3f87c427-ed0f-4be9-aaad-220135af3589" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{P}^{(2)}(t)  = \sum_n P(\omega_n)e^{j\omega_n t}
-\end{align}</p>
-<p>and let <span class="math notranslate nohighlight">\(\omega_n\)</span> include positive and negative frequencies.  The sum frequency generation term in the diagram above is</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>and let $\omega_n$ include positive and negative frequencies.  The sum frequency generation term in the diagram above is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e58b5562-bd06-4235-8467-92a30f1ab8a1">
+<span class="eqno">(27)<a class="headerlink" href="#equation-e58b5562-bd06-4235-8467-92a30f1ab8a1" title="Permalink to this equation">#</a></span>\[\begin{align}
 P(\omega_1 + \omega_2)E^{-j(\omega_1+\omega_2)} = \epsilon_0 \chi^{(2)}2E_1E_2E^{-j(\omega_1+\omega_2)} + c.c. &amp;&amp; \text{SFG}
-\end{align}</p>
+\end{align}\]</div>
 <p>We can write down all the terms this way:</p>
-<p>\begin{align}
-P(2\omega_1) = \epsilon_0 \chi^{(2)}E_1^2 &amp;&amp; \text{SHG} \nonumber \
-P(2\omega_2) = \epsilon_0 \chi^{(2)}E_2^2 &amp;&amp; \text{SHG} \nonumber \
-P(\omega_1 + \omega_2) = \epsilon_0 \chi^{(2)}2E_1E_2 &amp;&amp; \text{SFG} \nonumber \
-P(\omega_1 - \omega_2) = \epsilon_0 \chi^{(2)}2E_1E^*_2 &amp;&amp; \text{DFG} \nonumber \
+<div class="amsmath math notranslate nohighlight" id="equation-d2369770-eefe-4b1c-b202-b36a63781d5d">
+<span class="eqno">(28)<a class="headerlink" href="#equation-d2369770-eefe-4b1c-b202-b36a63781d5d" title="Permalink to this equation">#</a></span>\[\begin{align}
+P(2\omega_1) = \epsilon_0 \chi^{(2)}E_1^2 &amp;&amp; \text{SHG} \nonumber \\
+P(2\omega_2) = \epsilon_0 \chi^{(2)}E_2^2 &amp;&amp; \text{SHG} \nonumber \\
+P(\omega_1 + \omega_2) = \epsilon_0 \chi^{(2)}2E_1E_2 &amp;&amp; \text{SFG} \nonumber \\
+P(\omega_1 - \omega_2) = \epsilon_0 \chi^{(2)}2E_1E^*_2 &amp;&amp; \text{DFG} \nonumber \\
 P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR}
-\end{align}</p>
+\end{align}\]</div>
 <p>Each process will have an associated energy level diagram:</p>
 <div>
 <img src="attachment:second_order_processes.png" width="600px"/>
 </div>
 <p>A couple of things are worth noting:</p>
 <ol class="simple">
-<li><p>All these processes occur simultaneously.  If you input two strong fields <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span> into a nonlinear medium you can expect to get all these effects unless something selectively promotes one over the other (more on this later).</p></li>
-<li><p>The difference frequency process is qualitatively different than the others.  The photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> is absorbed, but the photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> appears to be generated.  How is that possible?  Well, the diagram is actually depicting a <em>new</em> photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> that is being stimulated by an input photon at <span class="math notranslate nohighlight">\(\omega_2\)</span>.  So the the input photons at <span class="math notranslate nohighlight">\(\omega_2\)</span> are causing stimulated emission of other <span class="math notranslate nohighlight">\(\omega_2\)</span>, and thereby generating new photons at <span class="math notranslate nohighlight">\(\omega_3 = \omega_1 - \omega_2\)</span> and then amplifyinig them.  For this reason, DFG is often called optical parametric amplification.</p></li>
+<li><p>All these processes occur simultaneously.  If you input two strong fields $E_1$ and $E_2$ into a nonlinear medium you can expect to get all these effects unless something selectively promotes one over the other (more on this later).</p></li>
+<li><p>The difference frequency process is qualitatively different than the others.  The photon at $\omega_1$ is absorbed, but the photon at $\omega_2$ appears to be generated.  How is that possible?  Well, the diagram is actually depicting a <em>new</em> photon at $\omega_2$ that is being stimulated by an input photon at $\omega_2$.  So the the input photons at $\omega_2$ are causing stimulated emission of other $\omega_2$, and thereby generating new photons at $\omega_3 = \omega_1 - \omega_2$ and then amplifyinig them.  For this reason, DFG is often called optical parametric amplification.</p></li>
 <li><p>All of these processes conserve energy.  The electron starts and ends in the ground state in each case.  This is the definition of the word <em>parametric</em>.  We’ll later contrast this with non-parametric processes in which optical absorption and loss occur.</p></li>
-<li><p>Notice that some of the <span class="math notranslate nohighlight">\(P(\omega_1+\omega_2)\)</span> and <span class="math notranslate nohighlight">\(P(\omega_1-\omega_2)\)</span> terms have factors of <span class="math notranslate nohighlight">\(2\)</span>.  We got this straight from the math, but it also turns out to have a physical significance!  There are two degenerate ways each of these processes can happen.  For example, in the case of SFG either (1) A photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> can be absorbed first, then a photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> or (2) A photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> can be absorbed first, then a photon at <span class="math notranslate nohighlight">\(\omega_1\)</span>.  The same upper state would be reached in both cases, but different virtual states would be used along the way. We could add two more diagrams to our figure for explicit completeness, one for each additional path with it’s own virtual state, but most books assume it is implied.  Anyways, since there are 2 paths for the electron to traverse the energy levels, the effect is twice as strong.  Crazy physics thought:  Notice in the case of difference frequency generation that the second path implies that we have stimulated emission of a photon (from the ground state!) at <span class="math notranslate nohighlight">\(\omega_2\)</span> <em>before</em> a photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> is absorbed.</p></li>
+<li><p>Notice that some of the $P(\omega_1+\omega_2)$ and $P(\omega_1-\omega_2)$ terms have factors of $2$.  We got this straight from the math, but it also turns out to have a physical significance!  There are two degenerate ways each of these processes can happen.  For example, in the case of SFG either (1) A photon at $\omega_1$ can be absorbed first, then a photon at $\omega_2$ or (2) A photon at $\omega_2$ can be absorbed first, then a photon at $\omega_1$.  The same upper state would be reached in both cases, but different virtual states would be used along the way. We could add two more diagrams to our figure for explicit completeness, one for each additional path with it’s own virtual state, but most books assume it is implied.  Anyways, since there are 2 paths for the electron to traverse the energy levels, the effect is twice as strong.  Crazy physics thought:  Notice in the case of difference frequency generation that the second path implies that we have stimulated emission of a photon (from the ground state!) at $\omega_2$ <em>before</em> a photon at $\omega_1$ is absorbed.</p></li>
 </ol>
 <p>Python can help us keep track of all these possibilities using the symbolic algebra package sympy:</p>
 <div class="cell docutils container">
@@ -758,20 +766,21 @@ P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR
 <section id="excercises">
 <h2>Excercises<a class="headerlink" href="#excercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>(10 pts) How many possible parametric photon pathways are represented in the general 2nd order process described above?  How many of those pathways lead to the generation of a photon <span class="math notranslate nohighlight">\(\omega_3\)</span> with energy <span class="math notranslate nohighlight">\(\geq 0\)</span>?</p></li>
+<li><p>(10 pts) How many possible parametric photon pathways are represented in the general 2nd order process described above?  How many of those pathways lead to the generation of a photon $\omega_3$ with energy $\geq 0$?</p></li>
 <li><p>(10 pts) Above is a Python function to generate an energy-level diagram for sum-frequency generation. Create a similar function for difference frequency generation.</p></li>
 <li><p>(20 pts) Bonus (not required):  Make a program that makes set of all possible energy level diagrams given input P2 above.</p></li>
 </ol>
 <section id="optical-parametric-oscillation">
 <h3>Optical Parametric Oscillation<a class="headerlink" href="#optical-parametric-oscillation" title="Permalink to this headline">#</a></h3>
-<p>Optical parametric oscillation is a small tweak to difference frequency generation in which we put a nonlinear crystal inside a cavity that is resonant at <span class="math notranslate nohighlight">\(\omega_2\)</span> and/or <span class="math notranslate nohighlight">\(\omega_3\)</span>.  This allows a large field at these frequencies to build up inside the cavity and enhance the stimulate emission at both frequencies.  This makes optical parametric amplification (DFG) much more efficient, and is very common in tunable lasers.  By inputing only <span class="math notranslate nohighlight">\(\omega_1\)</span> and tuning the cavity to be resonant at <span class="math notranslate nohighlight">\(\omega_2\)</span>, any frequency <span class="math notranslate nohighlight">\(\omega_3 = \omega_1-\omega_2\)</span> can be generated, thus making a tunable laser.</p>
+<p>Optical parametric oscillation is a small tweak to difference frequency generation in which we put a nonlinear crystal inside a cavity that is resonant at $\omega_2$ and/or $\omega_3$.  This allows a large field at these frequencies to build up inside the cavity and enhance the stimulate emission at both frequencies.  This makes optical parametric amplification (DFG) much more efficient, and is very common in tunable lasers.  By inputing only $\omega_1$ and tuning the cavity to be resonant at $\omega_2$, any frequency $\omega_3 = \omega_1-\omega_2$ can be generated, thus making a tunable laser.</p>
 </section>
 <section id="third-harmonic-generation">
 <h3>Third Harmonic Generation<a class="headerlink" href="#third-harmonic-generation" title="Permalink to this headline">#</a></h3>
-<p>Third harmonic generation is analogous to second harmonic generation (frequency doubling) except that it involves the absorption of 3 photons instead of 2.  We again consider a laser oscillating at frequency <span class="math notranslate nohighlight">\(\omega\)</span>:</p>
-<p>\begin{align}
+<p>Third harmonic generation is analogous to second harmonic generation (frequency doubling) except that it involves the absorption of 3 photons instead of 2.  We again consider a laser oscillating at frequency $\omega$:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6cf54433-5275-4306-977a-1d871840fd0a">
+<span class="eqno">(29)<a class="headerlink" href="#equation-6cf54433-5275-4306-977a-1d871840fd0a" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{E}(t) = Ee^{-j\omega t} + Ee^{j\omega t}
-\end{align}</p>
+\end{align}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">chi3</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;E, epsilon_0, chi^(3), omega, t&#39;</span><span class="p">)</span> <span class="c1">#create symbols for the input electric fields.  We&#39;ll ignore epsilon_0 and chi for now.</span>
@@ -781,7 +790,7 @@ P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR
 </div>
 </div>
 </div>
-<p>The first term, <span class="math notranslate nohighlight">\(E^3 e^{-j 3\omega t}\)</span> represents 3rd harmonic generation.  Three photons at <span class="math notranslate nohighlight">\(\omega\)</span> are absorbed and a photon at frequency <span class="math notranslate nohighlight">\(3\omega\)</span> is generated.</p>
+<p>The first term, $E^3 e^{-j 3\omega t}$ represents 3rd harmonic generation.  Three photons at $\omega$ are absorbed and a photon at frequency $3\omega$ is generated.</p>
 </section>
 </section>
 <section id="exercise">
@@ -791,14 +800,14 @@ P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR
 </ol>
 <section id="intensity-dependent-refractive-index">
 <h3>Intensity-dependent Refractive Index<a class="headerlink" href="#intensity-dependent-refractive-index" title="Permalink to this headline">#</a></h3>
-<p>2nd term in 3rd order polarization, <span class="math notranslate nohighlight">\(3E^2E^*e^{-j\omega t}\)</span>, represents is interesting.  It represents a component of the polarization that is oscillating at the same frequency as the input laser.  It therefore <em>acts</em> in same manner as the linear susceptibility, which is equivalent to the refractive index (recall <span class="math notranslate nohighlight">\(n^2 = \chi^{(1)}+1\)</span>.  Comparing it to the linear term, however, this term as an extra factor of <span class="math notranslate nohighlight">\(EE^* = |E|^2\)</span>, making it an intensity-dependent refractive index.  The intensity-dependent refractive index is responsible for self-focusing effects in <span class="math notranslate nohighlight">\(\chi^{(3)}\)</span> materials.  The center of a gaussian beam is more intense that its edges, meaning that light there will travel more slowly, just like a lens that is thick in the center.</p>
+<p>2nd term in 3rd order polarization, $3E^2E^<em>e^{-j\omega t}$, represents is interesting.  It represents a component of the polarization that is oscillating at the same frequency as the input laser.  It therefore <em>acts</em> in same manner as the linear susceptibility, which is equivalent to the refractive index (recall $n^2 = \chi^{(1)}+1$.  Comparing it to the linear term, however, this term as an extra factor of $EE^</em> = |E|^2$, making it an intensity-dependent refractive index.  The intensity-dependent refractive index is responsible for self-focusing effects in $\chi^{(3)}$ materials.  The center of a gaussian beam is more intense that its edges, meaning that light there will travel more slowly, just like a lens that is thick in the center.</p>
 </section>
 </section>
 <section id="excercise">
 <h2>Excercise<a class="headerlink" href="#excercise" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>(20 pts) Plot the intensity profile for a gaussian beam in vacuum with a diameter of 10 microns and a peak electric field of 1000 V/m.</p></li>
-<li><p>(10 pts) Plot the intensity-dependent refractive index profile for this same beam traveling through silicon, which has <span class="math notranslate nohighlight">\(\chi^{(3)}\)</span> = <span class="math notranslate nohighlight">\(5\times 10^{-16} \frac{\text{m}^2}{\text{V}^2}\)</span>.  How large does the peak electric field need to be to increase the refractive index by 0.5? (this is about the index contrast between glass and air)</p></li>
+<li><p>(10 pts) Plot the intensity-dependent refractive index profile for this same beam traveling through silicon, which has $\chi^{(3)}$ = $5\times 10^{-16} \frac{\text{m}^2}{\text{V}^2}$.  How large does the peak electric field need to be to increase the refractive index by 0.5? (this is about the index contrast between glass and air)</p></li>
 </ol>
 <section id="parametric-vs-nonparametric-processes">
 <h3>Parametric vs. Nonparametric Processes<a class="headerlink" href="#parametric-vs-nonparametric-processes" title="Permalink to this headline">#</a></h3>
@@ -806,10 +815,11 @@ P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR
 </section>
 <section id="saturable-absorption">
 <h3>Saturable Absorption<a class="headerlink" href="#saturable-absorption" title="Permalink to this headline">#</a></h3>
-<p>As an example of a nonparametric process, let’s take a look at saturable absorption.  Many materials can only absorb so much light, and additional light beyond the threshhold intensity passes through.  This occurs because so many electrons have been excited out of the ground state that there are none left to absorb light. In this case, the material is said to be saturated with light.  Mathematically, we can describe the amount of absorption per unit length, <span class="math notranslate nohighlight">\(\alpha\)</span> as a function of intensity <span class="math notranslate nohighlight">\(I\)</span> as</p>
-<p>\begin{align}
+<p>As an example of a nonparametric process, let’s take a look at saturable absorption.  Many materials can only absorb so much light, and additional light beyond the threshhold intensity passes through.  This occurs because so many electrons have been excited out of the ground state that there are none left to absorb light. In this case, the material is said to be saturated with light.  Mathematically, we can describe the amount of absorption per unit length, $\alpha$ as a function of intensity $I$ as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5131e19c-ed0d-450a-8a38-b111015a06f2">
+<span class="eqno">(30)<a class="headerlink" href="#equation-5131e19c-ed0d-450a-8a38-b111015a06f2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \alpha(I) = \frac{\alpha_0}{1 + \frac{I}{I_0}}.
-\end{align}</p>
+\end{align}\]</div>
 <p>Let’s plot this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,7 +849,7 @@ P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR
 <div>
 <img src="attachment:two_photon_absorption.png" width="100px"/>
 </div>
-<p>As a result of the real state, the when the atom absorbs the two photons, it does not immediately release the energy in the from of a new photon at energy <span class="math notranslate nohighlight">\(2\omega\)</span>. Rather the electron stays in the excited state for some time.</p>
+<p>As a result of the real state, the when the atom absorbs the two photons, it does not immediately release the energy in the from of a new photon at energy $2\omega$. Rather the electron stays in the excited state for some time.</p>
 <p>Two photon absorption is a second-order nonlinear process.  The fraction of light intensity absorbed depends nonlinearly with the intensity of light.  Qualitatively, we may see how this works by thinking of the absorption process statistically. In order for two-photons to be absorbed, the <em>both</em> need to be in the material at the same time. For very low flux of photons, the likelihood that two photons will interact with the same atom simultaneously is small.  But for higher photon fluxes, this liklihood increases.  In fact, for small photon numbers, it increases quadratically with the number of photons, since the probability of two-photons being present is simply the square of the probabability of one photon being present.  This is another way to think physically (and quantum mechanically!) about how second-order nonlinear processes work.</p>
 <p>Let’s do a simple statistical example:</p>
 <div class="cell docutils container">

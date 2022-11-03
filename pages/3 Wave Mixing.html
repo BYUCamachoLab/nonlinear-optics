@@ -567,21 +567,24 @@ title="Print to PDF"
 <section id="total-points-100-pts-40-pts-extra-credit">
 <h2>Total Points: –/100 pts + –/40 pts Extra Credit<a class="headerlink" href="#total-points-100-pts-40-pts-extra-credit" title="Permalink to this headline">#</a></h2>
 <p>In the last notebook, we derived the wave equation for nonlinear interactions and worked through the specific example of second harmonic generation. Here’s the wave equation again:</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fe632c14-b14f-49f2-913c-a8f3507e9cc7">
+<span class="eqno">(52)<a class="headerlink" href="#equation-fe632c14-b14f-49f2-913c-a8f3507e9cc7" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial E_n(z)}{\partial z}  &amp;= j\frac{\omega_n}{2 \epsilon_0 c n_n} P_n^{(NL)}(z)
-\end{align}</p>
+\end{align}\]</div>
 <p>In this notebook, we’ll use the same wave equation to investigate general three-wave mixing processes.</p>
 </section>
 <section id="general-three-wave-mixing-process">
 <h2>General Three-wave Mixing Process<a class="headerlink" href="#general-three-wave-mixing-process" title="Permalink to this headline">#</a></h2>
-<p>The first task is to find the nonlinear polarization.   We have 3 fields at frequencies <span class="math notranslate nohighlight">\(\omega_1\)</span>, <span class="math notranslate nohighlight">\(\omega_2\)</span>, and <span class="math notranslate nohighlight">\(\omega_3\)</span>, labeled in order of increasing frequency.</p>
-<p>\begin{align}
+<p>The first task is to find the nonlinear polarization.   We have 3 fields at frequencies $\omega_1$, $\omega_2$, and $\omega_3$, labeled in order of increasing frequency.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-56ec4f90-1fab-419d-a910-9ef40117258e">
+<span class="eqno">(53)<a class="headerlink" href="#equation-56ec4f90-1fab-419d-a910-9ef40117258e" title="Permalink to this equation">#</a></span>\[\begin{align}
 E(z,t) = E_1(z)e^{j(k_1z - \omega_1 t)} + E_2(z)e^{j(k_2z - \omega_2 t)} + E_3(z)e^{j(k_3z - \omega_3 t)}
-\end{align}</p>
-<p>The second order nonlinear polarization is produced by <span class="math notranslate nohighlight">\(\chi^{(2)}\)</span> and has the form:</p>
-<p>\begin{align}
-P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
-\end{align}</p>
+\end{align}\]</div>
+<p>The second order nonlinear polarization is produced by $\chi^{(2)}$ and has the form:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d59192b3-55c8-47b0-9147-172e331a980b">
+<span class="eqno">(54)<a class="headerlink" href="#equation-d59192b3-55c8-47b0-9147-172e331a980b" title="Permalink to this equation">#</a></span>\[\begin{align}
+P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).  
+\end{align}\]</div>
 <p>Let’s take the square of the electric field using SymPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -611,23 +614,25 @@ P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
 </div>
 <p>There are lots of terms here, most of which we have identified in previous notebooks.  We look for terms in three categories:</p>
 <ol class="simple">
-<li><p><span class="math notranslate nohighlight">\(\tilde{P}^{(NL)}_3\)</span> terms that oscillate at <span class="math notranslate nohighlight">\(\omega_3 = \omega_1 + \omega_2\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tilde{P}^{(NL)}_2\)</span> terms that oscillate at <span class="math notranslate nohighlight">\(\omega_2 = \omega_3 - \omega_1\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tilde{P}^{(NL)}_1\)</span> terms that oscillate at <span class="math notranslate nohighlight">\(\omega_1 = \omega_3 - \omega_2\)</span>.</p></li>
+<li><p>$\tilde{P}^{(NL)}_3$ terms that oscillate at $\omega_3 = \omega_1 + \omega_2$.</p></li>
+<li><p>$\tilde{P}^{(NL)}_2$ terms that oscillate at $\omega_2 = \omega_3 - \omega_1$.</p></li>
+<li><p>$\tilde{P}^{(NL)}_1$ terms that oscillate at $\omega_1 = \omega_3 - \omega_2$.</p></li>
 </ol>
 <p>We ignore the rest of terms, assuming that we have experimentally only phase-matched these three-wave mixing terms. By inspecting each term, we identify</p>
-<p>\begin{align}
-\tilde{P}^{(NL)}_3 = 2\epsilon_0\chi^{(2)}E_1E_2e^{j(k_1+k_2-k_3)} \
-\tilde{P}^{(NL)}_2 = 2\epsilon_0\chi^{(2)}E_3E^<em>_1e^{j(k_3-k_1-k_2)} \
-\tilde{P}^{(NL)}_1 = 2\epsilon_0\chi^{(2)}E_3E^</em>_2e^{j(k_3-k_2-k_1)}
-\end{align}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-711b56b8-f150-4240-a343-779871875148">
+<span class="eqno">(55)<a class="headerlink" href="#equation-711b56b8-f150-4240-a343-779871875148" title="Permalink to this equation">#</a></span>\[\begin{align}
+\tilde{P}^{(NL)}_3 = 2\epsilon_0\chi^{(2)}E_1E_2e^{j(k_1+k_2-k_3)} \\
+\tilde{P}^{(NL)}_2 = 2\epsilon_0\chi^{(2)}E_3E^*_1e^{j(k_3-k_1-k_2)} \\
+\tilde{P}^{(NL)}_1 = 2\epsilon_0\chi^{(2)}E_3E^*_2e^{j(k_3-k_2-k_1)} 
+\end{align}\]</div>
 <p>Notice there is a pattern that corresponds to the energy level diagram for each term.  After a little experience, you can actually just write down these terms by considering the possible energy level diagrams that lead to three-wave mixing.  We can now plug these nonlinear polarizations directly into the wave equation and produce 3 coupled differential equations:</p>
-<p>\begin{align}
-\frac{\partial E_3(z)}{\partial z}  &amp;= j\frac{\omega_3}{c n_3} \chi^{(2)}E_1E_2e^{-j\Delta k} \
-\frac{\partial E_2(z)}{\partial z}  &amp;= j\frac{\omega_2}{c n_2} \chi^{(2)}E_3E^<em>_1e^{j\Delta k} \
-\frac{\partial E_1(z)}{\partial z}  &amp;= j\frac{\omega_1}{c n_1} \chi^{(2)}E_3E^</em>_2e^{j\Delta k}
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(\Delta k = k_3 - k_2 - k_1\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a06594a9-34be-41aa-a1d8-0780d4ed03ef">
+<span class="eqno">(56)<a class="headerlink" href="#equation-a06594a9-34be-41aa-a1d8-0780d4ed03ef" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{\partial E_3(z)}{\partial z}  &amp;= j\frac{\omega_3}{c n_3} \chi^{(2)}E_1E_2e^{-j\Delta k} \\
+\frac{\partial E_2(z)}{\partial z}  &amp;= j\frac{\omega_2}{c n_2} \chi^{(2)}E_3E^*_1e^{j\Delta k} \\
+\frac{\partial E_1(z)}{\partial z}  &amp;= j\frac{\omega_1}{c n_1} \chi^{(2)}E_3E^*_2e^{j\Delta k}
+\end{align}\]</div>
+<p>where $\Delta k = k_3 - k_2 - k_1$.</p>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
@@ -637,7 +642,7 @@ P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
 </section>
 <section id="general-3-wave-mixing">
 <h2>General 3-wave mixing<a class="headerlink" href="#general-3-wave-mixing" title="Permalink to this headline">#</a></h2>
-<p>In the following code, we numerically solve these three differential equations.  These can be used to predict sum-frequency generation, difference frequency generation, and any other three-wave mixing process. For concreteness, I have used a <span class="math notranslate nohighlight">\(\chi^{(2)}\)</span> of lithium niobate and lightwaves near the visible spectrum.</p>
+<p>In the following code, we numerically solve these three differential equations.  These can be used to predict sum-frequency generation, difference frequency generation, and any other three-wave mixing process. For concreteness, I have used a $\chi^{(2)}$ of lithium niobate and lightwaves near the visible spectrum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
@@ -715,8 +720,8 @@ P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
 <section id="excercises">
 <h3>Excercises<a class="headerlink" href="#excercises" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
-<li><p>(40 pts, Bonus) Table 1.5.3 on page 49 of Boyd gives values of nonlinear susceptibilities for several crystals.  Note that <span class="math notranslate nohighlight">\(d = \frac{1}{2}\chi^{(2)}\)</span> by convention.  Re-solve the differential equations using quartz instead of lithium niobate and plot the result.  Find initial values of the electric field for each wave that correspond to sum-frequency generation and difference frequency generation. How much larger does the field need to be in quartz than in lithium niobate to achieve the same response?</p></li>
-<li><p>(20 pts) Suppose you need to order a lithium niobate crystal to perform sum frequency generation. You have two mode-locked lasers: one at <span class="math notranslate nohighlight">\(\omega_1 = 2\pi \times \)</span>300 THz that can produces a electric field of 30,000 V/m, and another at <span class="math notranslate nohighlight">\(\omega_2 = 2\pi\times\)</span> 500 THz can produce a electric of 10,000 V/m.  What is the minimum coherence length needed to produce light at 800 THz equal in intesity to the light at 500 Thz?  At this coherence length, how long should you ask the manufacturer to cut the crystal?</p></li>
+<li><p>(40 pts, Bonus) Table 1.5.3 on page 49 of Boyd gives values of nonlinear susceptibilities for several crystals.  Note that $d = \frac{1}{2}\chi^{(2)}$ by convention.  Re-solve the differential equations using quartz instead of lithium niobate and plot the result.  Find initial values of the electric field for each wave that correspond to sum-frequency generation and difference frequency generation. How much larger does the field need to be in quartz than in lithium niobate to achieve the same response?</p></li>
+<li><p>(20 pts) Suppose you need to order a lithium niobate crystal to perform sum frequency generation. You have two mode-locked lasers: one at $\omega_1 = 2\pi \times $300 THz that can produces a electric field of 30,000 V/m, and another at $\omega_2 = 2\pi\times$ 500 THz can produce a electric of 10,000 V/m.  What is the minimum coherence length needed to produce light at 800 THz equal in intesity to the light at 500 Thz?  At this coherence length, how long should you ask the manufacturer to cut the crystal?</p></li>
 </ol>
 </section>
 </section>
@@ -747,8 +752,8 @@ P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
 </div>
 </div>
 <p>From this plot, we can visualize the polarization wave and produced electric field slipping 180 degrees out of phase after one coherence length.</p>
-<p>In some situations it is not possible to achive phase matching (<span class="math notranslate nohighlight">\(\Delta k = 0)\)</span> for a particular nonlinear process or material,  but there is a clever trick called quasi phase matching that can help.  There are experimental techniques to reverse the sign of the nonlinearity in non-centrosymmetric materials at regular intervals.  This corresponds to inverting the potential well of the nucleus-electron mass spring system, so that the restoring force is suddenly flipped.  If the material is flipped this way once every coherence length, then the polarization wave and electric field repeatedly slip out of phase for a coherence length, and then slip back into phase for a coherence length. The experiemental technique to accomplish this is called periodic poling.</p>
-<p>Mathematicaly, we can model this by assuming that the phase <span class="math notranslate nohighlight">\(\Delta k z\)</span> flips every time <span class="math notranslate nohighlight">\(z\)</span> increases by a coherence length.  Using Scipy signal package, we can define a square-wave function <span class="math notranslate nohighlight">\(p(z)\)</span> that goes between 1 and -1 every coherence length:</p>
+<p>In some situations it is not possible to achive phase matching ($\Delta k = 0)$ for a particular nonlinear process or material,  but there is a clever trick called quasi phase matching that can help.  There are experimental techniques to reverse the sign of the nonlinearity in non-centrosymmetric materials at regular intervals.  This corresponds to inverting the potential well of the nucleus-electron mass spring system, so that the restoring force is suddenly flipped.  If the material is flipped this way once every coherence length, then the polarization wave and electric field repeatedly slip out of phase for a coherence length, and then slip back into phase for a coherence length. The experiemental technique to accomplish this is called periodic poling.</p>
+<p>Mathematicaly, we can model this by assuming that the phase $\Delta k z$ flips every time $z$ increases by a coherence length.  Using Scipy signal package, we can define a square-wave function $p(z)$ that goes between 1 and -1 every coherence length:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
@@ -862,7 +867,7 @@ P^{(NL)}(z, t) = \epsilon_0 \chi^{(2)}E^2(z,t).<br />
 <section id="id1">
 <h2>Exercises<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>(60 pts) Design a simulation in which you allow the period of the poling to not exactly match the coherence length.  In other words, <span class="math notranslate nohighlight">\(L_{pole} = 2 \eta L_{coh}\)</span>, where <span class="math notranslate nohighlight">\(\eta\)</span> is a number close to 1.  For what values of <span class="math notranslate nohighlight">\(\eta\)</span> do you notice an appreciable loss in conversion efficiency?  Does this depend on the input powers of the lasers, and the length of the crystal relative to the coherence length?</p></li>
+<li><p>(60 pts) Design a simulation in which you allow the period of the poling to not exactly match the coherence length.  In other words, $L_{pole} = 2 \eta L_{coh}$, where $\eta$ is a number close to 1.  For what values of $\eta$ do you notice an appreciable loss in conversion efficiency?  Does this depend on the input powers of the lasers, and the length of the crystal relative to the coherence length?</p></li>
 </ol>
 </section>
 </section>

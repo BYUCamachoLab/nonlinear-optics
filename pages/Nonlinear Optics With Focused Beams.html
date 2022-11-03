@@ -499,42 +499,50 @@ title="Print to PDF"
 <span id="lectures-focused-beams"></span><h1>Focused Beams<a class="headerlink" href="#focused-beams" title="Permalink to this headline">#</a></h1>
 <p>So far, we have been studying nonlinear optics processsing under the assumption that all electric fields are plane waves.  In reality, laser beams are not plane waves and furthermore are usually focused to achieve maximum intensity.   In this notebook, we’ll examine some of the consequences of nonlinear optics experiements using focused beams.</p>
 <p>The first important property of a laser beam is that it is more intense in the center than on the edges.  This means that nonlinear conversion efficiency will be higher in the center.  As a result, converted beams are narrower than the input beam.</p>
-<p>Let’s go back to the place in our derivation of the wave equation wave equation where we assumed plane waves.  After starting with Maxwell’s equations and taking taking the curl of the curl-<span class="math notranslate nohighlight">\(\tilde{\mathbf{E}}\)</span> equation and substituting in the curl-<span class="math notranslate nohighlight">\(\tilde{\mathbf{B}}\)</span> equation, we arrived at</p>
-<p>\begin{align}
+<p>Let’s go back to the place in our derivation of the wave equation wave equation where we assumed plane waves.  After starting with Maxwell’s equations and taking taking the curl of the curl-$\tilde{\mathbf{E}}$ equation and substituting in the curl-$\tilde{\mathbf{B}}$ equation, we arrived at</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fca2f8b2-7b48-45c7-aa4d-2a724eed1fa5">
+<span class="eqno">(57)<a class="headerlink" href="#equation-fca2f8b2-7b48-45c7-aa4d-2a724eed1fa5" title="Permalink to this equation">#</a></span>\[\begin{align}
 \nabla^2 \tilde{\mathbf{E}} - \epsilon_0\mu_0\frac{\partial^2}{\partial t^2} \tilde{\mathbf{E}} =  \mu_0\frac{\partial^2}{\partial t^2} \tilde{\mathbf{P}}
-\end{align}</p>
-<p>and then we assumed plane waves.  If we do not assume plane waves at this point, the spatial part of the field will have transverse variations in addition to a periodic <span class="math notranslate nohighlight">\(z\)</span> dependence.</p>
-<p>We can represent each frequency component of the electric field and polarization as
-\begin{align}
-\tilde{\mathbf{E}}_n(\mathbf{r},t) = \mathbf{E}_n(\mathbf{r})e^{j(k_nz - \omega_n t)} + c.c. \
-\tilde{\mathbf{P}}_n(\mathbf{r},t) = \mathbf{P}_n(\mathbf{r})e^{j(k’_nz - \omega_n t)} + c.c. \
-\end{align}</p>
-<p>Notice that this is the same definition as before except we have allowed <span class="math notranslate nohighlight">\(\mathbf{E}_n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{P}_n\)</span> to be spatially varying in the transverse dimensions (<span class="math notranslate nohighlight">\(x, y\)</span>) in addition to <span class="math notranslate nohighlight">\(z\)</span>.  This means that the Laplace operator <span class="math notranslate nohighlight">\(\nabla^2\)</span> will be <span class="math notranslate nohighlight">\(\partial/dx^2 + \partial/dy^2 + \partial/dz^2 = \nabla_T^2 + \partial/dz^2\)</span></p>
+\end{align}\]</div>
+<p>and then we assumed plane waves.  If we do not assume plane waves at this point, the spatial part of the field will have transverse variations in addition to a periodic $z$ dependence.</p>
+<p>We can represent each frequency component of the electric field and polarization as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-58753ed1-20fd-454e-bb0f-3f3844f050ea">
+<span class="eqno">(58)<a class="headerlink" href="#equation-58753ed1-20fd-454e-bb0f-3f3844f050ea" title="Permalink to this equation">#</a></span>\[\begin{align}
+\tilde{\mathbf{E}}_n(\mathbf{r},t) = \mathbf{E}_n(\mathbf{r})e^{j(k_nz - \omega_n t)} + c.c. \\
+\tilde{\mathbf{P}}_n(\mathbf{r},t) = \mathbf{P}_n(\mathbf{r})e^{j(k'_nz - \omega_n t)} + c.c. \\
+\end{align}\]</div>
+<p>Notice that this is the same definition as before except we have allowed $\mathbf{E}_n$ and $\mathbf{P}_n$ to be spatially varying in the transverse dimensions ($x, y$) in addition to $z$.  This means that the Laplace operator $\nabla^2$ will be $\partial/dx^2 + \partial/dy^2 + \partial/dz^2 = \nabla_T^2 + \partial/dz^2$</p>
 <p>With this small change, we proceed to derive the wave equation the same as before.  After taking spatial and temporal derivatives and making the slowly varying amplitude approximation, we arrive at</p>
-<p>\begin{align}
-2jk_n\frac{\partial \mathbf{E}_n}{\partial z} + \nabla_T^2 \mathbf{E}_n = - \frac{\omega_n^2}{\epsilon_0 c^2 }\mathbf{P}_n
-\end{align}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5bb0e31b-8aed-43c7-85cc-ea5c641242ef">
+<span class="eqno">(59)<a class="headerlink" href="#equation-5bb0e31b-8aed-43c7-85cc-ea5c641242ef" title="Permalink to this equation">#</a></span>\[\begin{align}
+2jk_n\frac{\partial \mathbf{E}_n}{\partial z} + \nabla_T^2 \mathbf{E}_n = - \frac{\omega_n^2}{\epsilon_0 c^2 }\mathbf{P}_n 
+\end{align}\]</div>
 <p>This is known as the paraxial wave equation.  Compare this to the plane wave version:</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2d6a7aa3-d070-4784-879e-fefb5cfda8e6">
+<span class="eqno">(60)<a class="headerlink" href="#equation-2d6a7aa3-d070-4784-879e-fefb5cfda8e6" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial E_n}{\partial z}  &amp;= j\frac{\omega_n}{2 \epsilon_0 c n_n} P_n^{(NL)}
-\end{align}</p>
-<p>Notice that we have the extra transverse Laplacian and as a result have to keep the factor of <span class="math notranslate nohighlight">\(2jk_n\)</span> with the the <span class="math notranslate nohighlight">\({\partial \mathbf{E}_n}/{\partial z}\)</span> term.  In the case of free propagation (e.g. <span class="math notranslate nohighlight">\(\mathbf{P}_n = 0\)</span>), a solution to the paraxial wave equation is a beam with a Gaussian transverse profile:</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>Notice that we have the extra transverse Laplacian and as a result have to keep the factor of $2jk_n$ with the the ${\partial \mathbf{E}_n}/{\partial z}$ term.  In the case of free propagation (e.g. $\mathbf{P}_n = 0$), a solution to the paraxial wave equation is a beam with a Gaussian transverse profile:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a8a4f2bd-9c1f-4f10-b52e-751bdaa7a9b6">
+<span class="eqno">(61)<a class="headerlink" href="#equation-a8a4f2bd-9c1f-4f10-b52e-751bdaa7a9b6" title="Permalink to this equation">#</a></span>\[\begin{align}
 E(r,z) = E_0 \frac{w_0}{w(z)}e^{-r^2/w(z)^2}e^{jkr^2/2R(z)e^{j\Phi(z)}}
-\end{align}</p>
+\end{align}\]</div>
 <p>where</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-55186fd1-c8c0-4da5-8afb-a7a2e664d41c">
+<span class="eqno">(62)<a class="headerlink" href="#equation-55186fd1-c8c0-4da5-8afb-a7a2e664d41c" title="Permalink to this equation">#</a></span>\[\begin{align}
 w(z) = w_0\left[ 1+ \left( \lambda z / \pi w_0^2 \right) ^2 \right]^{1/2}
-\end{align}</p>
-<p>is the <span class="math notranslate nohighlight">\(1/e\)</span> radius of the beam,</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>is the $1/e$ radius of the beam,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7fb8a3ca-7e26-4cf3-9e87-6c61c0d30d15">
+<span class="eqno">(63)<a class="headerlink" href="#equation-7fb8a3ca-7e26-4cf3-9e87-6c61c0d30d15" title="Permalink to this equation">#</a></span>\[\begin{align}
 R(z) = z\left[1 + \left( \pi w_0^2 / \lambda z \right)^2  \right]
-\end{align}
-is the radius of curvature of the wavefront, and</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>is the radius of curvature of the wavefront, and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a6e41082-92a9-4dc4-9af5-e5742dca7b37">
+<span class="eqno">(64)<a class="headerlink" href="#equation-a6e41082-92a9-4dc4-9af5-e5742dca7b37" title="Permalink to this equation">#</a></span>\[\begin{align}
 \Phi(z) = -\arctan \left( \lambda z / \pi w_0^2 \right)
-\end{align}
-is the phase.</p>
+\end{align}\]</div>
+<p>is the phase.</p>
 <p>Let’s plot this to get a feel feel for the Gaussian beam</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2141,46 +2149,53 @@ if (IPython.notebook.kernel != null) {
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>Animate the above plot so that you can change the beam radius <span class="math notranslate nohighlight">\(w_0\)</span> and the wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>Animate the above plot so that you can change the beam radius $w_0$ and the wavelength $\lambda$.</p></li>
 </ol>
-<p>To solve the paraxial equation when the nonlinear polarization is not included, we must solve the partial differential equation that includes <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(z\)</span>. This usually involves setting up a mesh grid and defining the partial differential equations at each point, and then iterating until a solution is found with a desired accuracy.</p>
-<p>Let’s get a feel for how these solutions look by looking at harmonic generation of the <span class="math notranslate nohighlight">\(qth\)</span> harmonic.  In this case, we have <span class="math notranslate nohighlight">\(\omega_q = q\omega\)</span>.  The polarization in this case is:</p>
-<p>\begin{align}
+<p>To solve the paraxial equation when the nonlinear polarization is not included, we must solve the partial differential equation that includes $r$ and $z$. This usually involves setting up a mesh grid and defining the partial differential equations at each point, and then iterating until a solution is found with a desired accuracy.</p>
+<p>Let’s get a feel for how these solutions look by looking at harmonic generation of the $qth$ harmonic.  In this case, we have $\omega_q = q\omega$.  The polarization in this case is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a231c0f5-15c4-47ea-b2cb-c2ed1ff71cf7">
+<span class="eqno">(65)<a class="headerlink" href="#equation-a231c0f5-15c4-47ea-b2cb-c2ed1ff71cf7" title="Permalink to this equation">#</a></span>\[\begin{align}
 {P}_n  = \epsilon_0 \chi^{(q)}E_1^{q}e^{j\Delta k z}
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(\Delta k = qk_1 - k_q\)</span>.  Inserting this into the wave equation, we have</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>where $\Delta k = qk_1 - k_q$.  Inserting this into the wave equation, we have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1eedd09f-ba52-48a2-93ee-c32cd2fa9255">
+<span class="eqno">(66)<a class="headerlink" href="#equation-1eedd09f-ba52-48a2-93ee-c32cd2fa9255" title="Permalink to this equation">#</a></span>\[\begin{align}
 2jkq \frac{\partial E_q}{\partial z} + \nabla^2_T E_q = \frac{\omega_q^2}{c^2}\chi^{(q)}E_1^{q}e^{j\Delta k z}
-\end{align}</p>
+\end{align}\]</div>
 <p>where</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e1b18ad-164a-4062-a1c0-935d614b7f0f">
+<span class="eqno">(67)<a class="headerlink" href="#equation-7e1b18ad-164a-4062-a1c0-935d614b7f0f" title="Permalink to this equation">#</a></span>\[\begin{align}
 E_1(r,z) = E_1 \frac{w_0}{w(z)}e^{-r^2/w(z)^2}e^{jkr^2/2R(z)e^{j\Phi(z)}}
-\end{align}</p>
-<p>At this point it is usually more convenient to switch to a more compact form by letting
-\begin{align}
-\zeta &amp;= 2z/b \
+\end{align}\]</div>
+<p>At this point it is usually more convenient to switch to a more compact form by letting</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4e798737-abab-4da2-9707-8afc8fe33233">
+<span class="eqno">(68)<a class="headerlink" href="#equation-4e798737-abab-4da2-9707-8afc8fe33233" title="Permalink to this equation">#</a></span>\[\begin{align}
+\zeta &amp;= 2z/b \\
 b &amp;= 2\pi w_0^2/\lambda = kw_0^2
-\end{align}</p>
-<p>so that
-\begin{align}
+\end{align}\]</div>
+<p>so that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a343642e-3c91-4f8a-90be-5a9bfeb93910">
+<span class="eqno">(69)<a class="headerlink" href="#equation-a343642e-3c91-4f8a-90be-5a9bfeb93910" title="Permalink to this equation">#</a></span>\[\begin{align}
 E_1(r,z) = \frac{E_1}{1+j\zeta}e^{-qr^2/w_0^2(1+j\zeta)}
-\end{align}</p>
+\end{align}\]</div>
 <p>We can guess that the solution to this equation will look like a Gaussian at each frequency.  Following Boyd and others, we use the trial solution</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-915bb528-4d94-4b16-a349-61c1884be0a6">
+<span class="eqno">(70)<a class="headerlink" href="#equation-915bb528-4d94-4b16-a349-61c1884be0a6" title="Permalink to this equation">#</a></span>\[\begin{align}
 E_q(r,z) = \frac{E_q(z)}{1+j\zeta}e^{-qr^2/w_0(1+j\zeta)}
-\end{align}</p>
-<p>This obeys the paraxial wave equation so long as (1) We work in the constant pump regime and (2) <span class="math notranslate nohighlight">\(E_q(z)\)</span> obeys the ordinary differential equation</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>This obeys the paraxial wave equation so long as (1) We work in the constant pump regime and (2) $E_q(z)$ obeys the ordinary differential equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5c110d0d-5dc1-461f-ae11-1cb70f16d8d2">
+<span class="eqno">(71)<a class="headerlink" href="#equation-5c110d0d-5dc1-461f-ae11-1cb70f16d8d2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{d E_q}{dz} = \frac{jq\omega}{2 n q c} \chi^{(q)}E_1^q \frac{e^{j\Delta k z}}{(1+j\zeta)^{(q-1)}}
-\end{align}</p>
+\end{align}\]</div>
 </section>
 <section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>Solve Eq 8 numerically using lithium niobate as the nonlinear medium.  Explore a range of beam radii, field intensities, and phase matching values <span class="math notranslate nohighlight">\(\Delta k\)</span>.  Make plots similar to the 2D mesh plot above.</p>
+<p>Solve Eq 8 numerically using lithium niobate as the nonlinear medium.  Explore a range of beam radii, field intensities, and phase matching values $\Delta k$.  Make plots similar to the 2D mesh plot above.</p>
 <ol class="simple">
 <li><p>Compare your solution to the analytic solution in Boyd pg 113-114.  Keep working at it until they match.</p></li>
 <li><p>Verify that the beam decreases in radius for higher harmonics</p></li>
-<li><p>What do you notice when <span class="math notranslate nohighlight">\(\Delta k\)</span> = 0?  Explain the Guoy phase shift and why no frequency conversion takes place?</p></li>
+<li><p>What do you notice when $\Delta k$ = 0?  Explain the Guoy phase shift and why no frequency conversion takes place?</p></li>
 </ol>
 </section>
 </section>

@@ -497,34 +497,39 @@ title="Print to PDF"
 <h1>Combining Dispersion and Nonlinearity in Optical Pulse Propagation<a class="headerlink" href="#combining-dispersion-and-nonlinearity-in-optical-pulse-propagation" title="Permalink to this headline">#</a></h1>
 <p>In the last two notebooks we have explored how pulses propagate in nonlinear media.  We first examined how dispersion affect pulse propogation, and found that we can model dispersion by transforming to the frequency domain and allowing each frequency component to accummulate a different phase.  We then examined how nonlinearity affects pulse propogation by studying how the intensity-dependent refractive index leads to self-phase modulation.  In this notebook, we will combine these two effects and look at how dipsersion and nonlinearity act simultaneously.</p>
 <p>In the last notebook, we derived the nonlinear wave equation that includes a time-varying amplitude:</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-caab9490-a8a1-4542-b682-e4ef7cd35095">
+<span class="eqno">()<a class="headerlink" href="#equation-caab9490-a8a1-4542-b682-e4ef7cd35095" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial \tilde{E}}{\partial z} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2c\epsilon_0n_0}\left(1-\frac{j}{\omega}\frac{\partial}{\partial T} \right)\tilde{P}^{NL}
-\end{align}</p>
+\end{align}\]</div>
 <p>It is very often the case that the second term on the right (the time derivative of the polarization) is negligible, so we’ll first consider a scenario in which is the case.  This simplifies the pulse propagation equation to</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0a61d5b6-cf08-4846-83fc-8491c53d453d">
+<span class="eqno">()<a class="headerlink" href="#equation-0a61d5b6-cf08-4846-83fc-8491c53d453d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial \tilde{E}}{\partial z} = \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2c\epsilon_0n_0}\tilde{P}^{NL}
-\end{align}</p>
+\end{align}\]</div>
 <p>Let’s start by modelling what happens when the nonlinear polarization results from the intensity-dependent refractive index.  In this case we can write</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ff090d6c-9b5c-4695-bd72-04ef6c78cb2f">
+<span class="eqno">()<a class="headerlink" href="#equation-ff090d6c-9b5c-4695-bd72-04ef6c78cb2f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \tilde{P}^{NL} = 3\epsilon_0\chi^{(3)}|E|^2 E
-\end{align}</p>
+\end{align}\]</div>
 <p>so that we have</p>
-<p>\begin{align}
-\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2cn_0}3\chi^{(3)}|E|^2 E \nonumber \
-\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\gamma |E|^2E \nonumber \
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(\gamma =  3 \omega \chi^{(3)}/ 2cn_0 \)</span>.</p>
-<p>This equation is known as the nonlinear Schrodinger equation.  The first term on the right is responsible for dispersion and the second term on the right is responsible for the nonlinearity.  A very common (and simple)technique for solving this equation numerically is the Split-Step Fourier Method.  We will not go through the details of the implementation, but the idea is that we will step forward a distance <span class="math notranslate nohighlight">\(h\)</span> in two steps.  In the first step we’ll take care of dispersion by transforming to the frequency domain and letting each frequency component acquire its own phase shift.  In the second step, will transform back to the time domain and take a nonlinear step.  In practice, the frequency domain step is itself usually divided into two half-steps, one before and one after the time step.  This reduces numerical errors.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-59412d3d-beaf-4fa3-8ec2-0ba4d9491e91">
+<span class="eqno">()<a class="headerlink" href="#equation-59412d3d-beaf-4fa3-8ec2-0ba4d9491e91" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\frac{\omega}{2cn_0}3\chi^{(3)}|E|^2 E \nonumber \\
+\frac{\partial \tilde{E}}{\partial z} &amp;= \frac{1}{2}j\beta_2\frac{\partial^2 \tilde{E}}{\partial T^2} -j\gamma |E|^2E \nonumber \\
+\end{align}\]</div>
+<p>where $\gamma =  3 \omega \chi^{(3)}/ 2cn_0 $.</p>
+<p>This equation is known as the nonlinear Schrodinger equation.  The first term on the right is responsible for dispersion and the second term on the right is responsible for the nonlinearity.  A very common (and simple)technique for solving this equation numerically is the Split-Step Fourier Method.  We will not go through the details of the implementation, but the idea is that we will step forward a distance $h$ in two steps.  In the first step we’ll take care of dispersion by transforming to the frequency domain and letting each frequency component acquire its own phase shift.  In the second step, will transform back to the time domain and take a nonlinear step.  In practice, the frequency domain step is itself usually divided into two half-steps, one before and one after the time step.  This reduces numerical errors.</p>
 <p>Here is a simple implementation of the Split-Step Fourier method for self-phase modulation in a dispersive fiber.  We’ll start with an initial pulse of the form</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ef2710ff-6e4a-4220-a947-c4a0636a7667">
+<span class="eqno">()<a class="headerlink" href="#equation-ef2710ff-6e4a-4220-a947-c4a0636a7667" title="Permalink to this equation">#</a></span>\[\begin{align}
 E_0 = A_0e^{-(1-jC)\frac{t^2}{2\tau^2}}
-\end{align}</p>
+\end{align}\]</div>
 <p>This is the same as the pulse we used in the previous two notebooks with two modifications:</p>
 <ol class="simple">
-<li><p>We have included the possibility of a linear chirp in the initial pulse, parameterized by the constant <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
-<li><p>We have divided out the carrier wave <span class="math notranslate nohighlight">\(e^{j\omega_0 t}\)</span>.</p></li>
+<li><p>We have included the possibility of a linear chirp in the initial pulse, parameterized by the constant $C$.</p></li>
+<li><p>We have divided out the carrier wave $e^{j\omega_0 t}$.</p></li>
 </ol>
-<p>We’ll also be a little more careful to make our time and frequency arrays have a length of <span class="math notranslate nohighlight">\(2^N\)</span> for more numerically efficient FFT’s.</p>
+<p>We’ll also be a little more careful to make our time and frequency arrays have a length of $2^N$ for more numerically efficient FFT’s.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -707,6 +712,7 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
+    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -717,7 +723,8 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;'
+            'resize: both;' +
+            'z-index: 2;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -740,7 +747,13 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute('style', 'box-sizing: content-box;');
+    canvas.setAttribute(
+        'style',
+        'box-sizing: content-box;' +
+            'pointer-events: none;' +
+            'position: relative;' +
+            'z-index: 0;'
+    );
 
     this.context = canvas.getContext('2d');
 
@@ -760,7 +773,12 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
+        'box-sizing: content-box;' +
+            'left: 0;' +
+            'pointer-events: none;' +
+            'position: absolute;' +
+            'top: 0;' +
+            'z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -810,10 +828,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            canvas.setAttribute(
-                'style',
-                'width: ' + width + 'px; height: ' + height + 'px;'
-            );
+            /* This rescales the canvas back to display pixels, so that it
+             * appears correct on HiDPI screens. */
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -829,34 +847,53 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        return function (event) {
-            return fig.mouse_event(event, name);
-        };
+        /* User Agent sniffing is bad, but WebKit is busted:
+         * https://bugs.webkit.org/show_bug.cgi?id=144526
+         * https://bugs.webkit.org/show_bug.cgi?id=181818
+         * The worst that happens here is that they get an extra browser
+         * selection when dragging, if this check fails to catch them.
+         */
+        var UA = navigator.userAgent;
+        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
+        if(isWebKit) {
+            return function (event) {
+                /* This prevents the web browser from automatically changing to
+                 * the text insertion cursor when the button is pressed. We
+                 * want to control all of the cursor setting manually through
+                 * the 'cursor' event from matplotlib */
+                event.preventDefault()
+                return fig.mouse_event(event, name);
+            };
+        } else {
+            return function (event) {
+                return fig.mouse_event(event, name);
+            };
+        }
     }
 
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -884,7 +921,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
+    canvas_div.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -1039,7 +1076,7 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.rubberband_canvas.style.cursor = msg['cursor'];
+    fig.canvas_div.style.cursor = msg['cursor'];
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -1151,30 +1188,6 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-// from https://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
-mpl.findpos = function (e) {
-    //this section is from http://www.quirksmode.org/js/events_properties.html
-    var targ;
-    if (!e) {
-        e = window.event;
-    }
-    if (e.target) {
-        targ = e.target;
-    } else if (e.srcElement) {
-        targ = e.srcElement;
-    }
-    if (targ.nodeType === 3) {
-        // defeat Safari bug
-        targ = targ.parentNode;
-    }
-
-    // pageX,Y are the mouse positions relative to the document
-    var boundingRect = targ.getBoundingClientRect();
-    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
-    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
-
-    return { x: x, y: y };
-};
 
 /*
  * return a copy of an object with only non-object keys
@@ -1191,15 +1204,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
-    var canvas_pos = mpl.findpos(event);
-
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    var x = canvas_pos.x * this.ratio;
-    var y = canvas_pos.y * this.ratio;
+    // from https://stackoverflow.com/q/1114465
+    var boundingRect = this.canvas.getBoundingClientRect();
+    var x = (event.clientX - boundingRect.left) * this.ratio;
+    var y = (event.clientY - boundingRect.top) * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -1209,11 +1222,6 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
-    /* This prevents the web browser from automatically changing to
-     * the text insertion cursor when the button is pressed.  We want
-     * to control all of the cursor setting manually through the
-     * 'cursor' event from matplotlib */
-    event.preventDefault();
     return false;
 };
 
@@ -1547,7 +1555,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='a550614d-0bd5-4c11-a937-a081c081e007'></div></div></div>
+</script><div class="output text_html"><div id='fef729b9-0308-47eb-a6f6-70aeecac742e'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1717,6 +1725,7 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
+    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -1727,7 +1736,8 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;'
+            'resize: both;' +
+            'z-index: 2;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -1750,7 +1760,13 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute('style', 'box-sizing: content-box;');
+    canvas.setAttribute(
+        'style',
+        'box-sizing: content-box;' +
+            'pointer-events: none;' +
+            'position: relative;' +
+            'z-index: 0;'
+    );
 
     this.context = canvas.getContext('2d');
 
@@ -1770,7 +1786,12 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
+        'box-sizing: content-box;' +
+            'left: 0;' +
+            'pointer-events: none;' +
+            'position: absolute;' +
+            'top: 0;' +
+            'z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -1820,10 +1841,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            canvas.setAttribute(
-                'style',
-                'width: ' + width + 'px; height: ' + height + 'px;'
-            );
+            /* This rescales the canvas back to display pixels, so that it
+             * appears correct on HiDPI screens. */
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -1839,34 +1860,53 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        return function (event) {
-            return fig.mouse_event(event, name);
-        };
+        /* User Agent sniffing is bad, but WebKit is busted:
+         * https://bugs.webkit.org/show_bug.cgi?id=144526
+         * https://bugs.webkit.org/show_bug.cgi?id=181818
+         * The worst that happens here is that they get an extra browser
+         * selection when dragging, if this check fails to catch them.
+         */
+        var UA = navigator.userAgent;
+        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
+        if(isWebKit) {
+            return function (event) {
+                /* This prevents the web browser from automatically changing to
+                 * the text insertion cursor when the button is pressed. We
+                 * want to control all of the cursor setting manually through
+                 * the 'cursor' event from matplotlib */
+                event.preventDefault()
+                return fig.mouse_event(event, name);
+            };
+        } else {
+            return function (event) {
+                return fig.mouse_event(event, name);
+            };
+        }
     }
 
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'dblclick',
         on_mouse_event_closure('dblclick')
     );
     // Throttle sequential mouse events to 1 every 20ms.
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    rubberband_canvas.addEventListener(
+    canvas_div.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -1894,7 +1934,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
+    canvas_div.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -2049,7 +2089,7 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.rubberband_canvas.style.cursor = msg['cursor'];
+    fig.canvas_div.style.cursor = msg['cursor'];
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -2161,30 +2201,6 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-// from https://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
-mpl.findpos = function (e) {
-    //this section is from http://www.quirksmode.org/js/events_properties.html
-    var targ;
-    if (!e) {
-        e = window.event;
-    }
-    if (e.target) {
-        targ = e.target;
-    } else if (e.srcElement) {
-        targ = e.srcElement;
-    }
-    if (targ.nodeType === 3) {
-        // defeat Safari bug
-        targ = targ.parentNode;
-    }
-
-    // pageX,Y are the mouse positions relative to the document
-    var boundingRect = targ.getBoundingClientRect();
-    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
-    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
-
-    return { x: x, y: y };
-};
 
 /*
  * return a copy of an object with only non-object keys
@@ -2201,15 +2217,15 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
-    var canvas_pos = mpl.findpos(event);
-
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    var x = canvas_pos.x * this.ratio;
-    var y = canvas_pos.y * this.ratio;
+    // from https://stackoverflow.com/q/1114465
+    var boundingRect = this.canvas.getBoundingClientRect();
+    var x = (event.clientX - boundingRect.left) * this.ratio;
+    var y = (event.clientY - boundingRect.top) * this.ratio;
 
     this.send_message(name, {
         x: x,
@@ -2219,11 +2235,6 @@ mpl.figure.prototype.mouse_event = function (event, name) {
         guiEvent: simpleKeys(event),
     });
 
-    /* This prevents the web browser from automatically changing to
-     * the text insertion cursor when the button is pressed.  We want
-     * to control all of the cursor setting manually through the
-     * 'cursor' event from matplotlib */
-    event.preventDefault();
     return false;
 };
 
@@ -2557,8 +2568,8 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='147998f6-4b4e-423d-85da-736de9d5ed7c'></div></div><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "414fc07345b6400798a88015fa79e7b3"}
+</script><div class="output text_html"><div id='8deae86f-86e8-46e3-b898-cd143fab604c'></div></div><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "079bc38506ca4a079bd79861e0c50c5b"}
 </script></div>
 </div>
 </section>
@@ -2573,7 +2584,7 @@ if (IPython.notebook.kernel !== null) {
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"f2d6922b641c412f9655edc1a35da075": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "414fc07345b6400798a88015fa79e7b3": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_99079864fcd14425968eecfb61c68070", "IPY_MODEL_e9448ebeb41547f19563d1d51b9a5d07"], "layout": "IPY_MODEL_f2d6922b641c412f9655edc1a35da075"}}, "3cc8e65fd82244faa2d0dc042c88c169": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e243e075d8914f738a0b5d4502770893": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "99079864fcd14425968eecfb61c68070": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_3cc8e65fd82244faa2d0dc042c88c169", "max": 1250000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 62500.0, "style": "IPY_MODEL_e243e075d8914f738a0b5d4502770893", "value": 0.0}}, "49061972a71e443ca5fa0c289a4d565a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e9448ebeb41547f19563d1d51b9a5d07": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_49061972a71e443ca5fa0c289a4d565a", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+{"state": {"1d3abc0a2cdd4a5b95ef8eec9761bd39": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "079bc38506ca4a079bd79861e0c50c5b": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_07037121308746db82c380bcf506ccd4", "IPY_MODEL_61662357e17549d8867613c9294f51d3"], "layout": "IPY_MODEL_1d3abc0a2cdd4a5b95ef8eec9761bd39"}}, "c3428cd16c7e4582b54d2a69444a38f1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "20daf9cf03544ba99203022a098566fd": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "07037121308746db82c380bcf506ccd4": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "z", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_c3428cd16c7e4582b54d2a69444a38f1", "max": 1250000.0, "min": 0.0, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 62500.0, "style": "IPY_MODEL_20daf9cf03544ba99203022a098566fd", "value": 0.0}}, "68298a570f7a4d16abbcf9c3c2dd1a89": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "61662357e17549d8867613c9294f51d3": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_68298a570f7a4d16abbcf9c3c2dd1a89", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 

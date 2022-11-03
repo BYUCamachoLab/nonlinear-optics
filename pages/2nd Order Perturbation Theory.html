@@ -475,46 +475,54 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>In the last notebook we derived the transition amplitude for a two level atom, obtaining <span class="math notranslate nohighlight">\(a_1^{(1)}\)</span> for the excited state of:</p>
-<p>\begin{align}
-a_1^{(1)} = \frac{1}{\hbar}\sum_j \mu_{10}^j \left(\frac{\hat{E}<em>j e^{-j\omega t}}{\omega</em>{10} + \omega} + \frac{\hat{E}^*<em>j e^{j\omega t}}{\omega</em>{10} - \omega} \right)
-\end{align}</p>
-<p>In this notebook, we extend the analysis by including an additional energy level <span class="math notranslate nohighlight">\(a_3\)</span>.  Since levels 1 and 2 both function as an excited state in first order, we can write down the first order population in level 2 in the same way:</p>
-<p>\begin{align}
-a_2^{(1)} = \frac{1}{\hbar}\sum_j \mu_{20}^j \left(\frac{\hat{E}<em>j e^{-j\omega t}}{\omega</em>{20} + \omega} + \frac{\hat{E}^*<em>j e^{j\omega t}}{\omega</em>{20} - \omega} \right)
-\end{align}</p>
+  <p>In the last notebook we derived the transition amplitude for a two level atom, obtaining $a_1^{(1)}$ for the excited state of:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-35b77c15-d8c3-4163-b3db-7040a1e5532f">
+<span class="eqno">(211)<a class="headerlink" href="#equation-35b77c15-d8c3-4163-b3db-7040a1e5532f" title="Permalink to this equation">#</a></span>\[\begin{align}
+a_1^{(1)} = \frac{1}{\hbar}\sum_j \mu_{10}^j \left(\frac{\hat{E}_j e^{-j\omega t}}{\omega_{10} + \omega} + \frac{\hat{E}^*_j e^{j\omega t}}{\omega_{10} - \omega} \right)
+\end{align}\]</div>
+<p>In this notebook, we extend the analysis by including an additional energy level $a_3$.  Since levels 1 and 2 both function as an excited state in first order, we can write down the first order population in level 2 in the same way:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-656018fc-6039-4a9f-85c8-51ccde1f4b7d">
+<span class="eqno">(212)<a class="headerlink" href="#equation-656018fc-6039-4a9f-85c8-51ccde1f4b7d" title="Permalink to this equation">#</a></span>\[\begin{align}
+a_2^{(1)} = \frac{1}{\hbar}\sum_j \mu_{20}^j \left(\frac{\hat{E}_j e^{-j\omega t}}{\omega_{20} + \omega} + \frac{\hat{E}^*_j e^{j\omega t}}{\omega_{20} - \omega} \right)
+\end{align}\]</div>
 <p>We can now plug these amplitudes in to find the second order corrections according to</p>
-<p>\begin{align}
-\dot{a_2}^{(1)} &amp;= -j\omega_{20}  + a_1^{(2)} -\frac{j}{\hbar}V_{12}a_2^{(1)} \nonumber \
+<div class="amsmath math notranslate nohighlight" id="equation-c79e8d93-1eba-476d-bdce-f1676b9c3336">
+<span class="eqno">(213)<a class="headerlink" href="#equation-c79e8d93-1eba-476d-bdce-f1676b9c3336" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{a_2}^{(1)} &amp;= -j\omega_{20}  + a_1^{(2)} -\frac{j}{\hbar}V_{12}a_2^{(1)} \nonumber \\
 &amp;= -\frac{j} {\hbar} \sum_k \mu_{12}^k\left( \hat{E}_ke^{-j\omega t }+ c.c. \right)a_2^{(1)}
-\end{align}</p>
+\end{align}\]</div>
 <p>which gives us</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-86fcbf72-0c82-43d0-b18d-c99729d5ef22">
+<span class="eqno">(214)<a class="headerlink" href="#equation-86fcbf72-0c82-43d0-b18d-c99729d5ef22" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_1^{(2)} = \frac{1}{\hbar^2} \sum_{j,k} \mu_{12}^k\mu_{20}^j
-\left(\frac{\hat{E}<em>j\hat{E}<em>k e^{j2\omega t}}{\left(\omega</em>{10} + 2\omega\right)\left(\omega</em>{20} + \omega\right)} +<br />
-\frac{\hat{E}^<em>_j\hat{E}^</em><em>k e^{-j2\omega t}}{\left(\omega</em>{10} + 2\omega\right)\left(\omega_{20} + \omega\right)}\right)
-\end{align}</p>
-<p>and we can find <span class="math notranslate nohighlight">\(a_2^{(2)}\)</span> by exchanging indices 1 and 2.</p>
+\left(\frac{\hat{E}_j\hat{E}_k e^{j2\omega t}}{\left(\omega_{10} + 2\omega\right)\left(\omega_{20} + \omega\right)} +  
+\frac{\hat{E}^*_j\hat{E}^*_k e^{-j2\omega t}}{\left(\omega_{10} + 2\omega\right)\left(\omega_{20} + \omega\right)}\right)
+\end{align}\]</div>
+<p>and we can find $a_2^{(2)}$ by exchanging indices 1 and 2.</p>
 <p>To make the connection to second harmonic generation and other 2nd order nonlinear processes, we need to find the resulting polarization.  This is</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1a201426-2b45-4fa1-afcf-668a0794bf39">
+<span class="eqno">(215)<a class="headerlink" href="#equation-1a201426-2b45-4fa1-afcf-668a0794bf39" title="Permalink to this equation">#</a></span>\[\begin{align}
 \mathbf{P} = N\langle \mathbf{\mu} \rangle = N\sum_{nl} \mu_{nl}a_la_n^*
-\end{align}</p>
-<p>The resultig polarization for second harmonic generation along direction <span class="math notranslate nohighlight">\(i\)</span> is
-\begin{align}
-P_i^{SHG} &amp;= \hat{P}<em>i e^{j2\omega t} + c.c. \nonumber \
-&amp;= N\left(a_2^{(2)}a_0^{(0)*}\mu</em>{02}^i  +
-a_1^{(2)}a_0^{(0)<em>}\mu_{01}^i +
-a_1^{(1)}a_2^{(1)</em>}\mu_{21}^i + c.c. \right)
-\end{align}</p>
+\end{align}\]</div>
+<p>The resultig polarization for second harmonic generation along direction $i$ is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ebe937ab-a05f-403d-8fd6-e0548f31e1b1">
+<span class="eqno">(216)<a class="headerlink" href="#equation-ebe937ab-a05f-403d-8fd6-e0548f31e1b1" title="Permalink to this equation">#</a></span>\[\begin{align}
+P_i^{SHG} &amp;= \hat{P}_i e^{j2\omega t} + c.c. \nonumber \\
+          &amp;= N\left(a_2^{(2)}a_0^{(0)*}\mu_{02}^i  +
+          a_1^{(2)}a_0^{(0)*}\mu_{01}^i + 
+          a_1^{(1)}a_2^{(1)*}\mu_{21}^i + c.c. \right)
+\end{align}\]</div>
 <p>The main takeaway here is that the polarization is the sum of products of the population levels multiplied by the correspodning dipole matrix element.</p>
 <p>How do we interpret this result?  Let’s take a look again at the first-order result for some help:</p>
-<p>\begin{align}
-P_i = \frac{N}{\hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}<em>{10}-\omega} + \frac{\mu</em>{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)\hat{E}_je^{j\omega t} + c.c.
-\end{align}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2c668519-ea20-442a-b930-261423d62d6b">
+<span class="eqno">(217)<a class="headerlink" href="#equation-2c668519-ea20-442a-b930-261423d62d6b" title="Permalink to this equation">#</a></span>\[\begin{align}
+P_i = \frac{N}{\hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}_{10}-\omega} + \frac{\mu_{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)\hat{E}_je^{j\omega t} + c.c.
+\end{align}\]</div>
 <p>meaning that the linear susceptibility is</p>
-<p>\begin{align}
-\chi_{ij}^{(1)} = \frac{N}{\epsilon_0 \hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}<em>{10}-\omega} + \frac{\mu</em>{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)
-\end{align}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1ab1347d-6d91-469d-9e3e-4f1efceca566">
+<span class="eqno">(218)<a class="headerlink" href="#equation-1ab1347d-6d91-469d-9e3e-4f1efceca566" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_{ij}^{(1)} = \frac{N}{\epsilon_0 \hbar}\sum_j \left(\frac{\mu_{01}^j\mu_{10}^i}{\tilde{\omega}_{10}-\omega} + \frac{\mu_{01}^i\mu_{10}^j}{\tilde{\omega}_{10}+\omega} \right)
+\end{align}\]</div>
 <p><img alt="linear_susceptibility_quantum.png" src="pages/attachment:linear_susceptibility_quantum.png" /></p>
 <p>We can see from the figure that only the first term contributes substantially, since it represents photon transitions that are much closer to resonances.  We can similarly represent nonlinear processes as sums of dominant processes which are close to resonance.  We will take this up in the next notebook.</p>
 

@@ -558,27 +558,32 @@ title="Print to PDF"
   <section id="third-order-nonlinear-polarization">
 <h1>Third-order nonlinear polarization<a class="headerlink" href="#third-order-nonlinear-polarization" title="Permalink to this headline">#</a></h1>
 <p>Now that we know how to handle the the nonlinear suceptibility for different polarizations of light and different crystal symmetries, we can explore third-order nonlinear processes.  For this notebook, we will concentrate on third-order processes in isotropic media.</p>
-<p>Using the same notation we introduced for second-order processes, we can write the polarization <span class="math notranslate nohighlight">\(P_i\)</span> resulting from a third-order susceptibility as</p>
-<p>\begin{align}
+<p>Using the same notation we introduced for second-order processes, we can write the polarization $P_i$ resulting from a third-order susceptibility as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-30acd839-83e6-4cf8-9aad-7e4a570fd2f7">
+<span class="eqno">(94)<a class="headerlink" href="#equation-30acd839-83e6-4cf8-9aad-7e4a570fd2f7" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega_4) = \epsilon_0\sum_p\sum_{jkl}\chi^{(3)}_{ijkl}(\omega_4; \omega_1, \omega_2, \omega_3)E_j(\omega_1)E_k(\omega_2)E_l(\omega_3)
-\end{align}</p>
+\end{align}\]</div>
 <p>Some examples of 3rd-order processes are</p>
 <p><em>Third Harmonic Generation</em></p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-741df2bd-1ad5-4b1f-ad31-510a278d8fa0">
+<span class="eqno">(95)<a class="headerlink" href="#equation-741df2bd-1ad5-4b1f-ad31-510a278d8fa0" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(3\omega) = \epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(3\omega; \omega, \omega, \omega)E_j(\omega)E_k(\omega)E_l(\omega)
-\end{align}</p>
-<p><em>The DC Kerr Effect</em>
-\begin{align}
+\end{align}\]</div>
+<p><em>The DC Kerr Effect</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-37b2bcb9-bcba-4262-80f1-9aa611e242e7">
+<span class="eqno">(96)<a class="headerlink" href="#equation-37b2bcb9-bcba-4262-80f1-9aa611e242e7" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega; 0, 0, \omega)E_j(0)E_k(0)E_l(\omega)
-\end{align}</p>
+\end{align}\]</div>
 <p><em>The Optical Kerr Effect</em></p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-08bd42d0-529f-4a06-9275-9fae3ae0d068">
+<span class="eqno">(97)<a class="headerlink" href="#equation-08bd42d0-529f-4a06-9275-9fae3ae0d068" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega_1) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega_1; \omega_2, -\omega_2, \omega_1)E_j(\omega_2)E^*_k(\omega_2)E_l(\omega_1)
-\end{align}</p>
+\end{align}\]</div>
 <p><em>Intensity-Dependent Refractive Index</em></p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cb39dd4a-034c-40be-9efc-071809db1c3d">
+<span class="eqno">(98)<a class="headerlink" href="#equation-cb39dd4a-034c-40be-9efc-071809db1c3d" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega; \omega, -\omega, \omega)E_j(\omega)E^*_k(\omega)E_l(\omega)
-\end{align}</p>
+\end{align}\]</div>
 <p>All these effects are the same as the ones we studied in notebook 3, and have the same corresponding energy level diagrams.  The only difference is that we allow electric fields with different polarizations to interact and produce material polarization in different cartesion directions.  Another important consequence is that we may now also consider waves traveling in different directions.   For example,  in a process known as degenerage four-wave mixing,  four waves with the same frequency, but traveling in different directions can interact.</p>
 </section>
 <section id="exercise">
@@ -590,43 +595,50 @@ P_i(\omega) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega; \omega, -\omega, \o
 <section id="symmetry-in-third-order-processes">
 <h1>Symmetry in third-order processes<a class="headerlink" href="#symmetry-in-third-order-processes" title="Permalink to this headline">#</a></h1>
 <p>Just like in second-order processes, we can simply the number of terms we must use in the susceptibility tensor by appealing to symmetry.  It’s a little more involved since there are 81 elements in the general third-order susceptibility tensor.   However, if we limit ourselves to isotropic media, all cartesian directions are the same, meaning for example that</p>
-<p>\begin{align}
-\chi_1 = \chi_{iiii} \
+<div class="amsmath math notranslate nohighlight" id="equation-97001a6e-ac7e-40c1-9f3d-d60468a4c9d5">
+<span class="eqno">(99)<a class="headerlink" href="#equation-97001a6e-ac7e-40c1-9f3d-d60468a4c9d5" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_1 = \chi_{iiii} \\
 \chi_{xxxx} = \chi_{yyyy} = \chi_{zzzz}
-\end{align}</p>
-<p>We thus give a label of <span class="math notranslate nohighlight">\(\chi_1\)</span> to any term <span class="math notranslate nohighlight">\(\chi_{iiii}\)</span>.  There are three more types, with six members each:</p>
-<p><em>Type 2</em>
-\begin{align}
-\chi_2 = \chi_{jjkk} \
+\end{align}\]</div>
+<p>We thus give a label of $\chi_1$ to any term $\chi_{iiii}$.  There are three more types, with six members each:</p>
+<p><em>Type 2</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-7cc3d681-6e13-40b3-92af-b3974ede9b3c">
+<span class="eqno">(100)<a class="headerlink" href="#equation-7cc3d681-6e13-40b3-92af-b3974ede9b3c" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_2 = \chi_{jjkk} \\
 \chi_{xxyy}  = \chi_{yyzz} = \chi_{zzxx} = \chi_{yyxx} = \chi_{zzyy} = \chi_{xxzz}
-\end{align}</p>
-<p><em>Type 3</em>
-\begin{align}
-\chi_2 = \chi_{jkjk} \
+\end{align}\]</div>
+<p><em>Type 3</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-577454dc-a290-4593-9db5-05144735f131">
+<span class="eqno">(101)<a class="headerlink" href="#equation-577454dc-a290-4593-9db5-05144735f131" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_2 = \chi_{jkjk} \\
 \chi_{xyxy}  = \chi_{yzyz} = \chi_{zxzx} = \chi_{yxyx} = \chi_{zyzy} = \chi_{xzxz}
-\end{align}</p>
-<p><em>Type 4</em>
-\begin{align}
-\chi_2 = \chi_{jkkj} \
+\end{align}\]</div>
+<p><em>Type 4</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-41a761ac-d255-400e-9fe6-696e34c054a5">
+<span class="eqno">(102)<a class="headerlink" href="#equation-41a761ac-d255-400e-9fe6-696e34c054a5" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_2 = \chi_{jkkj} \\
 \chi_{xyyx}  = \chi_{yzzy} = \chi_{zxxz} = \chi_{yxxy} = \chi_{zyyz} = \chi_{xzzx}
-\end{align}</p>
-<p>Adding all these up we have a total of <span class="math notranslate nohighlight">\(3 + 3\times6 = 21\)</span> terms, and it turns out that all other terms must be zero!.  Furthermore, in structurally isotropic media (not to be confused with optically isotropic!), nonlinear polarization must be the same in any coordinate system.  With a little bit of linear algebra, one can show that this means that</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>Adding all these up we have a total of $3 + 3\times6 = 21$ terms, and it turns out that all other terms must be zero!.  Furthermore, in structurally isotropic media (not to be confused with optically isotropic!), nonlinear polarization must be the same in any coordinate system.  With a little bit of linear algebra, one can show that this means that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f52eaa3c-ffb6-448f-97ee-5f64eb7af419">
+<span class="eqno">(103)<a class="headerlink" href="#equation-f52eaa3c-ffb6-448f-97ee-5f64eb7af419" title="Permalink to this equation">#</a></span>\[\begin{align}
 \chi_1 = \chi_2 + \chi_3 + \chi_4
-\end{align}</p>
+\end{align}\]</div>
 <p>The upshot of this realization is that there are actually only 3 independent terms in the third-order nonlinear susceptibility!  That will be nice for doing calculations.  For other optically isotropic media (such as cubic crystals) we can also reduce the number of independent terms down from 21, but there will be more.  For example, cubic crystals have 4 independent terms.</p>
 </section>
 <section id="third-harmonic-generation">
 <h1>Third harmonic generation<a class="headerlink" href="#third-harmonic-generation" title="Permalink to this headline">#</a></h1>
 <p>Let’s calculate the third-order nonlinear polarization in a structurally isotropic medium using our new tensor skills.</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-64a40209-40b6-44ec-ab05-1f0624658bc7">
+<span class="eqno">(104)<a class="headerlink" href="#equation-64a40209-40b6-44ec-ab05-1f0624658bc7" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(3\omega) = \epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(3\omega; \omega, \omega, \omega)E_j(\omega)E_k(\omega)E_l(\omega)
-\end{align}</p>
+\end{align}\]</div>
 <p>Since all the input fields have the same frequency, it must be the case that we can swap the input fields and not change the polarization.  This implies that</p>
-<p>\begin{align}
-\chi_2 = \chi_3 = \chi_4
-\end{align}</p>
-<p>and since in at least one direction <span class="math notranslate nohighlight">\(\chi_1\)</span> must be the only effective term, and this must be the same for <em>all</em> direction, it follows that we only need to consider <span class="math notranslate nohighlight">\(\chi_{xxxx}\)</span> and the tensor nature of the susceptibility does not matter at all.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-013a8581-cbbf-49fd-8b5e-a04e68882c93">
+<span class="eqno">(105)<a class="headerlink" href="#equation-013a8581-cbbf-49fd-8b5e-a04e68882c93" title="Permalink to this equation">#</a></span>\[\begin{align}
+\chi_2 = \chi_3 = \chi_4 
+\end{align}\]</div>
+<p>and since in at least one direction $\chi_1$ must be the only effective term, and this must be the same for <em>all</em> direction, it follows that we only need to consider $\chi_{xxxx}$ and the tensor nature of the susceptibility does not matter at all.</p>
 </section>
 <section id="id1">
 <h1>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
@@ -641,38 +653,44 @@ P_i(3\omega) = \epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(3\omega; \omega, \omega, \o
 <section id="dc-kerr-effect">
 <h1>DC Kerr Effect<a class="headerlink" href="#dc-kerr-effect" title="Permalink to this headline">#</a></h1>
 <p>Now consider the DC Kerr effect, for which</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c39af344-d09a-4db5-904c-00b4b9672f28">
+<span class="eqno">(106)<a class="headerlink" href="#equation-c39af344-d09a-4db5-904c-00b4b9672f28" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega; 0, 0, \omega)E_j(0)E_k(0)E_l(\omega)
-\end{align}</p>
-<p>Let’s consider plane wave travelling in the <span class="math notranslate nohighlight">\(z\)</span> direction. Suppose we apply a DC field which is polarized in the <span class="math notranslate nohighlight">\(y\)</span> direction, we can conclude that the resulting material polarization in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions are</p>
-<p>\begin{align}
-P_x(\omega) = 3\epsilon_0\chi^{(3)}<em>{xyyx}(\omega; 0, 0, \omega)E^2_y(0)E_x(\omega) =  3\epsilon_0\chi_4E^2_y(0)E_x(\omega) \
-P_y(\omega) = 3\epsilon_0\chi^{(3)}</em>{yyyy}(\omega; 0, 0, \omega)E^2_y(0)E_y(\omega) =  P_y(\omega) = 3\epsilon_0\chi_1E^2_y(0)E_y(\omega)
-\end{align}</p>
-<p>We see from this that the polarization at frequency <span class="math notranslate nohighlight">\(\omega\)</span>, which determines the refractive index, is different in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions:</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>Let’s consider plane wave travelling in the $z$ direction. Suppose we apply a DC field which is polarized in the $y$ direction, we can conclude that the resulting material polarization in the $x$ and $y$ directions are</p>
+<div class="amsmath math notranslate nohighlight" id="equation-08dc28bc-335b-4f8a-88fb-2ba1cafd3191">
+<span class="eqno">(107)<a class="headerlink" href="#equation-08dc28bc-335b-4f8a-88fb-2ba1cafd3191" title="Permalink to this equation">#</a></span>\[\begin{align}
+P_x(\omega) = 3\epsilon_0\chi^{(3)}_{xyyx}(\omega; 0, 0, \omega)E^2_y(0)E_x(\omega) =  3\epsilon_0\chi_4E^2_y(0)E_x(\omega) \\
+P_y(\omega) = 3\epsilon_0\chi^{(3)}_{yyyy}(\omega; 0, 0, \omega)E^2_y(0)E_y(\omega) =  P_y(\omega) = 3\epsilon_0\chi_1E^2_y(0)E_y(\omega)
+\end{align}\]</div>
+<p>We see from this that the polarization at frequency $\omega$, which determines the refractive index, is different in the $x$ and $y$ directions:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-88861a6b-6869-4656-b4ca-abb4fde6efe9">
+<span class="eqno">(108)<a class="headerlink" href="#equation-88861a6b-6869-4656-b4ca-abb4fde6efe9" title="Permalink to this equation">#</a></span>\[\begin{align}
 n_y - n_x = \frac{3(\chi_1 - \chi_4)E_y^2(0)}{2n} = \frac{3\chi_2E_y^2(0)}{n} = \lambda_0KE_y^2(0)
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(K\)</span> is called the Kerr constant.</p>
+\end{align}\]</div>
+<p>where $K$ is called the Kerr constant.</p>
 </section>
 <section id="id2">
 <h1>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h1>
-<p>Design a Kerr cell based on notrobenzene, with <span class="math notranslate nohighlight">\(K = 4.4\)</span> pm/V^2.  Assume you apply a DC field in the y-direction using two electrodes spaced by 1 cm.  You would like to rotate the plane of polarization of light by 90 degrees in a 10 propogation length.  What voltage on the plates will be required?</p>
+<p>Design a Kerr cell based on notrobenzene, with $K = 4.4$ pm/V^2.  Assume you apply a DC field in the y-direction using two electrodes spaced by 1 cm.  You would like to rotate the plane of polarization of light by 90 degrees in a 10 propogation length.  What voltage on the plates will be required?</p>
 </section>
 <section id="optical-kerr-effect">
 <h1>Optical Kerr Effect<a class="headerlink" href="#optical-kerr-effect" title="Permalink to this headline">#</a></h1>
-<p>The optical Kerr effect is analogous to the DC Kerr effect, except now we have an additional field at <span class="math notranslate nohighlight">\(\omega_2\)</span> the changes the refractive index of the field propagating at <span class="math notranslate nohighlight">\(\omega_1\)</span>.  Take another look at the resulting material polarization:</p>
-<p>\begin{align}
+<p>The optical Kerr effect is analogous to the DC Kerr effect, except now we have an additional field at $\omega_2$ the changes the refractive index of the field propagating at $\omega_1$.  Take another look at the resulting material polarization:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-714ca2cc-5624-428e-8e92-7a3a89c1a5ea">
+<span class="eqno">(109)<a class="headerlink" href="#equation-714ca2cc-5624-428e-8e92-7a3a89c1a5ea" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega_1) = 3\epsilon_0\sum_{jkl}\chi^{(3)}_{ijkl}(\omega_1; \omega_2, -\omega_2, \omega_1)E_j(\omega_2)E^*_k(\omega_2)E_l(\omega_1)
-\end{align}</p>
-<p>If fields at <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_2\)</span> have the same polarization (say in the <span class="math notranslate nohighlight">\(x\)</span> direction), we have</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>If fields at $\omega_1$ and $\omega_2$ have the same polarization (say in the $x$ direction), we have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-76754681-ef96-4c9f-997c-7a27da99894a">
+<span class="eqno">(110)<a class="headerlink" href="#equation-76754681-ef96-4c9f-997c-7a27da99894a" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_x(\omega_1) = 3\epsilon_0 \chi^{(3)}_{xxxx}(\omega_1; \omega_2, -\omega_2, \omega_1)|E_x(\omega_2)|^2 E_x(\omega_1)
-\end{align}</p>
-<p>If instead the fields at <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_2\)</span> are cross-polarized, then we have</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>If instead the fields at $\omega_1$ and $\omega_2$ are cross-polarized, then we have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2be2137d-84dc-434b-942c-ef2a7414afc5">
+<span class="eqno">(111)<a class="headerlink" href="#equation-2be2137d-84dc-434b-942c-ef2a7414afc5" title="Permalink to this equation">#</a></span>\[\begin{align}
 P_i(\omega_1) = 3\epsilon_0\chi^{(3)}_{xyyx}(\omega_1; \omega_2, -\omega_2, \omega_1)|E_y(\omega_2)|^E_x(\omega_1)
-\end{align}</p>
+\end{align}\]</div>
 <p>This is sometimes known as the AC Kerr effect.</p>
 </section>
 

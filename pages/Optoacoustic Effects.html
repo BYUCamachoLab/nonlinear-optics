@@ -549,41 +549,49 @@ title="Print to PDF"
 <section id="frequecy-shifting-of-light-by-acoustic-waves">
 <h2>Frequecy Shifting of Light by Acoustic Waves<a class="headerlink" href="#frequecy-shifting-of-light-by-acoustic-waves" title="Permalink to this headline">#</a></h2>
 <p>Let’s work out how an ultrasonic wave can induce a nonlinear polarization through electrostriction.  We’ll then use that nonlinear polarization in the electric field wave equations to see some nonlinear optical effects.</p>
-<p>We start by writing the acoustic wave in the same form as the electric field waves.  We’ll let <span class="math notranslate nohighlight">\(Q\)</span> signify the mechanical displacement, <span class="math notranslate nohighlight">\(\Omega_A\)</span> the acoustic angular frequency, and <span class="math notranslate nohighlight">\(K_A\)</span> the acoustic wavenumber:</p>
-<p>\begin{align}
+<p>We start by writing the acoustic wave in the same form as the electric field waves.  We’ll let $Q$ signify the mechanical displacement, $\Omega_A$ the acoustic angular frequency, and $K_A$ the acoustic wavenumber:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-96e95c0e-261f-41b2-9957-f1b0294317c0">
+<span class="eqno">(117)<a class="headerlink" href="#equation-96e95c0e-261f-41b2-9957-f1b0294317c0" title="Permalink to this equation">#</a></span>\[\begin{align}
 Q = \tilde{Q}e^{j\left(K_Ay - j\Omega_A t\right)} + c.c.
-\end{align}</p>
-<p>We have chosen this wave to travel in the <span class="math notranslate nohighlight">\(y\)</span> direction.  It is somewhat difficult to measure the amplitude of internal displacements within a material, but often much easier to apply and measure a strain <span class="math notranslate nohighlight">\(S = \partial Q/\partial y\)</span>.  For this reason, the electrostrictive constant <span class="math notranslate nohighlight">\(\gamma_e\)</span> is given as a measure of the change in the dielectric constant as a function of strain:</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>We have chosen this wave to travel in the $y$ direction.  It is somewhat difficult to measure the amplitude of internal displacements within a material, but often much easier to apply and measure a strain $S = \partial Q/\partial y$.  For this reason, the electrostrictive constant $\gamma_e$ is given as a measure of the change in the dielectric constant as a function of strain:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ad331567-9a32-42ce-95a9-ab3d026d2349">
+<span class="eqno">(118)<a class="headerlink" href="#equation-ad331567-9a32-42ce-95a9-ab3d026d2349" title="Permalink to this equation">#</a></span>\[\begin{align}
 \delta\epsilon = -\gamma_e S
-\end{align}</p>
+\end{align}\]</div>
 <p>The upshot is that we need to write our acoustic wave interms of the strain:</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-62458946-1759-4ca6-a5d4-a71e33ba789c">
+<span class="eqno">(119)<a class="headerlink" href="#equation-62458946-1759-4ca6-a5d4-a71e33ba789c" title="Permalink to this equation">#</a></span>\[\begin{align}
 S = \frac{\partial Q}{\partial y} = j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.
-\end{align}</p>
+\end{align}\]</div>
 <p>So we conclude that the acoustic wave sets up dielectric constant wave:</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d53669fb-9003-4ca2-866b-c73c95c16ae7">
+<span class="eqno">(120)<a class="headerlink" href="#equation-d53669fb-9003-4ca2-866b-c73c95c16ae7" title="Permalink to this equation">#</a></span>\[\begin{align}
 \delta \epsilon = -\gamma_e j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.
-\end{align}</p>
-<p>If a laser field is incident on this material, it will set up a polarization equal to <span class="math notranslate nohighlight">\(P = \epsilon_0\chi E = \epsilon_0(\delta \epsilon - 1)E\)</span>.  The nonlinear polarization will therefore be</p>
-<p>\begin{align}
+\end{align}\]</div>
+<p>If a laser field is incident on this material, it will set up a polarization equal to $P = \epsilon_0\chi E = \epsilon_0(\delta \epsilon - 1)E$.  The nonlinear polarization will therefore be</p>
+<div class="amsmath math notranslate nohighlight" id="equation-da311d22-b5ed-419c-86e9-ed40c27a31fb">
+<span class="eqno">(121)<a class="headerlink" href="#equation-da311d22-b5ed-419c-86e9-ed40c27a31fb" title="Permalink to this equation">#</a></span>\[\begin{align}
 P^{(NL)} = \epsilon_0\delta\epsilon E
-\end{align}</p>
+\end{align}\]</div>
 <p>Writing the electric field of the laser as</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cae82a3a-05a6-4ce8-ba9b-3e4023fe09b4">
+<span class="eqno">(122)<a class="headerlink" href="#equation-cae82a3a-05a6-4ce8-ba9b-3e4023fe09b4" title="Permalink to this equation">#</a></span>\[\begin{align}
 E= \tilde{E}_Le^{j\left(k_Ly - \omega_L t\right)} + c.c.
-\end{align}</p>
+\end{align}\]</div>
 <p>we obtain</p>
-<p>\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fab1444f-935b-4617-987a-524d8a024223">
+<span class="eqno">(123)<a class="headerlink" href="#equation-fab1444f-935b-4617-987a-524d8a024223" title="Permalink to this equation">#</a></span>\[\begin{align}
 P^{(NL)} &amp;= \epsilon_0\left(-\gamma_e j K_A \tilde{Q}e^{j\left(K_Ay - \Omega_A t\right)} + c.c.\right)\left( \tilde{E}_Le^{j\left(k_Ly - \omega_L t\right)} + c.c.
-\right) \nonumber \
-&amp;= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((k_l +K_A)y - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((k_l -K_A)y - (\omega_L - \Omega_A) t\right)} + c.c. \right)
-\end{align}</p>
-<p>We can thus see that the effect of the mechanical wave is to produce a polarization wave oscillating at frequencies <span class="math notranslate nohighlight">\(\omega_L \pm \Omega_A\)</span>.  This is the same process used in acousto-optic modulators and deflectors.</p>
-<p>We actually need to generalize our nonliear polarization a bit to account for the fact that the direction of propagation of the light wave does not need to be in the same direction as the acoustic wave.  In fact, for most acousto-optic modulators the two direction are perpindicular!  We do this by writing the wavenumbers <span class="math notranslate nohighlight">\(k_L\)</span> and <span class="math notranslate nohighlight">\(K_A\)</span> as wave vectors <span class="math notranslate nohighlight">\(\mathbf{k}_L\)</span> and <span class="math notranslate nohighlight">\(\mathbf{K}_A\)</span> and the spatial coordinate <span class="math notranslate nohighlight">\(y\)</span> as a spatial vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>.  Our nonlinear polarization becomes:</p>
-<p>\begin{align}
+ \right) \nonumber \\
+ &amp;= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((k_l +K_A)y - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((k_l -K_A)y - (\omega_L - \Omega_A) t\right)} + c.c. \right)
+ \end{align}\]</div>
+<p>We can thus see that the effect of the mechanical wave is to produce a polarization wave oscillating at frequencies $\omega_L \pm \Omega_A$.  This is the same process used in acousto-optic modulators and deflectors.</p>
+<p>We actually need to generalize our nonliear polarization a bit to account for the fact that the direction of propagation of the light wave does not need to be in the same direction as the acoustic wave.  In fact, for most acousto-optic modulators the two direction are perpindicular!  We do this by writing the wavenumbers $k_L$ and $K_A$ as wave vectors $\mathbf{k}_L$ and $\mathbf{K}_A$ and the spatial coordinate $y$ as a spatial vector $\mathbf{r}$.  Our nonlinear polarization becomes:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c5604c8e-cf28-438a-8a68-d4b982b9ac3f">
+<span class="eqno">(124)<a class="headerlink" href="#equation-c5604c8e-cf28-438a-8a68-d4b982b9ac3f" title="Permalink to this equation">#</a></span>\[\begin{align}
 P^{(NL)}= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((\mathbf{k}_l + \mathbf{K}_A)\cdot \mathbf{r} - (\omega_L + \Omega_A) t\right)} + \tilde{E}\tilde{Q}^*e^{j\left((\mathbf{k}_l -\mathbf{K}_A)\cdot \mathbf{r} - (\omega_L - \Omega_A) t\right)} + c.c. \right)
-\end{align}</p>
+ \end{align}\]</div>
 <p>Here’s a diagram showing the addition of wave-vectors for a typical acousto-optic modulator:</p>
 <p><img alt="acousto_optic_modulator.png" src="pages/attachment:acousto_optic_modulator.png" /></p>
 <p>How large of a deflection might we expect to acheive?  Let’s calculate:</p>
@@ -613,11 +621,12 @@ P^{(NL)}= -\epsilon_0\gamma_e j K_A\left( \tilde{E}\tilde{Q}e^{j\left((\mathbf{k
 </div>
 </div>
 <p>So it looks like to get a deflection of more than a few degrees, we need to have an acoustic frequency of &gt; 1 GHz.  But what about phase matching?</p>
-<p>The wavevector of the generated optical wave along the propogation direction of the laser is <span class="math notranslate nohighlight">\(k_L\cos \theta\)</span>, so the wavevector mismatch is</p>
-<p>\begin{align}
-\Delta k &amp;= k_L - k_L \cos \theta \nonumber \
-&amp;\approx k_L\frac{\theta^2}{2}
-\end{align}</p>
+<p>The wavevector of the generated optical wave along the propogation direction of the laser is $k_L\cos \theta$, so the wavevector mismatch is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a4f62366-7d90-4a1d-9fe8-9af18d8142c9">
+<span class="eqno">(125)<a class="headerlink" href="#equation-a4f62366-7d90-4a1d-9fe8-9af18d8142c9" title="Permalink to this equation">#</a></span>\[\begin{align}
+\Delta k &amp;= k_L - k_L \cos \theta \nonumber \\
+ &amp;\approx k_L\frac{\theta^2}{2} 
+\end{align}\]</div>
 <p>This is typically a very short coherence length (microns), and acousto-optic modulators in which the crystal width is much smaller than the coherence length regime are said to operate in the Raman-Nath regime.</p>
 </section>
 <section id="exercise">
