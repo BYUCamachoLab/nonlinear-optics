@@ -1,7 +1,7 @@
 # nonlinear-optics
 JupyterBook for the Nonlinear Optics course at BYU
 
-This book can be viewed online at this link.
+This book can be viewed online at [https://byucamacholab.github.io/nonlinear-optics]().
 
 ## Installation
 
