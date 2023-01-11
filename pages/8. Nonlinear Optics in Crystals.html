@@ -480,23 +480,33 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#name">
+   8.1. Name:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-points-100-pts">
+   8.2. Total Points: –/100 pts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-notation">
-   8.1. Some notation
+   8.3. Some notation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-1-second-harmonic-generation-in-kdp">
-   8.2. Example 1: Second Harmonic Generation in KDP
+   8.4. Example 1: Second Harmonic Generation in KDP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   8.3. Exercises
+   8.5. Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
-   8.4. Hints about deriving the coupled wave equation for Exercise 1:
+   8.6. Hints about deriving the coupled wave equation for Exercise 1:
   </a>
  </li>
 </ul>
@@ -519,23 +529,33 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#name">
+   8.1. Name:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-points-100-pts">
+   8.2. Total Points: –/100 pts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-notation">
-   8.1. Some notation
+   8.3. Some notation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-1-second-harmonic-generation-in-kdp">
-   8.2. Example 1: Second Harmonic Generation in KDP
+   8.4. Example 1: Second Harmonic Generation in KDP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   8.3. Exercises
+   8.5. Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
-   8.4. Hints about deriving the coupled wave equation for Exercise 1:
+   8.6. Hints about deriving the coupled wave equation for Exercise 1:
   </a>
  </li>
 </ul>
@@ -549,7 +569,22 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-optics-in-crystals">
-<span id="lectures-crystal-symmetry-2"></span><h1><span class="section-number">8. </span>Nonlinear Optics in Crystals<a class="headerlink" href="#nonlinear-optics-in-crystals" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">8. </span>Nonlinear Optics in Crystals<a class="headerlink" href="#nonlinear-optics-in-crystals" title="Permalink to this headline">#</a></h1>
+<section id="name">
+<h2><span class="section-number">8.1. </span>Name:<a class="headerlink" href="#name" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="total-points-100-pts">
+<h2><span class="section-number">8.2. </span>Total Points: –/100 pts<a class="headerlink" href="#total-points-100-pts" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### UNCOMMENT AND RUN THIS CELL IF USING GOOGLE COLAB</span>
+<span class="c1"># !pip install ipympl -q</span>
+<span class="c1"># from google.colab import output</span>
+<span class="c1"># output.enable_custom_widget_manager()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>In this notebook we build upon the crystal optics discussed in the last notebook, but now allow nonlinear optical interactions instead of just linear interactions.  The good news is you essentially know everything you need in order to do nonlinear optics in crystals.  The bad news is it can be quite tedious to keep track of all the fields and the crystals with their associated symmetries.  But it’s not too bad, so here we go.</p>
 <p>Let’s first write remind ourselves of something we already know.  The polarization <span class="math notranslate nohighlight">\(P_i\)</span> in the direction <span class="math notranslate nohighlight">\(i = x,y,z\)</span> resulting from electric fields pointing in direction <span class="math notranslate nohighlight">\(j,k,l ... = x,y,z\)</span> may be written</p>
 <div class="math notranslate nohighlight">
@@ -589,8 +624,9 @@ P_i(0) = \epsilon_0\sum_{jk}\chi_{ijk}^{(2)}(0; \omega, -\omega)E_j(\omega)E_k^*
 \end{align}
 \]</div>
 <p>In general, the rule is that you can interchange any of the cartesian indices so long as you simultaneously exchange the corresponding frequency indices.  When the response of the medium is independent of the frequency (i.e. no dispersion), we can interchange the cartesian indices while leaving the frequency indices the same.  This is known as <em>Kleinman symmetry</em>.</p>
+</section>
 <section id="some-notation">
-<h2><span class="section-number">8.1. </span>Some notation<a class="headerlink" href="#some-notation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.3. </span>Some notation<a class="headerlink" href="#some-notation" title="Permalink to this headline">#</a></h2>
 <p>We can use these symmetry principles to simplify our notation.  We have seen that the second order susceptibility tensor <span class="math notranslate nohighlight">\(\chi_{ijk}^{(2)}\)</span>is in general a 27 element tensor, since <span class="math notranslate nohighlight">\(i,j\)</span> and <span class="math notranslate nohighlight">\(k\)</span> can each have one of three cartesian coordinates.  It is very common to write the full tensor in contracted notation by making use of the symmetry arguments above.  This is the same notation used to describe piezoelectric materials and was common before nonlinear optics became a distinct discipline.  The idea is that we really only have six ways the two fields <span class="math notranslate nohighlight">\(E_j\)</span> and <span class="math notranslate nohighlight">\(E_k\)</span> can combine in a second order process.  For example, for sum frequency generation we can write:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -633,7 +669,7 @@ d_{31} &amp; d_{32} &amp; d_{33}  &amp; d_{34} &amp; d_{35} &amp; d_{36}
 <p>When you look up the nonlinear susceptibility of a material, it will most often be given in this contracted notation.</p>
 </section>
 <section id="example-1-second-harmonic-generation-in-kdp">
-<h2><span class="section-number">8.2. </span>Example 1: Second Harmonic Generation in KDP<a class="headerlink" href="#example-1-second-harmonic-generation-in-kdp" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.4. </span>Example 1: Second Harmonic Generation in KDP<a class="headerlink" href="#example-1-second-harmonic-generation-in-kdp" title="Permalink to this headline">#</a></h2>
 <p>Let’s now take another look at second harmonic generation using this new notation that can take into account all of the crystal symmetries and different optical polarizations. The first process we will consider is second harmonic generation in a crystal known as KDP (Potassium Dihydrogen Phosphate).  We can look up <a class="reference external" href="http://www.crystallography.net/cod/7020842.html">KDP on the Crystallography Open Database</a> and import it into the Crystal package in python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -645,8 +681,14 @@ d_{31} &amp; d_{32} &amp; d_{33}  &amp; d_{34} &amp; d_{35} &amp; d_{36}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;international_symbol&#39;: &#39;P2_12_12_1&#39;, &#39;hall_symbol&#39;: &#39;P 2ac 2ab&#39;, &#39;hm_symbol&#39;: &#39;P212121&#39;, &#39;centering&#39;: &lt;CenteringType.primitive: &#39;P&#39;&gt;, &#39;international_number&#39;: 19, &#39;hall_number&#39;: 115, &#39;international_full&#39;: &#39;P 2_1 2_1 2_1&#39;, &#39;pointgroup&#39;: &#39;222&#39;}
-LatticeSystem.tetragonal
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">crystals</span> <span class="kn">import</span> <span class="n">Crystal</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">kdp</span> <span class="o">=</span> <span class="n">Crystal</span><span class="o">.</span><span class="n">from_cod</span><span class="p">(</span><span class="mi">9007582</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">kdp</span><span class="o">.</span><span class="n">symmetry</span><span class="p">())</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;crystals&#39;
 </pre></div>
 </div>
 </div>
@@ -670,18 +712,18 @@ P_e(2\omega) = 2\epsilon_0 d_{36} E_0^2 \sin\theta\sin\phi\cos\phi
 <p>To maximize the polarization, we must set <span class="math notranslate nohighlight">\(\phi = 45^{\circ}\)</span>.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">8.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>Solve for amount of second harmonic generation for type I phase matching using the parameters outlined above in the notebook. (e.g. plug this nonlinear polarization into the ode from previous notebooks).  Plot your results, and animat as a function of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span>, and <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
-<li><p>Re-calculate the nonlinear polarization for SHG using an ordinaray <em>and</em> extraordinary fundamental wave to produce an extraordinary second harmonic.  (This is called Type-II phase matching).  Make plots again.</p></li>
+<li><p>(60 pts) Solve for amount of second harmonic generation for type I phase matching using the parameters outlined above in the notebook. (e.g. plug this nonlinear polarization into the ode from previous notebooks).  Plot your results, and animat as a function of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span>, and <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
+<li><p>(40 pts) Re-calculate the nonlinear polarization for SHG using an ordinaray <em>and</em> extraordinary fundamental wave to produce an extraordinary second harmonic.  (This is called Type-II phase matching).  Make plots again.</p></li>
 </ol>
 </section>
 <section id="hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
-<h2><span class="section-number">8.4. </span>Hints about deriving the coupled wave equation for Exercise 1:<a class="headerlink" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.6. </span>Hints about deriving the coupled wave equation for Exercise 1:<a class="headerlink" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1" title="Permalink to this headline">#</a></h2>
 <p>You will need to find the nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(2\omega\)</span> along the ordinary and extraordinary axis.  Here’s some notes on how to do that.</p>
 <p>To produce the second harmonic frequency, we have combined two waves <span class="math notranslate nohighlight">\(E_x(\omega)\)</span> and <span class="math notranslate nohighlight">\(E_y(\omega)\)</span> to produce another electric field <span class="math notranslate nohighlight">\(E_e(2\omega)\)</span>. Importantly, <span class="math notranslate nohighlight">\(E_x\)</span> and <span class="math notranslate nohighlight">\(E_y\)</span> are just projections of a single wave <span class="math notranslate nohighlight">\(E_o\)</span> with a polarization in the <span class="math notranslate nohighlight">\(x-y\)</span> plane.</p>
 <p>Note that the second harmonic wave <span class="math notranslate nohighlight">\(E_e\)</span> is perpindicular to <span class="math notranslate nohighlight">\(E_o\)</span>, but is not polarized in the <span class="math notranslate nohighlight">\(x-y\)</span> plane!  Neither is it polarized in <span class="math notranslate nohighlight">\(z\)</span>!  Instead it is polarized in a direction perpindicular to <span class="math notranslate nohighlight">\(E_o\)</span> <em>and the direction of propagation</em>, which is at some angle <span class="math notranslate nohighlight">\(\theta\)</span> relative to the <span class="math notranslate nohighlight">\(z\)</span> axis.  Here’s a diagram:</p>
-<p><img alt="phase_matching_geometry.png" src="pages/attachment:phase_matching_geometry.png" /></p>
+<p><img alt="phase_matching_geometry.png" src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/phase_matching_geometry.png?raw=true" /></p>
 <p>See if you can verify the following by looking at the diagram:</p>
 <ol class="simple">
 <li><p>The ordinary electric field <span class="math notranslate nohighlight">\(E_o\)</span> is in the <span class="math notranslate nohighlight">\(x-y\)</span> crystal plane.</p></li>
@@ -689,12 +731,12 @@ P_e(2\omega) = 2\epsilon_0 d_{36} E_0^2 \sin\theta\sin\phi\cos\phi
 <li><p>We can write down the <span class="math notranslate nohighlight">\(xyz\)</span> projections for all the fields:
 $<span class="math notranslate nohighlight">\(
 \begin{align}
-E_{ox} &amp;= E_o\sin \phi \nonumber \\
-E_{oy} &amp;= E_o\cos \phi \nonumber \\
-E_{oz} &amp;= 0 \nonumber \\
-E_{ex} &amp;= E_e\cos \phi \cos\theta \nonumber \\
-E_{ey} &amp;= E_e\sin \phi \cos\theta \nonumber \\
-E_{ez} &amp;= E_e \sin \theta \nonumber \\
+E_{ox} &amp;= E_o\sin \phi  \\
+E_{oy} &amp;= E_o\cos \phi  \\
+E_{oz} &amp;= 0  \\
+E_{ex} &amp;= E_e\cos \phi \cos\theta  \\
+E_{ey} &amp;= E_e\sin \phi \cos\theta  \\
+E_{ez} &amp;= E_e \sin \theta  \\
 \end{align}
 \)</span>$</p></li>
 <li><p>We can write down the relevant material polarizations for the nonlinear ode as follows:</p></li>
@@ -715,9 +757,9 @@ $<span class="math notranslate nohighlight">\(
 <div class="math notranslate nohighlight">
 \[\begin{split}
    \begin{align}
-   P_o(\omega) &amp;= P_x(\omega)\sin \phi + P_y(\omega)\cos \phi \nonumber \\
-               &amp;= \epsilon_0 \left[\chi^{(2)}_{xzy}(\omega; 2\omega, \omega)E_z(2\omega)E_y^*(\omega)\sin \phi + \chi^{(2)}_{yzx}(\omega; 2\omega, \omega)E_z(2\omega)E_x^*(\omega)\cos \phi\right] \nonumber \\
-               &amp;= 2\epsilon_0 d_{36} \left[E_z(2\omega)E_y^*(\omega)\sin \phi + E_z(2\omega)E_x^*(\omega)\cos \phi\right] \nonumber \\
+   P_o(\omega) &amp;= P_x(\omega)\sin \phi + P_y(\omega)\cos \phi  \\
+               &amp;= \epsilon_0 \left[\chi^{(2)}_{xzy}(\omega; 2\omega, \omega)E_z(2\omega)E_y^*(\omega)\sin \phi + \chi^{(2)}_{yzx}(\omega; 2\omega, \omega)E_z(2\omega)E_x^*(\omega)\cos \phi\right]  \\
+               &amp;= 2\epsilon_0 d_{36} \left[E_z(2\omega)E_y^*(\omega)\sin \phi + E_z(2\omega)E_x^*(\omega)\cos \phi\right]  \\
                &amp;= 4\epsilon_0 d_{36} E_e  E_o^*\cos \phi\sin \phi \sin \theta
    \end{align}
    \end{split}\]</div>
