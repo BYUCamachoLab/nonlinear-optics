@@ -10,29 +10,30 @@ parts:
   - file: schedule
   - file: computer
 - caption: Lectures
+  numbered: true
   chapters:
-  - file: pages/Atomic Polarizability
-  - file: pages/The Nonlinear Susceptibility
-  - file: pages/Overview of Nonlinear Processes
-  - file: pages/Coupled Wave Equations
-  - file: pages/3 Wave Mixing
-  - file: pages/Nonlinear Optics With Focused Beams
-  - file: pages/Crystal Optics
-  - file: pages/Crystal Optics 2
-  - file: pages/Third Order Nonlinear Processes
-  - file: pages/Raman Scattering
-  - file: pages/Optoacoustic Effects
-  - file: pages/Stimulated Brillouin Scattering
-  - file: pages/Optical Phase Conjugation
-  - file: pages/Phase and Group Velocity
-  - file: pages/Dispersion Optical Pulses
-  - file: pages/Nonlinear Optics With Pulses 1
-  - file: pages/Nonlinear Optics With Pulses 2
-  - file: pages/Schrodinger Equation
-  - file: pages/The Density Matrix
-  - file: pages/First Order Perturbation Theory
-  - file: pages/2nd Order Perturbation Theory
-  - file: pages/Electromagnetically Induced Transparency
+  - file: pages/1. Atomic Polarizability
+  - file: pages/2. The Nonlinear Susceptibility
+  - file: pages/3. Overview of Nonlinear Processes
+  - file: pages/4. Coupled Wave Equations
+  - file: pages/5. Three-Wave Mixing
+  - file: pages/6. Focused Beams
+  - file: pages/7. Crystal Symmetry
+  - file: pages/8. Nonlinear Optics in Crystals
+  - file: pages/9. Third Order Nonlinear Polarization
+  - file: pages/10. Raman Scattering
+  - file: pages/11. Optoacoustic Effects
+  - file: pages/12. Stimulated Brillouin Scattering
+  - file: pages/13. Optical Phase Conjugation
+  - file: pages/14. Phase and Group Velocities
+  - file: pages/15. Dispersion in Optical Pulses
+  - file: pages/16. Nonlinear Differential Equations for Pulsed Light
+  - file: pages/17. Combining Dispersion and Nonlinearity in Optical Pulse Propagation
+  - file: pages/18. The Quantum Mechanical Wave Function
+  - file: pages/19. The Density Matrix
+  - file: pages/20. First Order Perturbation Theory
+  - file: pages/21. Second Order Perturbation Theory
+  - file: pages/22. Electromagnetically Induced Transparency
 # - caption: Projects
 #   chapters: 
 #   - file: content/midterm
