@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>8. Nonlinear Optics in Crystals &#8212; Nonlinear Optics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. Third-order nonlinear polarization" href="9.%20Third%20Order%20Nonlinear%20Polarization.html" />
+    <link rel="prev" title="7. Crystal Symmetry" href="7.%20Crystal%20Symmetry.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Nonlinear Optics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Nonlinear Optics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Course Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../schedule.html">
+   Schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../computer.html">
+   Computer Configuration
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.%20Atomic%20Polarizability.html">
+   1. Atoms in external electric fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.%20The%20Nonlinear%20Susceptibility.html">
+   2. The Nonlinear Susceptibility
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3.%20Overview%20of%20Nonlinear%20Processes.html">
+   3. Overview of Nonlinear Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4.%20Coupled%20Wave%20Equations.html">
+   4. Coupled Wave Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5.%20Three-Wave%20Mixing.html">
+   5. Three-Wave Mixing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6.%20Focused%20Beams.html">
+   6. Focused Beams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.%20Crystal%20Symmetry.html">
+   7. Crystal Symmetry
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. Nonlinear Optics in Crystals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="9.%20Third%20Order%20Nonlinear%20Polarization.html">
+   9. Third-order nonlinear polarization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10.%20Raman%20Scattering.html">
+   10. Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.%20Optoacoustic%20Effects.html">
+   11. Optoacoustic Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12.%20Stimulated%20Brillouin%20Scattering.html">
+   12. Stimulated Brillouin Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13.%20Optical%20Phase%20Conjugation.html">
+   13. Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14.%20Phase%20and%20Group%20Velocities.html">
+   14. Phase and Group Velocities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15.%20Dispersion%20in%20Optical%20Pulses.html">
+   15. Dispersion in Optical Pulses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16.%20Nonlinear%20Differential%20Equations%20for%20Pulsed%20Light.html">
+   16. Nonlinear Differential Equations For Pulsed Light
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17.%20Combining%20Dispersion%20and%20Nonlinearity%20in%20Optical%20Pulse%20Propagation.html">
+   17. Combining Dispersion and Nonlinearity in Optical Pulse Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18.%20The%20Quantum%20Mechanical%20Wave%20Function.html">
+   18. The Quantum Mechanical Wave Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19.%20The%20Density%20Matrix.html">
+   19. The Density Matrix
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20.%20First%20Order%20Perturbation%20Theory.html">
+   20. First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21.%20Second%20Order%20Perturbation%20Theory.html">
+   21. Second Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22.%20Electromagnetically%20Induced%20Transparency.html">
+   22. Electromagnetically Induced Transparency
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/main?urlpath=tree/book/pages/8. Nonlinear Optics in Crystals.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/BYUCamachoLab/nonlinear-optics/blob/main/book/pages/8. Nonlinear Optics in Crystals.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics/issues/new?title=Issue%20on%20page%20%2Fpages/8. Nonlinear Optics in Crystals.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/pages/8. Nonlinear Optics in Crystals.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-notation">
+   8.1. Some notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1-second-harmonic-generation-in-kdp">
+   8.2. Example 1: Second Harmonic Generation in KDP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   8.3. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
+   8.4. Hints about deriving the coupled wave equation for Exercise 1:
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Nonlinear Optics in Crystals</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-notation">
+   8.1. Some notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1-second-harmonic-generation-in-kdp">
+   8.2. Example 1: Second Harmonic Generation in KDP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   8.3. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
+   8.4. Hints about deriving the coupled wave equation for Exercise 1:
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-optics-in-crystals">
+<span id="lectures-crystal-symmetry-2"></span><h1><span class="section-number">8. </span>Nonlinear Optics in Crystals<a class="headerlink" href="#nonlinear-optics-in-crystals" title="Permalink to this headline">#</a></h1>
+<p>In this notebook we build upon the crystal optics discussed in the last notebook, but now allow nonlinear optical interactions instead of just linear interactions.  The good news is you essentially know everything you need in order to do nonlinear optics in crystals.  The bad news is it can be quite tedious to keep track of all the fields and the crystals with their associated symmetries.  But it’s not too bad, so here we go.</p>
+<p>Let’s first write remind ourselves of something we already know.  The polarization <span class="math notranslate nohighlight">\(P_i\)</span> in the direction <span class="math notranslate nohighlight">\(i = x,y,z\)</span> resulting from electric fields pointing in direction <span class="math notranslate nohighlight">\(j,k,l ... = x,y,z\)</span> may be written</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P_i = \epsilon_0\left(\sum_j\chi_{ij}^{(1)}E_j + \sum_{jk}\chi_{ijk}^{(2)}E_jE_k + \sum_{jkl}\chi_{ijkl}^{(3)}E_jE_kE_l + \dots \right)
+\end{align}
+\]</div>
+<p>When we derived the wave equation for nonlinear optics in previous notebooks, we always reached a point where we had a set of single-frequency wave equations, one for for each frequency component of the polarization.  In those cases we used subscripts, as in <span class="math notranslate nohighlight">\(E_n\)</span> to denote an electric field with frequency <span class="math notranslate nohighlight">\(\omega_n\)</span>.  But now we’re using the subscripts for cartesion directions!  So we have to find a different way to specify a frequency.   It is common to put the frequency dependence in parenthesis in such a way that it denotes the nonlinear process being considered.  As an example, consider sum frequency generation, in which 3 frequencies <span class="math notranslate nohighlight">\(\omega_3 = \omega_1 + \omega_2\)</span> participate.  We write the nonlinear polarization in the <span class="math notranslate nohighlight">\(i\)</span> direction at frequency <span class="math notranslate nohighlight">\(\omega_3\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P_i(\omega_3) = \epsilon_0\sum_p\sum_{jk}\chi_{ijk}^{(2)}(\omega_3; \omega_1, \omega_2)E_j(\omega_1)E_k(\omega_2)
+\end{align}
+\]</div>
+<p>Two new features appear in this representation that we havenen’t seen before.  The first is the way we’ve included the frequency dependence of the susceptibility.  <span class="math notranslate nohighlight">\(\chi_{ijk}^{(2)}(\omega_3; \omega_1, \omega_2)\)</span> should be read as “The second order suceptibility leading to a polarization at <span class="math notranslate nohighlight">\(\omega_3\)</span> in which the field pointing in direction <span class="math notranslate nohighlight">\(E_j\)</span> has frequency <span class="math notranslate nohighlight">\(\omega_1\)</span> and the field poionting in direction <span class="math notranslate nohighlight">\(E_k\)</span> has frequency <span class="math notranslate nohighlight">\(\omega_2\)</span>”.  The second new feature is the sum over <span class="math notranslate nohighlight">\(p\)</span>, which accounts for all possible permuations of <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_3\)</span>.  This is necessary to account for all the possible photon pathways in an energy level diagram involving the same frequencies.  Since for sum frequency generation, the two possible pathways contribute equally to the polarization, we may simply multiply the polarization by a factor of two and drop the summation over <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P_i(\omega_3) = 2\epsilon_0\sum_{jk}\chi_{ijk}^{(2)}(\omega_3; \omega_1, \omega_2)E_j(\omega_1)E_k(\omega_2)
+\end{align}
+\]</div>
+<p>In doing this we have assume <em>intrinisic permutation symmetry</em>, and the factor of two reminds us of the number of disctinct pathways in the resulting polarization.</p>
+<p>Let’s practice writing down the polarization this way for second harmonic generation and optical rectification:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P_i(2\omega) = \epsilon_0\sum_{jk}\chi_{ijk}^{(2)}(2\omega; \omega, \omega)E_j(\omega)E_k(\omega) &amp;&amp; \text{SHG} \\
+P_i(0) = \epsilon_0\sum_{jk}\chi_{ijk}^{(2)}(0; \omega, -\omega)E_j(\omega)E_k^*(\omega) &amp;&amp; \text{OR}
+\end{align}
+\end{split}\]</div>
+<p>In a lossless medium, we can invoke another powerful symmetry argument, <em>full permutation symmetry</em>.  As we learned in previous notebooks, the coupled wave equations must conserve energy. For sum frequency generation, this implies that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\chi_{xyz}^{(2)}(\omega_3; \omega_1, \omega_2) = \chi_{yxz}^{(2)}(\omega_1; \omega_3, -\omega_2) = \chi_{zxy}^{(2)}(\omega_2; \omega_3, -\omega_1)
+\end{align}
+\]</div>
+<p>In general, the rule is that you can interchange any of the cartesian indices so long as you simultaneously exchange the corresponding frequency indices.  When the response of the medium is independent of the frequency (i.e. no dispersion), we can interchange the cartesian indices while leaving the frequency indices the same.  This is known as <em>Kleinman symmetry</em>.</p>
+<section id="some-notation">
+<h2><span class="section-number">8.1. </span>Some notation<a class="headerlink" href="#some-notation" title="Permalink to this headline">#</a></h2>
+<p>We can use these symmetry principles to simplify our notation.  We have seen that the second order susceptibility tensor <span class="math notranslate nohighlight">\(\chi_{ijk}^{(2)}\)</span>is in general a 27 element tensor, since <span class="math notranslate nohighlight">\(i,j\)</span> and <span class="math notranslate nohighlight">\(k\)</span> can each have one of three cartesian coordinates.  It is very common to write the full tensor in contracted notation by making use of the symmetry arguments above.  This is the same notation used to describe piezoelectric materials and was common before nonlinear optics became a distinct discipline.  The idea is that we really only have six ways the two fields <span class="math notranslate nohighlight">\(E_j\)</span> and <span class="math notranslate nohighlight">\(E_k\)</span> can combine in a second order process.  For example, for sum frequency generation we can write:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\begin{bmatrix}
+  E_x(\omega_1) E_x(\omega_2) \\
+  E_y(\omega_1) E_y(\omega_2) \\
+  E_z(\omega_1) E_z(\omega_2) \\
+  E_y(\omega_1)E_z(\omega_2) + E_z(\omega_1)E_y(\omega_2)\\
+  E_x(\omega_1)E_z(\omega_2) + E_z(\omega_1)E_x(\omega_2)\\
+  E_x(\omega_1)E_y(\omega_2) + E_y(\omega_1)E_x(\omega_2)\\
+\end{bmatrix}
+\end{align}
+\end{split}\]</div>
+<p>Where each <span class="math notranslate nohighlight">\((jk)\)</span> combination now gets a single index 1-6 and we have used kleinmaan symmetry</p>
+<p>The first three terms 1-3 are cases with two photons with the same polarization, and the next three terms 4-6 are cases of two photons with opposite polarization.   The resulting material polarization can point in any one of three directions, and must include a contribution from each of these possible six combinations of <span class="math notranslate nohighlight">\(E_jE_k\)</span>.  We therefore need a <span class="math notranslate nohighlight">\(3\times6=18\)</span> element matrix to keep track of all the contributions.  We call each element in this matrix <span class="math notranslate nohighlight">\(d_{il}\)</span> = <span class="math notranslate nohighlight">\(\chi^{(2)}_{i(jk)}/2\)</span> and write down the polarization for sum frequency generation as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\begin{bmatrix}
+  P_x(\omega_3) \\
+  P_y(\omega_3)\\
+  P_z(\omega_3) \\
+\end{bmatrix} = 2\epsilon_0
+\begin{bmatrix}
+d_{11} &amp; d_{12} &amp; d_{13}  &amp; d_{14} &amp; d_{15} &amp; d_{16}\\
+d_{21} &amp; d_{22} &amp; d_{23}  &amp; d_{24} &amp; d_{25} &amp; d_{26} \\
+d_{31} &amp; d_{32} &amp; d_{33}  &amp; d_{34} &amp; d_{35} &amp; d_{36}
+\end{bmatrix}
+\begin{bmatrix}
+  E_x(\omega_1) E_x(\omega_2) \\
+  E_y(\omega_1) E_y(\omega_2) \\
+  E_z(\omega_1) E_z(\omega_2) \\
+  E_y(\omega_1)E_z(\omega_2) + E_z(\omega_1)E_y(\omega_2)\\
+  E_x(\omega_1)E_z(\omega_2) + E_z(\omega_1)E_x(\omega_2)\\
+  E_x(\omega_1)E_y(\omega_2) + E_y(\omega_1)E_x(\omega_2)\\
+\end{bmatrix}
+\end{align}
+\end{split}\]</div>
+<p>When you look up the nonlinear susceptibility of a material, it will most often be given in this contracted notation.</p>
+</section>
+<section id="example-1-second-harmonic-generation-in-kdp">
+<h2><span class="section-number">8.2. </span>Example 1: Second Harmonic Generation in KDP<a class="headerlink" href="#example-1-second-harmonic-generation-in-kdp" title="Permalink to this headline">#</a></h2>
+<p>Let’s now take another look at second harmonic generation using this new notation that can take into account all of the crystal symmetries and different optical polarizations. The first process we will consider is second harmonic generation in a crystal known as KDP (Potassium Dihydrogen Phosphate).  We can look up <a class="reference external" href="http://www.crystallography.net/cod/7020842.html">KDP on the Crystallography Open Database</a> and import it into the Crystal package in python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">crystals</span> <span class="kn">import</span> <span class="n">Crystal</span>
+<span class="n">kdp</span> <span class="o">=</span> <span class="n">Crystal</span><span class="o">.</span><span class="n">from_cod</span><span class="p">(</span><span class="mi">9007582</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kdp</span><span class="o">.</span><span class="n">symmetry</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kdp</span><span class="o">.</span><span class="n">lattice_system</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;international_symbol&#39;: &#39;P2_12_12_1&#39;, &#39;hall_symbol&#39;: &#39;P 2ac 2ab&#39;, &#39;hm_symbol&#39;: &#39;P212121&#39;, &#39;centering&#39;: &lt;CenteringType.primitive: &#39;P&#39;&gt;, &#39;international_number&#39;: 19, &#39;hall_number&#39;: 115, &#39;international_full&#39;: &#39;P 2_1 2_1 2_1&#39;, &#39;pointgroup&#39;: &#39;222&#39;}
+LatticeSystem.tetragonal
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that KPD has a tetragonal lattice, meaning that it is a uniaxial crystal.  Let’s first consider the case in which two ordinary waves combine at frequency <span class="math notranslate nohighlight">\(\omega\)</span> to produce an extraordinary wave at frequency <span class="math notranslate nohighlight">\(2\omega\)</span>, described by the shorthand <span class="math notranslate nohighlight">\(o+o \rightarrow e\)</span>.  In order to phase match this process, we need to orient the crystal at an angle <span class="math notranslate nohighlight">\(\theta\)</span> away from the <span class="math notranslate nohighlight">\(z\)</span> axis such that the ordinary refractive index <span class="math notranslate nohighlight">\(n_x = n_y =n_o\)</span> at frequency <span class="math notranslate nohighlight">\(\omega\)</span> is the same as the the refractive index of the extraordinary wave <span class="math notranslate nohighlight">\(\tilde{n}_e(\theta)\)</span> at <span class="math notranslate nohighlight">\(2\omega\)</span>.  KDP is a negative uniaxial crystal, so the value <span class="math notranslate nohighlight">\(\tilde{n}_e(90) = n_e\)</span> is a minimum and increases according to the index ellipsoid</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+{n}_0(\omega) = \tilde{n}_e(2\omega) = \left[\frac{\cos^2\theta}{n_0^2(2\omega)}  + \frac{\sin^2\theta}{n_e^2(2\omega)} \right]^{-1/2}
+\end{align}
+\]</div>
+<p>For a fundamental wavelength of 1064 nm (a very common laser frequency) <span class="math notranslate nohighlight">\(n_0(\omega)= 1.4938\)</span> and <span class="math notranslate nohighlight">\(n_e(\omega)= 1.4705\)</span>.  At the doubled frequency <span class="math notranslate nohighlight">\(n_0(2\omega) = 1.5124 \)</span> and  <span class="math notranslate nohighlight">\(n_e(2\omega) = 1.4705\)</span>.  Inserting these values into the index ellipsoid gives <span class="math notranslate nohighlight">\(\theta = 41.21^{\circ}\)</span>.</p>
+<p>But which value of <span class="math notranslate nohighlight">\(d_{il}\)</span> do we use?  Looking at tables, we see that <span class="math notranslate nohighlight">\(d_{14}, d_{25}\)</span> and <span class="math notranslate nohighlight">\(d_{36}\)</span> are all nonzero.  Since the fundamental wave is <em>ordinary</em>, it is polarized in the <span class="math notranslate nohighlight">\(x-y\)</span> plane, thus mixing <span class="math notranslate nohighlight">\(E_x\)</span> and <span class="math notranslate nohighlight">\(E_y\)</span> to produce a polarization (and hence a field) in some direction <span class="math notranslate nohighlight">\(i\)</span>.  <span class="math notranslate nohighlight">\(d_{14}\)</span> produces a polarization in the <span class="math notranslate nohighlight">\(x\)</span> direction by mixing fields in the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> directions, so that’s no good.  <span class="math notranslate nohighlight">\(d_{25}\)</span> produces a polarization in the <span class="math notranslate nohighlight">\(y\)</span> direction by mixing fields in the <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(x\)</span> direction, also no good.  <span class="math notranslate nohighlight">\(d_{36}\)</span> produces a polarization in the <span class="math notranslate nohighlight">\(z\)</span> direction by mixing fields in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions.  This is good, since our ordinary waves are in the <span class="math notranslate nohighlight">\(x-y\)</span> plane.  But wait a minute…we want this process to <em>produce</em> a wave along the <span class="math notranslate nohighlight">\(e\)</span> direction, which is <em>not</em> on the <span class="math notranslate nohighlight">\(z\)</span> axis. Well, since we are orienting the <span class="math notranslate nohighlight">\(z\)</span>-axis of the crystal at an angle <span class="math notranslate nohighlight">\(\theta\)</span> with respect to the propagation direction, the polarization produced in <span class="math notranslate nohighlight">\(z\)</span> will have some component along the extraordinary axis:  <span class="math notranslate nohighlight">\(P_e = P_z \sin \theta\)</span>.  It is this component that will produce a wave polarized orthogonal to the propagation direction.  But what about all the fields produced that are not transverse to the propogation direction?  It turns out these fields do not constructively interfere with the fields produced by neighboring atoms, so are not phase matched.</p>
+<p>Let’s call <span class="math notranslate nohighlight">\(\phi\)</span> the angle in the <span class="math notranslate nohighlight">\(x-y\)</span> plane away from the <span class="math notranslate nohighlight">\(x\)</span> axis.  Now <span class="math notranslate nohighlight">\(E_x = E_0\sin(\phi)\)</span> and <span class="math notranslate nohighlight">\(E_y = E_0\cos(\phi)\)</span>.  Mixing these two waves gives us a polarization along the <span class="math notranslate nohighlight">\(z\)</span> axis of <span class="math notranslate nohighlight">\(P_z(2\omega)\sin\theta\)</span>.  So we will obtain a nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(2\omega\)</span> equal to</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P_e(2\omega) = 2\epsilon_0 d_{36} E_0^2 \sin\theta\sin\phi\cos\phi
+\end{align}
+\]</div>
+<p>To maximize the polarization, we must set <span class="math notranslate nohighlight">\(\phi = 45^{\circ}\)</span>.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">8.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Solve for amount of second harmonic generation for type I phase matching using the parameters outlined above in the notebook. (e.g. plug this nonlinear polarization into the ode from previous notebooks).  Plot your results, and animat as a function of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(\phi\)</span>, and <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
+<li><p>Re-calculate the nonlinear polarization for SHG using an ordinaray <em>and</em> extraordinary fundamental wave to produce an extraordinary second harmonic.  (This is called Type-II phase matching).  Make plots again.</p></li>
+</ol>
+</section>
+<section id="hints-about-deriving-the-coupled-wave-equation-for-exercise-1">
+<h2><span class="section-number">8.4. </span>Hints about deriving the coupled wave equation for Exercise 1:<a class="headerlink" href="#hints-about-deriving-the-coupled-wave-equation-for-exercise-1" title="Permalink to this headline">#</a></h2>
+<p>You will need to find the nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(2\omega\)</span> along the ordinary and extraordinary axis.  Here’s some notes on how to do that.</p>
+<p>To produce the second harmonic frequency, we have combined two waves <span class="math notranslate nohighlight">\(E_x(\omega)\)</span> and <span class="math notranslate nohighlight">\(E_y(\omega)\)</span> to produce another electric field <span class="math notranslate nohighlight">\(E_e(2\omega)\)</span>. Importantly, <span class="math notranslate nohighlight">\(E_x\)</span> and <span class="math notranslate nohighlight">\(E_y\)</span> are just projections of a single wave <span class="math notranslate nohighlight">\(E_o\)</span> with a polarization in the <span class="math notranslate nohighlight">\(x-y\)</span> plane.</p>
+<p>Note that the second harmonic wave <span class="math notranslate nohighlight">\(E_e\)</span> is perpindicular to <span class="math notranslate nohighlight">\(E_o\)</span>, but is not polarized in the <span class="math notranslate nohighlight">\(x-y\)</span> plane!  Neither is it polarized in <span class="math notranslate nohighlight">\(z\)</span>!  Instead it is polarized in a direction perpindicular to <span class="math notranslate nohighlight">\(E_o\)</span> <em>and the direction of propagation</em>, which is at some angle <span class="math notranslate nohighlight">\(\theta\)</span> relative to the <span class="math notranslate nohighlight">\(z\)</span> axis.  Here’s a diagram:</p>
+<p><img alt="phase_matching_geometry.png" src="pages/attachment:phase_matching_geometry.png" /></p>
+<p>See if you can verify the following by looking at the diagram:</p>
+<ol class="simple">
+<li><p>The ordinary electric field <span class="math notranslate nohighlight">\(E_o\)</span> is in the <span class="math notranslate nohighlight">\(x-y\)</span> crystal plane.</p></li>
+<li><p>The extra-ordinary electric field <span class="math notranslate nohighlight">\(E_e\)</span> is perpindicular to <span class="math notranslate nohighlight">\(E_o\)</span>, but is <em>not</em> in the <span class="math notranslate nohighlight">\(x-y\)</span> plane. It is rotated at an angle <span class="math notranslate nohighlight">\(\theta\)</span> relative to the <span class="math notranslate nohighlight">\(x-y\)</span> plane so that it is also perpindicular to <span class="math notranslate nohighlight">\(k_1\)</span>, the propogation direction.</p></li>
+<li><p>We can write down the <span class="math notranslate nohighlight">\(xyz\)</span> projections for all the fields:
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+E_{ox} &amp;= E_o\sin \phi \nonumber \\
+E_{oy} &amp;= E_o\cos \phi \nonumber \\
+E_{oz} &amp;= 0 \nonumber \\
+E_{ex} &amp;= E_e\cos \phi \cos\theta \nonumber \\
+E_{ey} &amp;= E_e\sin \phi \cos\theta \nonumber \\
+E_{ez} &amp;= E_e \sin \theta \nonumber \\
+\end{align}
+\)</span>$</p></li>
+<li><p>We can write down the relevant material polarizations for the nonlinear ode as follows:</p></li>
+</ol>
+<p>a. The polarization in the same direction as <span class="math notranslate nohighlight">\(E_e\)</span> oscillating at <span class="math notranslate nohighlight">\(2\omega\)</span>:
+$<span class="math notranslate nohighlight">\(
+   \begin{align}
+   P_e(2\omega) = P_z(2\omega)\sin \theta =  2\epsilon_0 d_{36}E_{ox}E_{oy}\sin \theta = 2\epsilon_0 d_{36}E_0^2 \sin \phi \cos \phi \sin \theta
+   \end{align}
+   \)</span>$</p>
+<p>b. The polarization oscillating in the same direction as <span class="math notranslate nohighlight">\(E_o\)</span> at <span class="math notranslate nohighlight">\(\omega\)</span>.  Let’s write this one out explicitly to get some practice.  Because of full permutation symmetry, the nonlinear coefficient <span class="math notranslate nohighlight">\(2d_{36} = \chi^{(2)}_{zxy}(2\omega, \omega, \omega)\)</span> will remain unchanged if we permute the cartesian indices along with their associated frequency arguments.  This means that
+$<span class="math notranslate nohighlight">\(
+   \begin{align}
+   \chi^{(2)}_{zxy}(2\omega; \omega, \omega) = \chi^{(2)}_{xzy}(\omega; 2\omega, \omega) = \chi^{(2)}_{yxz}(\omega; \omega, 2\omega)
+   \end{align}
+   \)</span>$</p>
+<p>This is convenient, since the polarization we need is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{align}
+   P_o(\omega) &amp;= P_x(\omega)\sin \phi + P_y(\omega)\cos \phi \nonumber \\
+               &amp;= \epsilon_0 \left[\chi^{(2)}_{xzy}(\omega; 2\omega, \omega)E_z(2\omega)E_y^*(\omega)\sin \phi + \chi^{(2)}_{yzx}(\omega; 2\omega, \omega)E_z(2\omega)E_x^*(\omega)\cos \phi\right] \nonumber \\
+               &amp;= 2\epsilon_0 d_{36} \left[E_z(2\omega)E_y^*(\omega)\sin \phi + E_z(2\omega)E_x^*(\omega)\cos \phi\right] \nonumber \\
+               &amp;= 4\epsilon_0 d_{36} E_e  E_o^*\cos \phi\sin \phi \sin \theta
+   \end{align}
+   \end{split}\]</div>
+<p>Note that the <em>effective</em> susceptibility <span class="math notranslate nohighlight">\(d_{eff} = d_{36} \cos \phi\sin \phi \sin \theta \)</span> appears in both polarizations.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pages"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="7.%20Crystal%20Symmetry.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Crystal Symmetry</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="9.%20Third%20Order%20Nonlinear%20Polarization.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Third-order nonlinear polarization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr. Ryan Camacho<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

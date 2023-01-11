@@ -1,0 +1,1052 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Overview of Nonlinear Processes &#8212; Nonlinear Optics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Coupled Wave Equations" href="4.%20Coupled%20Wave%20Equations.html" />
+    <link rel="prev" title="2. The Nonlinear Susceptibility" href="2.%20The%20Nonlinear%20Susceptibility.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Nonlinear Optics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Nonlinear Optics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Course Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../schedule.html">
+   Schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../computer.html">
+   Computer Configuration
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.%20Atomic%20Polarizability.html">
+   1. Atoms in external electric fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.%20The%20Nonlinear%20Susceptibility.html">
+   2. The Nonlinear Susceptibility
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Overview of Nonlinear Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4.%20Coupled%20Wave%20Equations.html">
+   4. Coupled Wave Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5.%20Three-Wave%20Mixing.html">
+   5. Three-Wave Mixing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6.%20Focused%20Beams.html">
+   6. Focused Beams
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.%20Crystal%20Symmetry.html">
+   7. Crystal Symmetry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="8.%20Nonlinear%20Optics%20in%20Crystals.html">
+   8. Nonlinear Optics in Crystals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="9.%20Third%20Order%20Nonlinear%20Polarization.html">
+   9. Third-order nonlinear polarization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10.%20Raman%20Scattering.html">
+   10. Introduction to Raman Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11.%20Optoacoustic%20Effects.html">
+   11. Optoacoustic Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12.%20Stimulated%20Brillouin%20Scattering.html">
+   12. Stimulated Brillouin Scattering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13.%20Optical%20Phase%20Conjugation.html">
+   13. Optical Phase Conjugation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14.%20Phase%20and%20Group%20Velocities.html">
+   14. Phase and Group Velocities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15.%20Dispersion%20in%20Optical%20Pulses.html">
+   15. Dispersion in Optical Pulses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16.%20Nonlinear%20Differential%20Equations%20for%20Pulsed%20Light.html">
+   16. Nonlinear Differential Equations For Pulsed Light
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17.%20Combining%20Dispersion%20and%20Nonlinearity%20in%20Optical%20Pulse%20Propagation.html">
+   17. Combining Dispersion and Nonlinearity in Optical Pulse Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18.%20The%20Quantum%20Mechanical%20Wave%20Function.html">
+   18. The Quantum Mechanical Wave Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19.%20The%20Density%20Matrix.html">
+   19. The Density Matrix
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20.%20First%20Order%20Perturbation%20Theory.html">
+   20. First Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21.%20Second%20Order%20Perturbation%20Theory.html">
+   21. Second Order Perturbation Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22.%20Electromagnetically%20Induced%20Transparency.html">
+   22. Electromagnetically Induced Transparency
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/BYUCamachoLab/nonlinear-optics/main?urlpath=tree/book/pages/3. Overview of Nonlinear Processes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/BYUCamachoLab/nonlinear-optics/blob/main/book/pages/3. Overview of Nonlinear Processes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/BYUCamachoLab/nonlinear-optics/issues/new?title=Issue%20on%20page%20%2Fpages/3. Overview of Nonlinear Processes.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/pages/3. Overview of Nonlinear Processes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-harmonic-generation">
+   3.1. Second Harmonic Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sum-and-difference-frequency-generation">
+   3.2. Sum and Difference Frequency Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   3.3. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optical-parametric-oscillation">
+   3.4. Optical Parametric Oscillation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#third-harmonic-generation">
+   3.5. Third Harmonic Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   3.6. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intensity-dependent-refractive-index">
+   3.7. Intensity-dependent Refractive Index
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#excercises">
+   3.8. Excercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parametric-vs-nonparametric-processes">
+   3.9. Parametric vs. Nonparametric Processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saturable-absorption">
+   3.10. Saturable Absorption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-photon-absorption">
+   3.11. Two-photon Absorption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.12. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Overview of Nonlinear Processes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-harmonic-generation">
+   3.1. Second Harmonic Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sum-and-difference-frequency-generation">
+   3.2. Sum and Difference Frequency Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   3.3. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optical-parametric-oscillation">
+   3.4. Optical Parametric Oscillation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#third-harmonic-generation">
+   3.5. Third Harmonic Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   3.6. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intensity-dependent-refractive-index">
+   3.7. Intensity-dependent Refractive Index
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#excercises">
+   3.8. Excercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parametric-vs-nonparametric-processes">
+   3.9. Parametric vs. Nonparametric Processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saturable-absorption">
+   3.10. Saturable Absorption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-photon-absorption">
+   3.11. Two-photon Absorption
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.12. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-nonlinear-processes">
+<h1><span class="section-number">3. </span>Overview of Nonlinear Processes<a class="headerlink" href="#overview-of-nonlinear-processes" title="Permalink to this headline">#</a></h1>
+<p>Name:</p>
+<p>Total Points: –/100 pts</p>
+<p>Extra Credit: –/40 pts</p>
+<section id="second-harmonic-generation">
+<h2><span class="section-number">3.1. </span>Second Harmonic Generation<a class="headerlink" href="#second-harmonic-generation" title="Permalink to this headline">#</a></h2>
+<p>We’ve already seen second harmonic generation in our introductory example to nonlinear suceptibility in the last notebook.  We saw that when a quadratic term is added to the restoring force of a simple harmonic oscillator, oscillations appear at <span class="math notranslate nohighlight">\(2\omega_0\)</span> in addition to the natural oscillation frequency <span class="math notranslate nohighlight">\(\omega_0\)</span>.  Furthermore, if the mass is <em>driven</em> by an external force at frequency <span class="math notranslate nohighlight">\(\omega\)</span>, the mass will oscillate at both <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(2\omega\)</span>.  These oscillations in turn produce electric fields, thus <em>generating</em> light at the doubled frequency.</p>
+<p>Mathematically, we summarize this process as follows.  The external driving force is usually a laser, whose electric field is represented as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\tilde{E}(t) = Ee^{-j\omega t} + Ee^{j\omega t}
+\end{align}
+\]</div>
+<p>Here we’ve followed the convention of Boyd, and indicated all rapidly varying quantitites with a tilde.  We substitute this field into the equation for the nonlinear polarization and obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P(t) &amp; = \epsilon_0 \left[ \chi^{(1)} \tilde{E}(t) + \chi^{(2)} \tilde{E}^2(t) + \dots \right]  \\
+     &amp;=  \epsilon_0 \left[ \chi^{(1)} \left( Ee^{-j\omega t} +  E^*e^{j\omega t}\right) + \chi^{(2)} \left(E^2e^{-j2\omega t} + 2|E|^2 + E^{*2}e^{-j2\omega t} \right)  + \dots \right] 
+\end{align}
+\end{split}\]</div>
+<p>We may isolate the nonlinear polarization oscillating at <span class="math notranslate nohighlight">\(2\omega\)</span> and write it as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\tilde{P}^{(2)}(t) = \epsilon_0 \chi^{(2)} \left(E^2e^{-j2\omega t} + c.c \right)
+\end{align}
+\]</div>
+<p>Notice there is also a non-oscillating polarization created of magnitude <span class="math notranslate nohighlight">\(2 \epsilon_0 \chi^{(2)}|E|^2 \)</span>.  This is known as optical rectification.</p>
+<p>We can start to think of a quantum mechanical description of second harmonic generation by considering the external laser as a flux of photons with frequency <span class="math notranslate nohighlight">\(\omega\)</span> incident on the atoms.  The frequency doubling process produces new photons at frequency <span class="math notranslate nohighlight">\(2\omega\)</span>.  Since the energy of a photon is proportional to its frequency (thank you Max Planck!), each photon generated at <span class="math notranslate nohighlight">\(2\omega\)</span> must result in the destruction of a single photon at <span class="math notranslate nohighlight">\(\omega\)</span>.  This process is often represnted graphically an energy diagram:</p>
+<div>
+<img src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/second_harmonic_generation.png?raw=true" width="200px"/>
+</div>
+<p>The horizontal lines represent the new potential energy of the electron when it absorbs or emits photons.  Solid horizontal lines represent allowed quantum states, and dashed lines represent “virtual” states that are very short-lived.</p>
+<p>Interesting side note: You can also do the reverse of this process, and send in a single photon at <span class="math notranslate nohighlight">\(2\omega\)</span> and generate two “daughter” photons at <span class="math notranslate nohighlight">\(\omega\)</span>.  This process is called parametric downconversion, and is the most common way to generate entangled photons.  But more on that later…</p>
+</section>
+<section id="sum-and-difference-frequency-generation">
+<h2><span class="section-number">3.2. </span>Sum and Difference Frequency Generation<a class="headerlink" href="#sum-and-difference-frequency-generation" title="Permalink to this headline">#</a></h2>
+<p>We’ll start with the diagram this time and then do the math.</p>
+<div>
+<img src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/sum_frequency_generation.png?raw=true" width="200px"/>
+</div>
+<p>This is just a slight modification of second harmonic generation.  The external laser now has photons at two frequencies, <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_2\)</span>.  The second order nonlinearity allows them to combine and generate photons at frequency <span class="math notranslate nohighlight">\(\omega_1 + \omega_2\)</span>.  Here’s the math:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\tilde{E}(t) = E_1e^{-j\omega_1 t} + E_2e^{-j\omega_2 t} + c.c
+\end{align}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\tilde{P}^{(2)}(t)  = &amp; \epsilon_0 \chi^{(2)}\left[  E_1^2e^{-j2\omega_1 t} + E_2^2e^{-j2\omega_2 t} + 2E_1E_2e^{-j(\omega_1 + \omega_2) t} + 2E_1E_2^*e^{-j(\omega_1 - \omega_2) t} + c.c. \right]\\
+&amp; + 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right]
+\end{align}
+\end{split}\]</div>
+<p>There are several terms here.  Let’s break it down by the frequency of the resulting polarization.  In other words, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\tilde{P}^{(2)}(t)  = \sum_n P(\omega_n)e^{j\omega_n t}
+\end{align}
+\]</div>
+<p>and let <span class="math notranslate nohighlight">\(\omega_n\)</span> include positive and negative frequencies.  The sum frequency generation term in the diagram above is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+P(\omega_1 + \omega_2)E^{-j(\omega_1+\omega_2)} = \epsilon_0 \chi^{(2)}2E_1E_2E^{-j(\omega_1+\omega_2)} + c.c. &amp;&amp; \text{SFG}
+\end{align}
+\]</div>
+<p>We can write down all the terms this way:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P(2\omega_1) = \epsilon_0 \chi^{(2)}E_1^2 &amp;&amp; \text{SHG}  \\
+P(2\omega_2) = \epsilon_0 \chi^{(2)}E_2^2 &amp;&amp; \text{SHG}  \\
+P(\omega_1 + \omega_2) = \epsilon_0 \chi^{(2)}2E_1E_2 &amp;&amp; \text{SFG}  \\
+P(\omega_1 - \omega_2) = \epsilon_0 \chi^{(2)}2E_1E^*_2 &amp;&amp; \text{DFG}  \\
+P(0) = 2\epsilon_0 \chi^{(2)}\left[ |E_1|^2 + |E_2|^2\right] &amp;&amp; \text{OR}
+\end{align}
+\end{split}\]</div>
+<p>Each process will have an associated energy level diagram:</p>
+<div>
+<img src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/second_order_processes.png?raw=true" width="800px"/>
+</div>
+<p>A couple of things are worth noting:</p>
+<ol class="simple">
+<li><p>All these processes occur simultaneously.  If you input two strong fields <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span> into a nonlinear medium you can expect to get all these effects unless something selectively promotes one over the other (more on this later).</p></li>
+<li><p>The difference frequency process is qualitatively different than the others.  The photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> is absorbed, but the photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> appears to be generated.  How is that possible?  Well, the diagram is actually depicting a <em>new</em> photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> that is being stimulated by an input photon at <span class="math notranslate nohighlight">\(\omega_2\)</span>.  So the the input photons at <span class="math notranslate nohighlight">\(\omega_2\)</span> are causing stimulated emission of other <span class="math notranslate nohighlight">\(\omega_2\)</span>, and thereby generating new photons at <span class="math notranslate nohighlight">\(\omega_3 = \omega_1 - \omega_2\)</span> and then amplifyinig them.  For this reason, DFG is often called optical parametric amplification.</p></li>
+<li><p>All of these processes conserve energy.  The electron starts and ends in the ground state in each case.  This is the definition of the word <em>parametric</em>.  We’ll later contrast this with non-parametric processes in which optical absorption and loss occur.</p></li>
+<li><p>Notice that some of the <span class="math notranslate nohighlight">\(P(\omega_1+\omega_2)\)</span> and <span class="math notranslate nohighlight">\(P(\omega_1-\omega_2)\)</span> terms have factors of <span class="math notranslate nohighlight">\(2\)</span>.  We got this straight from the math, but it also turns out to have a physical significance!  There are two degenerate ways each of these processes can happen.  For example, in the case of SFG either (1) A photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> can be absorbed first, then a photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> or (2) A photon at <span class="math notranslate nohighlight">\(\omega_2\)</span> can be absorbed first, then a photon at <span class="math notranslate nohighlight">\(\omega_1\)</span>.  The same upper state would be reached in both cases, but different virtual states would be used along the way. We could add two more diagrams to our figure for explicit completeness, one for each additional path with it’s own virtual state, but most books assume it is implied.  Anyways, since there are 2 paths for the electron to traverse the energy levels, the effect is twice as strong.  Crazy physics thought:  Notice in the case of difference frequency generation that the second path implies that we have stimulated emission of a photon (from the ground state!) at <span class="math notranslate nohighlight">\(\omega_2\)</span> <em>before</em> a photon at <span class="math notranslate nohighlight">\(\omega_1\)</span> is absorbed.</p></li>
+</ol>
+<p>Python can help us keep track of all these possibilities using the symbolic algebra package sympy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### UNCOMMENT AND RUN THIS CELL IF USING GOOGLE COLAB</span>
+<span class="c1"># !pip install ipympl -q</span>
+<span class="c1"># from google.colab import output</span>
+<span class="c1"># output.enable_custom_widget_manager()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1">#import sympy</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">ipw</span>
+<span class="o">%</span><span class="k">matplotlib</span> widget
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1">#import sympy</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">ipw</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;widget&#39;</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2369,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2367</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2368</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2369</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2370</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99,</span> in <span class="ni">PylabMagics.matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>     <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3537,</span> in <span class="ni">InteractiveShell.enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3533</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: Cannot change to a different GUI toolkit: </span><span class="si">%s</span><span class="s1">.&#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3534</span>                 <span class="s1">&#39; Using </span><span class="si">%s</span><span class="s1"> instead.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gui</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">3535</span>         <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">find_gui_and_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pylab_gui_select</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3537</span> <span class="n">pt</span><span class="o">.</span><span class="n">activate_matplotlib</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3538</span> <span class="n">configure_inline_support</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3540</span> <span class="c1"># Now we must activate the gui pylab wants to use, and fix %run to take</span>
+<span class="g g-Whitespace">   </span><span class="mi">3541</span> <span class="c1"># plot updates into account</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/pylabtools.py:360,</span> in <span class="ni">activate_matplotlib</span><span class="nt">(backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span> <span class="c1"># Due to circular imports, pyplot may be only partially initialised</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span> <span class="c1"># when this function runs.</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span> <span class="c1"># So avoid needing matplotlib attribute-lookup to access pyplot.</span>
+<span class="g g-Whitespace">    </span><span class="mi">358</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="ne">--&gt; </span><span class="mi">360</span> <span class="n">plt</span><span class="o">.</span><span class="n">switch_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="o">.</span><span class="n">_needmain</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span> <span class="c1"># We need to detect at runtime whether show() is called by the user.</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="c1"># For this, we wrap it into a decorator which adds a &#39;called&#39; flag.</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/matplotlib/pyplot.py:277,</span> in <span class="ni">switch_backend</span><span class="nt">(newbackend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> <span class="c1"># Backends are implemented as modules, but &quot;inherit&quot; default method</span>
+<span class="g g-Whitespace">    </span><span class="mi">271</span> <span class="c1"># implementations from backend_bases._Backend.  This is achieved by</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span> <span class="c1"># creating a &quot;class&quot; that inherits from backend_bases._Backend and whose</span>
+<span class="g g-Whitespace">    </span><span class="mi">273</span> <span class="c1"># body is filled with the module&#39;s globals.</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span> <span class="n">backend_name</span> <span class="o">=</span> <span class="n">cbook</span><span class="o">.</span><span class="n">_backend_module_name</span><span class="p">(</span><span class="n">newbackend</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">277</span> <span class="k">class</span> <span class="nc">backend_mod</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">backend_bases</span><span class="o">.</span><span class="n">_Backend</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>     <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)))</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span> <span class="n">required_framework</span> <span class="o">=</span> <span class="n">_get_required_interactive_framework</span><span class="p">(</span><span class="n">backend_mod</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/matplotlib/pyplot.py:278,</span> in <span class="ni">switch_backend.&lt;locals&gt;.backend_mod</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span> <span class="k">class</span> <span class="nc">backend_mod</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">backend_bases</span><span class="o">.</span><span class="n">_Backend</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">278</span>     <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">backend_name</span><span class="p">)))</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/importlib/__init__.py:126,</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>             <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">126</span> <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1050,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:992,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:241,</span> in <span class="ni">_call_with_frames_removed</span><span class="nt">(f, *args, **kwds)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1050,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1004,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipympl&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E1</span><span class="p">,</span> <span class="n">E2</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">chi2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;E1,E2, epsilon_0, chi^(2)&#39;</span><span class="p">)</span> <span class="c1">#create symbols for the input electric fields.  We&#39;ll ignore epsilon_0 and chi for now.</span>
+<span class="n">P2</span> <span class="o">=</span> <span class="p">(</span><span class="n">E1</span><span class="o">+</span> <span class="n">functions</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">E1</span><span class="p">)</span><span class="o">+</span> <span class="n">E2</span><span class="o">+</span><span class="n">functions</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">E2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">eps</span><span class="o">*</span><span class="n">chi2</span><span class="o">*</span><span class="n">P2</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also make energy level diagrams:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">energy_diagram</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="n">de</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">de</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">de</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">width</span> <span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">length_includes_head</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">de</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;$\omega_</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">de</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sum Frequency Generation&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">energy_diagram</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h2><span class="section-number">3.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>(10 pts) How many possible parametric photon pathways are represented in the general 2nd order process described above?  How many of those pathways lead to the generation of a photon <span class="math notranslate nohighlight">\(\omega_3\)</span> with energy <span class="math notranslate nohighlight">\(\geq 0\)</span>?</p></li>
+<li><p>(10 pts) Above is a Python function to generate an energy-level diagram for sum-frequency generation. Create a similar function for difference frequency generation.</p></li>
+<li><p>(20 pts Extra Credit):  Make a program that makes set of all possible energy level diagrams given input P2 above.</p></li>
+</ol>
+</section>
+<section id="optical-parametric-oscillation">
+<h2><span class="section-number">3.4. </span>Optical Parametric Oscillation<a class="headerlink" href="#optical-parametric-oscillation" title="Permalink to this headline">#</a></h2>
+<p>Optical parametric oscillation is a small tweak to difference frequency generation in which we put a nonlinear crystal inside a cavity that is resonant at <span class="math notranslate nohighlight">\(\omega_2\)</span> and/or <span class="math notranslate nohighlight">\(\omega_3\)</span>.  This allows a large field at these frequencies to build up inside the cavity and enhance the stimulate emission at both frequencies.  This makes optical parametric amplification (DFG) much more efficient, and is very common in tunable lasers.  By inputing only <span class="math notranslate nohighlight">\(\omega_1\)</span> and tuning the cavity to be resonant at <span class="math notranslate nohighlight">\(\omega_2\)</span>, any frequency <span class="math notranslate nohighlight">\(\omega_3 = \omega_1-\omega_2\)</span> can be generated, thus making a tunable laser.</p>
+</section>
+<section id="third-harmonic-generation">
+<h2><span class="section-number">3.5. </span>Third Harmonic Generation<a class="headerlink" href="#third-harmonic-generation" title="Permalink to this headline">#</a></h2>
+<p>Third harmonic generation is analogous to second harmonic generation (frequency doubling) except that it involves the absorption of 3 photons instead of 2.  We again consider a laser oscillating at frequency <span class="math notranslate nohighlight">\(\omega\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\tilde{E}(t) = Ee^{-j\omega t} + Ee^{j\omega t}
+\end{align}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">chi3</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;E, epsilon_0, chi^(3), omega, t&#39;</span><span class="p">)</span> <span class="c1">#create symbols for the input electric fields.  We&#39;ll ignore epsilon_0 and chi for now.</span>
+<span class="n">P3</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">+</span> <span class="n">functions</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">))</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">eps</span><span class="o">*</span><span class="n">chi3</span><span class="o">*</span><span class="n">P3</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first term, <span class="math notranslate nohighlight">\(E^3 e^{-j 3\omega t}\)</span> represents 3rd harmonic generation.  Three photons at <span class="math notranslate nohighlight">\(\omega\)</span> are absorbed and a photon at frequency <span class="math notranslate nohighlight">\(3\omega\)</span> is generated.</p>
+</section>
+<section id="id1">
+<h2><span class="section-number">3.6. </span>Exercises<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>(20 pts) Create an energy level diagram for 3rd harmonic generation.</p></li>
+</ol>
+</section>
+<section id="intensity-dependent-refractive-index">
+<h2><span class="section-number">3.7. </span>Intensity-dependent Refractive Index<a class="headerlink" href="#intensity-dependent-refractive-index" title="Permalink to this headline">#</a></h2>
+<p>2nd term in 3rd order polarization, <span class="math notranslate nohighlight">\(3E^2E^*e^{-j\omega t}\)</span>, represents is interesting.  It represents a component of the polarization that is oscillating at the same frequency as the input laser.  It therefore <em>acts</em> in same manner as the linear susceptibility, which is equivalent to the refractive index (recall <span class="math notranslate nohighlight">\(n^2 = \chi^{(1)}+1\)</span>.  Comparing it to the linear term, however, this term as an extra factor of <span class="math notranslate nohighlight">\(EE^* = |E|^2\)</span>, making it an intensity-dependent refractive index.  The intensity-dependent refractive index is responsible for self-focusing effects in <span class="math notranslate nohighlight">\(\chi^{(3)}\)</span> materials.  The center of a gaussian beam is more intense that its edges, meaning that light there will travel more slowly, just like a lens that is thick in the center.</p>
+</section>
+<section id="excercises">
+<h2><span class="section-number">3.8. </span>Excercises<a class="headerlink" href="#excercises" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>(20 pts) Plot the intensity profile for a gaussian beam in vacuum with a diameter of 10 microns and a peak electric field of 1000 V/m.</p></li>
+<li><p>(20 pts) Plot the intensity-dependent refractive index profile for this same beam traveling through silicon, which has <span class="math notranslate nohighlight">\(\chi^{(3)}\)</span> = <span class="math notranslate nohighlight">\(5\times 10^{-16} \frac{\text{m}^2}{\text{V}^2}\)</span>.  How large does the peak electric field need to be to increase the refractive index by 0.5? (this is about the index contrast between glass and air)</p></li>
+</ol>
+</section>
+<section id="parametric-vs-nonparametric-processes">
+<h2><span class="section-number">3.9. </span>Parametric vs. Nonparametric Processes<a class="headerlink" href="#parametric-vs-nonparametric-processes" title="Permalink to this headline">#</a></h2>
+<p>Parametric processes leave the atoms in the same state they started.  Nonparametric processes do not.</p>
+</section>
+<section id="saturable-absorption">
+<h2><span class="section-number">3.10. </span>Saturable Absorption<a class="headerlink" href="#saturable-absorption" title="Permalink to this headline">#</a></h2>
+<p>As an example of a nonparametric process, let’s take a look at saturable absorption.  Many materials can only absorb so much light, and additional light beyond the threshhold intensity passes through.  This occurs because so many electrons have been excited out of the ground state that there are none left to absorb light. In this case, the material is said to be saturated with light.  Mathematically, we can describe the amount of absorption per unit length, <span class="math notranslate nohighlight">\(\alpha\)</span> as a function of intensity <span class="math notranslate nohighlight">\(I\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\alpha(I) = \frac{\alpha_0}{1 + \frac{I}{I_0}}.
+\end{align}
+\]</div>
+<p>Let’s plot this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">I0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">alpha0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha0</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">I</span><span class="o">/</span><span class="n">I0</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Saturable Absorption&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you place a saturable absorber inside a resonant optical cavity, an interesting effect called optical bistability can occur.  As the laser intensity is increased, the cavity builds up intensity.  This reduces the absorption of the saturable aborber, further increasing the intesity.  However, if the input laser intensity is then slowly lowered, the itensity of light in the cavity remains high, since the saturable absorber tranmits all light.  Eventually, the light intensity becomes low enough that the intensity drops rapidly.  Here is a diagram showing this process qualitatively:</p>
+<div>
+<img src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/saturable_absorption.png?raw=true" width="400px"/>
+</div>
+<p>We’ll come back to this effect in more detail later in the course.</p>
+</section>
+<section id="two-photon-absorption">
+<h2><span class="section-number">3.11. </span>Two-photon Absorption<a class="headerlink" href="#two-photon-absorption" title="Permalink to this headline">#</a></h2>
+<p>As an example of another nonparametric nonlinear process,  let’s look at two-photon absorption.  It’s identical to second harmonic generation with one important difference: the upper state is a real state of the atom instead of a virtual state.  Here’s an energy-level diagram–notice the solid black horizontal lines representing real states:</p>
+<div>
+<img src="https://github.com/BYUCamachoLab/nonlinear-optics/blob/main/book/images/two_photon_absorption.png?raw=true" width="200px"/>
+</div>
+<p>As a result of the real state, the when the atom absorbs the two photons, it does not immediately release the energy in the from of a new photon at energy <span class="math notranslate nohighlight">\(2\omega\)</span>. Rather the electron stays in the excited state for some time.</p>
+<p>Two photon absorption is a second-order nonlinear process.  The fraction of light intensity absorbed depends nonlinearly with the intensity of light.  Qualitatively, we may see how this works by thinking of the absorption process statistically. In order for two-photons to be absorbed, the <em>both</em> need to be in the material at the same time. For very low flux of photons, the likelihood that two photons will interact with the same atom simultaneously is small.  But for higher photon fluxes, this liklihood increases.  In fact, for small photon numbers, it increases quadratically with the number of photons, since the probability of two-photons being present is simply the square of the probabability of one photon being present.  This is another way to think physically (and quantum mechanically!) about how second-order nonlinear processes work.</p>
+<p>Let’s do a simple statistical example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># Number of photons in material in a given time duration</span>
+<span class="c1"># we will define p below as the probability that any individual photon is absorbed</span>
+
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">p0e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="n">N</span>  <span class="c1">#probability that exactly 0 photons are absorbed</span>
+    <span class="n">p1e</span> <span class="o">=</span> <span class="n">N</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#probability that exactly one photon is absorbed</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p0e</span> <span class="o">-</span> <span class="n">p1e</span> <span class="c1">#probability that at least two photons are absorbed</span>
+    <span class="n">line0</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">dummy_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">line0</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dummy_p</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="c1">#ax.plot(N, p2)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Two-photon absorption probability&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of photons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">ipw</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">3.12. </span>Exercises<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>(20 pts) Fit the simple statistical model to a quadratic function for p = 0.0001. It should be a pretty good fit.  At what value of p is RMS the error in the fit &gt; 10%.  Why is the probability of two photon-absorption not quadratic at high absorption cross-sections?</p></li>
+<li><p>(20 pts Extra Credit).  Make a statistical model for 3-photon aborption.  Is it a cubic function like we might expect?</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pages"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2.%20The%20Nonlinear%20Susceptibility.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>The Nonlinear Susceptibility</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4.%20Coupled%20Wave%20Equations.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Coupled Wave Equations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr. Ryan Camacho<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

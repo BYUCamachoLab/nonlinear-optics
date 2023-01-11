@@ -1,0 +1,104 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#Import python packages we'll use
+import numpy as np  #import NumPy package.  Did you know Travis Oliphant, former BYU ECE faculty, wrote NumPy? 
+from scipy.constants import *  #get physical constants like pi and c
+import matplotlib as mpl  #plotting package
+import matplotlib.pyplot as plt
+#mpl.rc('text', usetex = True)
+%matplotlib widget
+#mpl.rcParams['figure.figsize'] = (10,5)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[2], line 7[0m
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      6[0m [38;5;66;03m#mpl.rc('text', usetex = True)[39;00m
+[0;32m----> 7[0m [43mget_ipython[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mrun_line_magic[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mmatplotlib[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mwidget[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m      8[0m [38;5;66;03m#mpl.rcParams['figure.figsize'] = (10,5)[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2369[0m, in [0;36mInteractiveShell.run_line_magic[0;34m(self, magic_name, line, _stack_depth)[0m
+[1;32m   2367[0m     kwargs[[38;5;124m'[39m[38;5;124mlocal_ns[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mget_local_scope(stack_depth)
+[1;32m   2368[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39mbuiltin_trap:
+[0;32m-> 2369[0m     result [38;5;241m=[39m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   2370[0m [38;5;28;01mreturn[39;00m result
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99[0m, in [0;36mPylabMagics.matplotlib[0;34m(self, line)[0m
+[1;32m     97[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mAvailable matplotlib backends: [39m[38;5;132;01m%s[39;00m[38;5;124m"[39m [38;5;241m%[39m backends_list)
+[1;32m     98[0m [38;5;28;01melse[39;00m:
+[0;32m---> 99[0m     gui, backend [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mshell[49m[38;5;241;43m.[39;49m[43menable_matplotlib[49m[43m([49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[38;5;241;43m.[39;49m[43mlower[49m[43m([49m[43m)[49m[43m [49m[38;5;28;43;01mif[39;49;00m[43m [49m[38;5;28;43misinstance[39;49m[43m([49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[43m,[49m[43m [49m[38;5;28;43mstr[39;49m[43m)[49m[43m [49m[38;5;28;43;01melse[39;49;00m[43m [49m[43margs[49m[38;5;241;43m.[39;49m[43mgui[49m[43m)[49m
+[1;32m    100[0m     [38;5;28mself[39m[38;5;241m.[39m_show_matplotlib_backend(args[38;5;241m.[39mgui, backend)
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3537[0m, in [0;36mInteractiveShell.enable_matplotlib[0;34m(self, gui)[0m
+[1;32m   3533[0m         [38;5;28mprint[39m([38;5;124m'[39m[38;5;124mWarning: Cannot change to a different GUI toolkit: [39m[38;5;132;01m%s[39;00m[38;5;124m.[39m[38;5;124m'[39m
+[1;32m   3534[0m                 [38;5;124m'[39m[38;5;124m Using [39m[38;5;132;01m%s[39;00m[38;5;124m instead.[39m[38;5;124m'[39m [38;5;241m%[39m (gui, [38;5;28mself[39m[38;5;241m.[39mpylab_gui_select))
+[1;32m   3535[0m         gui, backend [38;5;241m=[39m pt[38;5;241m.[39mfind_gui_and_backend([38;5;28mself[39m[38;5;241m.[39mpylab_gui_select)
+[0;32m-> 3537[0m [43mpt[49m[38;5;241;43m.[39;49m[43mactivate_matplotlib[49m[43m([49m[43mbackend[49m[43m)[49m
+[1;32m   3538[0m configure_inline_support([38;5;28mself[39m, backend)
+[1;32m   3540[0m [38;5;66;03m# Now we must activate the gui pylab wants to use, and fix %run to take[39;00m
+[1;32m   3541[0m [38;5;66;03m# plot updates into account[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/IPython/core/pylabtools.py:360[0m, in [0;36mactivate_matplotlib[0;34m(backend)[0m
+[1;32m    355[0m [38;5;66;03m# Due to circular imports, pyplot may be only partially initialised[39;00m
+[1;32m    356[0m [38;5;66;03m# when this function runs.[39;00m
+[1;32m    357[0m [38;5;66;03m# So avoid needing matplotlib attribute-lookup to access pyplot.[39;00m
+[1;32m    358[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mimport[39;00m pyplot [38;5;28;01mas[39;00m plt
+[0;32m--> 360[0m [43mplt[49m[38;5;241;43m.[39;49m[43mswitch_backend[49m[43m([49m[43mbackend[49m[43m)[49m
+[1;32m    362[0m plt[38;5;241m.[39mshow[38;5;241m.[39m_needmain [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    363[0m [38;5;66;03m# We need to detect at runtime whether show() is called by the user.[39;00m
+[1;32m    364[0m [38;5;66;03m# For this, we wrap it into a decorator which adds a 'called' flag.[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/matplotlib/pyplot.py:277[0m, in [0;36mswitch_backend[0;34m(newbackend)[0m
+[1;32m    270[0m [38;5;66;03m# Backends are implemented as modules, but "inherit" default method[39;00m
+[1;32m    271[0m [38;5;66;03m# implementations from backend_bases._Backend.  This is achieved by[39;00m
+[1;32m    272[0m [38;5;66;03m# creating a "class" that inherits from backend_bases._Backend and whose[39;00m
+[1;32m    273[0m [38;5;66;03m# body is filled with the module's globals.[39;00m
+[1;32m    275[0m backend_name [38;5;241m=[39m cbook[38;5;241m.[39m_backend_module_name(newbackend)
+[0;32m--> 277[0m [38;5;28;01mclass[39;00m [38;5;21;01mbackend_mod[39;00m(matplotlib[38;5;241m.[39mbackend_bases[38;5;241m.[39m_Backend):
+[1;32m    278[0m     [38;5;28mlocals[39m()[38;5;241m.[39mupdate([38;5;28mvars[39m(importlib[38;5;241m.[39mimport_module(backend_name)))
+[1;32m    280[0m required_framework [38;5;241m=[39m _get_required_interactive_framework(backend_mod)
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/matplotlib/pyplot.py:278[0m, in [0;36mswitch_backend.<locals>.backend_mod[0;34m()[0m
+[1;32m    277[0m [38;5;28;01mclass[39;00m [38;5;21;01mbackend_mod[39;00m(matplotlib[38;5;241m.[39mbackend_bases[38;5;241m.[39m_Backend):
+[0;32m--> 278[0m     [38;5;28mlocals[39m()[38;5;241m.[39mupdate([38;5;28mvars[39m([43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mbackend_name[49m[43m)[49m))
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    124[0m             [38;5;28;01mbreak[39;00m
+[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:992[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:241[0m, in [0;36m_call_with_frames_removed[0;34m(f, *args, **kwds)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1004[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'ipympl'
+ModuleNotFoundError: No module named 'ipympl'
+
