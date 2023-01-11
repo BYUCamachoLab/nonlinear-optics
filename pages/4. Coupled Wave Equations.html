@@ -480,23 +480,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#name">
-   4.1. Name:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#total-points">
-   4.2. Total Points:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#second-harmonic-generation">
-   4.3. Second Harmonic Generation
+   4.1. Second Harmonic Generation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   4.4. Exercises
+   4.2. Exercises
   </a>
  </li>
 </ul>
@@ -519,23 +509,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#name">
-   4.1. Name:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#total-points">
-   4.2. Total Points:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#second-harmonic-generation">
-   4.3. Second Harmonic Generation
+   4.1. Second Harmonic Generation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   4.4. Exercises
+   4.2. Exercises
   </a>
  </li>
 </ul>
@@ -550,11 +530,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="coupled-wave-equations">
 <h1><span class="section-number">4. </span>Coupled Wave Equations<a class="headerlink" href="#coupled-wave-equations" title="Permalink to this headline">#</a></h1>
-<section id="name">
-<h2><span class="section-number">4.1. </span>Name:<a class="headerlink" href="#name" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="total-points">
-<h2><span class="section-number">4.2. </span>Total Points:<a class="headerlink" href="#total-points" title="Permalink to this headline">#</a></h2>
+<p><strong>Name:</strong></p>
+<p><strong>Total Points:</strong> –/100 pts</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### UNCOMMENT AND RUN THIS CELL IF USING GOOGLE COLAB</span>
@@ -687,9 +664,8 @@ k_n &amp;= \frac{\omega_n}{c}n_n
 \end{align}
 \]</div>
 <p>This simple differential equation is the basis for nearly all coupled equations in nonlinear optics.  Note, however that we have ignored any <em>time</em> dependence of the field amplitudes, and rather written them as <span class="math notranslate nohighlight">\(E_n(z)\)</span> and <span class="math notranslate nohighlight">\(P_n(z)\)</span>.  This means we can’t solve nonlinear optics problems with short pulses using this equation.  We’ll tackle that later.</p>
-</section>
 <section id="second-harmonic-generation">
-<h2><span class="section-number">4.3. </span>Second Harmonic Generation<a class="headerlink" href="#second-harmonic-generation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.1. </span>Second Harmonic Generation<a class="headerlink" href="#second-harmonic-generation" title="Permalink to this headline">#</a></h2>
 <p>Let’s use this wave equation to look at second harmonic generation.  Our first job is to find the nonlinear polarization terms <span class="math notranslate nohighlight">\(P_n^{(NL)}(z)\)</span> oscilatting at frequency <span class="math notranslate nohighlight">\(\omega_n\)</span>.  The electric field will have frequencies at <span class="math notranslate nohighlight">\(\omega_1\)</span> and <span class="math notranslate nohighlight">\(\omega_2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -809,7 +785,7 @@ P_1^{(NL)}(z) = 2\epsilon_0\chi^{(2)}E_2E_1^* e^{j\Delta k}
 </div>
 </section>
 <section id="exercises">
-<h2><span class="section-number">4.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>(80 pts) Use python to solve for the second harmonic generation intensity <em>without</em> assuming that <span class="math notranslate nohighlight">\(E_1(z)\)</span> is constant.  Plot the fundamental and second harmonic intensities in the same plot, and animate the result with a slider bar for the coherence length.  Use the same parameters as the example above.</p></li>
 <li><p>(20 pts) What is the physical meaning of the wave-vector mismatch <span class="math notranslate nohighlight">\(\Delta k\)</span> and the coherence length <span class="math notranslate nohighlight">\(L_{coh}\)</span>?</p></li>
